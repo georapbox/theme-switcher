@@ -1,13 +1,13 @@
-[![npm version](https://img.shields.io/npm/v/@georapbox/foo-bar.svg)](https://www.npmjs.com/package/@georapbox/foo-bar)
-[![npm license](https://img.shields.io/npm/l/@georapbox/foo-bar.svg)](https://www.npmjs.com/package/@georapbox/foo-bar)
+[![npm version](https://img.shields.io/npm/v/@georapbox/theme-switcher.svg)](https://www.npmjs.com/package/@georapbox/theme-switcher)
+[![npm license](https://img.shields.io/npm/l/@georapbox/theme-switcher.svg)](https://www.npmjs.com/package/@georapbox/theme-switcher)
 
-[demo]: https://georapbox.github.io/foo-bar/
-[license]: https://github.com/georapbox/foo-bar/blob/main/LICENSE
-[changelog]: https://github.com/georapbox/foo-bar/blob/main/CHANGELOG.md
+[demo]: https://georapbox.github.io/theme-switcher/
+[license]: https://github.com/georapbox/theme-switcher/blob/main/LICENSE
+[changelog]: https://github.com/georapbox/theme-switcher/blob/main/CHANGELOG.md
 
-# &lt;foo-bar&gt;
+# &lt;theme-switcher&gt;
 
-foo-bar description goes here.
+A custom element that allows you to switch between light, dark, and system theme.
 
 [API documentation](#api) &bull; [Demo][demo]
 
@@ -16,7 +16,7 @@ foo-bar description goes here.
 ### Installation
 
 ```sh
-npm install --save @georapbox/foo-bar
+npm install --save @georapbox/theme-switcher
 ```
 
 ### Importing the component
@@ -27,24 +27,24 @@ This lets the application decide when the custom element is defined.
 #### Manual definition
 
 ```js
-import { FooBar } from '@georapbox/foo-bar';
+import { ThemeSwitcher } from '@georapbox/theme-switcher';
 
 // Define using the default tag name
-FooBar.define();
+ThemeSwitcher.define();
 ```
 
 #### Auto-defined (convenience)
 
-If you don't need control over registration, you can import the pre-defined build which immediately registers `<foo-bar>`.
+If you don't need control over registration, you can import the pre-defined build which immediately registers `<theme-switcher>`.
 
 ```js
-import '@georapbox/foo-bar/define';
+import '@georapbox/theme-switcher/define';
 ```
 
 ### Markup
 
 ```html
-<foo-bar></foo-bar>
+<theme-switcher></theme-switcher>
 ```
 
 ### Style
@@ -76,9 +76,9 @@ By default, the component comes with basic styling. However, you can customise t
 
 | Name | Type | Description | Arguments |
 | ---- | ---- | ----------- | --------- |
-| `define` | Static | Defines the custom element by registering it with the browser's CustomElementRegistry if it hasn't been defined already. | `tagName='foo-bar'` |
+| `define` | Static | Defines the custom element by registering it with the browser's CustomElementRegistry if it hasn't been defined already. | `tagName='theme-switcher'` |
 
-<sup>1</sup> Instance methods are only available after the component has been defined. To ensure the component is defined, you can use `whenDefined` method of the `CustomElementRegistry` interface, eg `customElements.whenDefined('foo-bar').then(() => { /* call methods here */ });`
+<sup>1</sup> Instance methods are only available after the component has been defined. To ensure the component is defined, you can use `whenDefined` method of the `CustomElementRegistry` interface, eg `customElements.whenDefined('theme-switcher').then(() => { /* call methods here */ });`
 
 ### Events
 

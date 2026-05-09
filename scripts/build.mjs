@@ -1,7 +1,7 @@
 import fs from 'fs/promises';
 import * as esbuild from 'esbuild';
 
-const PACKAGE_NAME = 'foo-bar';
+const PACKAGE_NAME = 'theme-switcher';
 
 const readPkg = async () => {
   return JSON.parse(await fs.readFile(new URL('../package.json', import.meta.url)));

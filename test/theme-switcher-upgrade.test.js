@@ -1,19 +1,19 @@
 import { elementUpdated, expect, fixture, fixtureCleanup, html } from '@open-wc/testing';
-import { FooBar } from '../src/foo-bar.js';
+import { ThemeSwitcher } from '../src/theme-switcher.js';
 
-describe('foo-bar upgrading', () => {
+describe('theme-switcher upgrading', () => {
   afterEach(() => {
     fixtureCleanup();
   });
 
   it('default properties', async () => {
-    const el = await fixture(html`<foo-bar></foo-bar>`);
+    const el = await fixture(html`<theme-switcher></theme-switcher>`);
 
     // Update properties before upgrading
     el.exampleProp = 'test';
 
     // Upgrade custom element
-    FooBar.define();
+    ThemeSwitcher.define();
 
     await elementUpdated(el);
 

@@ -1,6 +1,6 @@
 import * as esbuild from 'esbuild';
 
-const PACKAGE_NAME = 'foo-bar';
+const PACKAGE_NAME = 'theme-switcher';
 
 const ctx = await esbuild.context({
   entryPoints: [`src/${PACKAGE_NAME}.js`, `src/${PACKAGE_NAME}-defined.js`],

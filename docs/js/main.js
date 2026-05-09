@@ -2,10 +2,10 @@ import '../lib/browser-window.js';
 
 const url = window.location.href;
 const isLocalhost = url.includes('127.0.0.1') || url.includes('localhost');
-const componentUrl = isLocalhost ? '../../dist/foo-bar.js' : '../lib/foo-bar.js';
+const componentUrl = isLocalhost ? '../../dist/theme-switcher.js' : '../lib/theme-switcher.js';
 
-const { FooBar } = await import(componentUrl);
-FooBar.define();
+const { ThemeSwitcher } = await import(componentUrl);
+ThemeSwitcher.define();
 
 document.querySelectorAll('h3[id^="example-"]').forEach((el, index) => {
   el.insertAdjacentHTML('afterbegin', `<a href="#${el.getAttribute('id')}">#</a> Example ${index + 1} - `);

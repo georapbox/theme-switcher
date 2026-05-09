@@ -1,7 +1,7 @@
 // https://custom-elements-manifest.open-wc.org/analyzer/config/
 export default {
   /** Globs to analyze */
-  globs: ['src/foo-bar.js'],
+  globs: ['src/theme-switcher.js'],
   /** Globs to exclude */
   exclude: [],
   /** Directory to output CEM to */
@@ -29,7 +29,7 @@ export default {
       moduleLinkPhase({ moduleDoc }) {
         moduleDoc.exports?.forEach(ex => {
           if (ex.kind === 'custom-element-definition' && ex.name === 'elementName') {
-            ex.name = 'foo-bar'; // Force the manifest to show the default tag name
+            ex.name = 'theme-switcher'; // Force the manifest to show the default tag name
           }
         });
       }

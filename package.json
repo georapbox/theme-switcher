@@ -1,20 +1,20 @@
 {
-  "name": "@georapbox/foo-bar",
+  "name": "@georapbox/theme-switcher",
   "version": "1.0.0",
-  "description": "foo-bar description goes here",
+  "description": "A custom element that allows you to switch between light, dark, and system theme.",
   "type": "module",
-  "main": "dist/foo-bar.js",
-  "unpkg": "dist/foo-bar.js",
-  "types": "dist/foo-bar.d.ts",
+  "main": "dist/theme-switcher.js",
+  "unpkg": "dist/theme-switcher.js",
+  "types": "dist/theme-switcher.d.ts",
   "customElements": "dist/custom-elements.json",
   "exports": {
     ".": {
-      "types": "./dist/foo-bar.d.ts",
-      "import": "./dist/foo-bar.js"
+      "types": "./dist/theme-switcher.d.ts",
+      "import": "./dist/theme-switcher.js"
     },
     "./define": {
-      "types": "./dist/foo-bar.d.ts",
-      "import": "./dist/foo-bar-defined.js"
+      "types": "./dist/theme-switcher.d.ts",
+      "import": "./dist/theme-switcher-defined.js"
     },
     "./custom-elements.json": "./dist/custom-elements.json"
   },
@@ -49,13 +49,13 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/georapbox/foo-bar.git"
+    "url": "git+https://github.com/georapbox/theme-switcher.git"
   },
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/georapbox/foo-bar/issues"
+    "url": "https://github.com/georapbox/theme-switcher/issues"
   },
-  "homepage": "https://github.com/georapbox/foo-bar#readme",
+  "homepage": "https://github.com/georapbox/theme-switcher#readme",
   "devDependencies": {
     "@custom-elements-manifest/analyzer": "~0.11.0",
     "@eslint/js": "~9.39.2",

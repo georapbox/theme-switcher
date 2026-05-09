@@ -32,10 +32,10 @@ template.innerHTML = html`
 `;
 
 /**
- * @summary foo-bar description goes here
- * @documentation https://github.com/georapbox/foo-bar
+ * @summary A custom element that allows you to switch between light, dark, and system theme.
+ * @documentation https://github.com/georapbox/theme-switcher
  *
- * @tagname foo-bar - The default custom element tag name, unless overridden by the `define` method.
+ * @tagname theme-switcher - The default custom element tag name, unless overridden by the `define` method.
  * @extends HTMLElement
  *
  * @property {string} exampleProp - Example property. Description goes here.
@@ -44,7 +44,7 @@ template.innerHTML = html`
  *
  * @method define - Static method. Defines the custom element by registering it with the browser's CustomElementRegistry if it hasn't been defined already.
  */
-class FooBar extends HTMLElement {
+class ThemeSwitcher extends HTMLElement {
   constructor() {
     super();
 
@@ -121,14 +121,14 @@ class FooBar extends HTMLElement {
    * Defines the custom element by registering it with the browser's
    * CustomElementRegistry if it hasn't been defined already.
    *
-   * @param {string} [tagName='foo-bar'] - The tag name to use for the custom element. Must include a hyphen.
+   * @param {string} [tagName='theme-switcher'] - The tag name to use for the custom element. Must include a hyphen.
    */
-  static define(tagName = 'foo-bar') {
+  static define(tagName = 'theme-switcher') {
     if (typeof window === 'undefined' || window.customElements.get(tagName)) {
       return;
     }
-    window.customElements.define(tagName, FooBar);
+    window.customElements.define(tagName, ThemeSwitcher);
   }
 }
 
-export { FooBar };
+export { ThemeSwitcher };
