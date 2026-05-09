@@ -1,0 +1,65 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+:root {
+  scroll-behavior: smooth;
+}
+
+.noscript-banner {
+  width: 100%;
+  padding: 0.5rem 0.75rem;
+  border-radius: var(--border-radius);
+  background-color: #f8d7da;
+  text-align: center;
+  color: #000000;
+}
+
+.component-description p {
+  margin: 0 0 0.5rem 0;
+}
+
+.component-description p:last-child {
+  margin-bottom: 0;
+}
+
+.card {
+  background-color: var(--background-card);
+  padding: 1rem;
+  border-radius: var(--border-radius);
+  border: 1px solid var(--border);
+  margin-bottom: 0.5rem;
+}
+
+.card > details {
+  margin-bottom: 0;
+}
+
+.card details summary {
+  font-weight: 500;
+}
+
+.back-top {
+  text-align: end;
+  font-size: 0.875rem;
+}
+
+.table-of-contents {
+  columns: 300px 2;
+}
+
+browser-window {
+  --bw-background: var(--background-alt);
+  display: block;
+}
+
+browser-window::part(base) {
+  border-color: var(--border);
+  border-radius: var(--border-radius);
+}
+
+browser-window::part(title) {
+  border-radius: var(--border-radius);
+}
