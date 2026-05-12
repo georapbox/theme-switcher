@@ -7,6 +7,10 @@ const componentUrl = isLocalhost ? '../../dist/theme-switcher.js' : '../lib/them
 const { ThemeSwitcher } = await import(componentUrl);
 ThemeSwitcher.define();
 
+document.querySelectorAll('theme-switcher').forEach(el => {
+  el.setAttribute('storage-key', window.__THEME_TOGGLE_DEMO_STORAGE_KEY__);
+});
+
 document.querySelectorAll('h3[id^="example-"]').forEach((el, index) => {
   el.insertAdjacentHTML('afterbegin', `<a href="#${el.getAttribute('id')}">#</a> Example ${index + 1} - `);
 });

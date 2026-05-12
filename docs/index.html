@@ -13,7 +13,16 @@
   <link rel="stylesheet" href="css/main.css">
   <script src="lib/highlight/highlight.min.js" defer></script>
   <script src="js/main.js" type="module"></script>
-  <script>document.addEventListener('DOMContentLoaded', () => window.hljs.highlightAll());</script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => window.hljs.highlightAll());
+    window.__THEME_TOGGLE_DEMO_STORAGE_KEY__ = 'theme-switcher-demo/theme-preference';
+    try {
+      // Set theme early to avoid flash of unstyled content.
+      document.documentElement.setAttribute('data-theme', window.localStorage.getItem(window.__THEME_TOGGLE_DEMO_STORAGE_KEY__) || 'system');
+    } catch (err) {
+      // Fail silently...
+    }
+  </script>
 </head>
 <body>
   <noscript>
@@ -39,7 +48,9 @@
 
   <div class="card">
     <browser-window url="https://github.com/georapbox/theme-switcher" icon>
-      <theme-switcher></theme-switcher>
+      <div style="display: flex; justify-content: center; padding: 1rem;">
+        <theme-switcher></theme-switcher>
+      </div>
     </browser-window>
 
     <details>
