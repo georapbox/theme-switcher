@@ -97,6 +97,7 @@ By default, the component comes with basic styling. However, you can customise t
 
 | Name | Description | Event Detail |
 | ---- | ----------- | ------------ |
+| `theme-change` | Dispatched when the theme is changed by user interaction. The event detail contains the new theme value. | `{theme: 'light' \| 'dark' \| 'system'}` |
 
 ## Changelog
 

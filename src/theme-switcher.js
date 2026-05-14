@@ -164,6 +164,7 @@ template.innerHTML = html`
  * @cssproperty --theme-switcher-option-active-color - The text/icon color of the selected theme option button.
  * @cssproperty --theme-switcher-option-active-background-color - The background color of the selected theme option button.
  *
+ * @event theme-change - Dispatched when the theme is changed by user interaction. The event detail contains the new theme value.
  * @method define - Static method. Defines the custom element by registering it with the browser's CustomElementRegistry if it hasn't been defined already.
  */
 class ThemeSwitcher extends HTMLElement {
@@ -340,6 +341,16 @@ class ThemeSwitcher extends HTMLElement {
     this.#theme = selectedTheme;
     this.#setThemePreference();
     this.#reflectThemePreference();
+
+    this.dispatchEvent(
+      new CustomEvent('theme-change', {
+        bubbles: true,
+        composed: true,
+        detail: {
+          theme: this.#theme
+        }
+      })
+    );
   };
 
   /**
