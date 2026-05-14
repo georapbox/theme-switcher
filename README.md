@@ -56,6 +56,8 @@ By default, the component comes with basic styling. However, you can customise t
 ### Properties
 | Name | Reflects | Type | Required | Default | Description |
 | ---- | -------- | ---- | -------- | ------- | ----------- |
+| `noStorage`<br>*`no-storage`* | ✓ | `boolean` | - | `false` | Whether to disable persistence of the selected theme in local storage. |
+| `storageKey`<br>*`storage-key`* | ✓ | `string` | - | `'theme-switcher/theme-preference'` | The local storage key used to persist the selected theme. |
 
 ### Slots
 
@@ -66,11 +68,22 @@ By default, the component comes with basic styling. However, you can customise t
 
 | Name | Description |
 | ---- | ----------- |
+| `base` | The root wrapper element of the theme switcher. |
+| `theme-option` | A theme option button. |
+| `theme-option--light` | The button for selecting the light theme. |
+| `theme-option--system` | The button for selecting the system theme. |
+| `theme-option--dark` | The button for selecting the dark theme. |
 
 ### CSS Custom Properties
 
 | Name | Description | Default |
 | ---- | ----------- | ------- |
+| `--theme-switcher-background-color` | The background color of the theme switcher. | `transparent` |
+| `--theme-switcher-border-color` | The border color of the theme switcher. | `canvastext` |
+| `--theme-switcher-padding` | The padding around the theme switcher content. | `0.1875rem` |
+| `--theme-switcher-option-color` | The text/icon color of each theme option button. | `canvastext` |
+| `--theme-switcher-option-active-color` | The text/icon color of the selected theme option button. | `canvas` |
+| `--theme-switcher-option-active-background-color` | The background color of the selected theme option button. | `canvastext` |
 
 ### Methods
 

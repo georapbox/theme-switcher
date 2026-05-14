@@ -16,9 +16,9 @@ const styles = css`
     --theme-switcher-background-color: transparent;
     --theme-switcher-border-color: canvastext;
     --theme-switcher-padding: 0.1875rem;
-    --theme-switcher-switch-color: canvastext;
-    --theme-switcher-switch-active-color: canvas;
-    --theme-switcher-switch-active-background-color: canvastext;
+    --theme-switcher-option-color: canvastext;
+    --theme-switcher-option-active-color: canvas;
+    --theme-switcher-option-active-background-color: canvastext;
 
     box-sizing: border-box;
   }
@@ -48,7 +48,7 @@ const styles = css`
     background-color: var(--theme-switcher-background-color);
   }
 
-  .theme-switcher__switch {
+  .theme-switcher__option {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -56,18 +56,18 @@ const styles = css`
     border-radius: 50%;
     width: 2rem;
     height: 2rem;
-    color: var(--theme-switcher-switch-color);
+    color: var(--theme-switcher-option-color);
     background-color: transparent;
     font-size: 1rem;
   }
 
-  .theme-switcher__switch:not(:disabled) {
+  .theme-switcher__option:not(:disabled) {
     cursor: pointer;
   }
 
-  .theme-switcher__switch[aria-checked='true'] {
-    background-color: var(--theme-switcher-switch-active-background-color);
-    color: var(--theme-switcher-switch-active-color);
+  .theme-switcher__option[aria-checked='true'] {
+    background-color: var(--theme-switcher-option-active-background-color);
+    color: var(--theme-switcher-option-active-color);
   }
 `;
 
@@ -80,8 +80,8 @@ template.innerHTML = html`
 
   <div class="theme-switcher" part="base" role="radiogroup">
     <button
-      class="theme-switcher__switch"
-      part="theme-switch theme-switch--light"
+      class="theme-switcher__option"
+      part="theme-option theme-option--light"
       type="button"
       role="radio"
       aria-checked="false"
@@ -99,8 +99,8 @@ template.innerHTML = html`
     </button>
 
     <button
-      class="theme-switcher__switch"
-      part="theme-switch theme-switch--system"
+      class="theme-switcher__option"
+      part="theme-option theme-option--system"
       type="button"
       role="radio"
       aria-checked="false"
@@ -118,8 +118,8 @@ template.innerHTML = html`
     </button>
 
     <button
-      class="theme-switcher__switch"
-      part="theme-switch theme-switch--dark"
+      class="theme-switcher__option"
+      part="theme-option theme-option--dark"
       type="button"
       role="radio"
       aria-checked="false"
@@ -145,24 +145,24 @@ template.innerHTML = html`
  * @tagname theme-switcher - The default custom element tag name, unless overridden by the `define` method.
  * @extends HTMLElement
  *
- * @property {boolean} noStorage - Indicates whether the theme state should be persisted to local storage.
- * @property {string} storageKey - The key used to store the theme state in local storage.
+ * @property {boolean} noStorage - Whether to disable persistence of the selected theme in local storage. Defaults to false.
+ * @property {string} storageKey - The local storage key used to persist the selected theme. Defaults to "theme-switcher/theme-preference".
  *
- * @attribute {boolean} no-storage - Indicates whether the theme state should be persisted to local storage.
- * @attribute {string} storage-key - The key used to store the theme state in local storage.
+ * @attribute {boolean} no-storage - Whether to disable persistence of the selected theme in local storage. Defaults to false.
+ * @attribute {string} storage-key - The local storage key used to persist the selected theme. Defaults to "theme-switcher/theme-preference".
  *
- * @csspart base - The wrapper element of the theme switcher.
- * @csspart theme-switch - The individual theme switch buttons.
- * @csspart theme-switch--light - The light theme switch button.
- * @csspart theme-switch--system - The system theme switch button.
- * @csspart theme-switch--dark - The dark theme switch button.
+ * @csspart base - The root wrapper element of the theme switcher.
+ * @csspart theme-option - A theme option button.
+ * @csspart theme-option--light - The button for selecting the light theme.
+ * @csspart theme-option--system - The button for selecting the system theme.
+ * @csspart theme-option--dark - The button for selecting the dark theme.
  *
  * @cssproperty --theme-switcher-background-color - The background color of the theme switcher.
  * @cssproperty --theme-switcher-border-color - The border color of the theme switcher.
- * @cssproperty --theme-switcher-padding - The padding of the theme switcher.
- * @cssproperty--theme-switcher-switch-color - The color of the theme switch buttons.
- * @cssproperty --theme-switcher-switch-active-color - The color of the active theme switch button.
- * @cssproperty --theme-switcher-switch-active-background-color - The background color of the active theme switch button.
+ * @cssproperty --theme-switcher-padding - The padding around the theme switcher content.
+ * @cssproperty --theme-switcher-option-color - The text/icon color of each theme option button.
+ * @cssproperty --theme-switcher-option-active-color - The text/icon color of the selected theme option button.
+ * @cssproperty --theme-switcher-option-active-background-color - The background color of the selected theme option button.
  *
  * @method define - Static method. Defines the custom element by registering it with the browser's CustomElementRegistry if it hasn't been defined already.
  */
@@ -201,33 +201,34 @@ class ThemeSwitcher extends HTMLElement {
   }
 
   /**
-   * Indicates whether the theme state should be persisted to local storage.
+   * Whether to disable persistence of the selected theme in local storage.
+   *
+   * When enabled, theme changes are applied only for the current session and
+   * are not saved for future page loads.
    *
    * @type {boolean}
    * @default false
-   * @attribute no-storage - Reflects the noStorage property.
+   * @attribute no-storage
    */
   get noStorage() {
     return this.hasAttribute('no-storage');
   }
 
   set noStorage(value) {
-    if (value) {
-      this.setAttribute('no-storage', '');
-    } else {
-      this.removeAttribute('no-storage');
-    }
+    this.toggleAttribute('no-storage', !!value);
   }
 
   /**
-   * The key used to store the theme state in local storage.
+   * The local storage key used to persist the selected theme.
    *
-   * @type {string | null}
-   * @default 'theme-toggle/theme-preference'
-   * @attribute storage-key - Reflects the storageKey property.
+   * This value is ignored when `no-storage` is enabled.
+   *
+   * @type {string}
+   * @default 'theme-switcher/theme-preference'
+   * @attribute storage-key
    */
   get storageKey() {
-    return this.getAttribute('storage-key');
+    return this.getAttribute('storage-key') ?? '';
   }
 
   set storageKey(value) {

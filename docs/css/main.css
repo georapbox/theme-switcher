@@ -112,7 +112,7 @@ browser-window::part(title) {
 
 theme-switcher {
   --theme-switcher-border-color: var(--text-main);
-  --theme-switcher-switch-color: var(--text-main);
-  --theme-switcher-switch-active-color: var(--background-body);
-  --theme-switcher-switch-active-background-color: var(--text-main);
+  --theme-switcher-option-color: var(--text-main);
+  --theme-switcher-option-active-color: var(--background-body);
+  --theme-switcher-option-active-background-color: var(--text-main);
 }
