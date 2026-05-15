@@ -41,10 +41,65 @@ If you don't need control over registration, you can import the pre-defined buil
 import '@georapbox/theme-switcher/define';
 ```
 
-### Markup
+### Using the component in your HTML
+
+To use the component, simply add the `<theme-switcher>` tag to your HTML:
 
 ```html
 <theme-switcher></theme-switcher>
+```
+
+### How it works
+
+By default, `<theme-switcher>` uses the `system` theme. This allows the page to follow the user's system color preference when your CSS uses `color-scheme`, `light-dark()`, or `prefers-color-scheme`.
+
+When the user selects a theme, the component sets a `data-theme` attribute on the root element of the document:
+
+```html
+<html data-theme="light">
+<html data-theme="dark">
+<html data-theme="system">
+```
+
+The selected theme is saved in `localStorage` by default, using the configured `storageKey`. On future page loads, the saved theme is restored automatically.
+
+If `no-storage` is enabled, the selected theme is not persisted and the component falls back to system on the next page load.
+
+```html
+<theme-switcher no-storage></theme-switcher>
+```
+
+You can use the `data-theme` attribute to control the page color scheme and then use the CSS `light-dark()` color function for theme-aware styles:
+
+```css
+:root {
+  --page-background-color: light-dark(#ffffff, #111111);
+  --page-text-color: light-dark(#111111, #ffffff);
+
+  color-scheme: light dark;
+  background-color: var(--page-background-color);
+  color: var(--page-text-color);
+}
+
+:root[data-theme='light'] {
+  color-scheme: light;
+}
+
+:root[data-theme='dark'] {
+  color-scheme: dark;
+}
+
+:root[data-theme='system'] {
+  color-scheme: light dark;
+}
+
+theme-switcher {
+  --theme-switcher-background-color: light-dark(#ffffff, #1f1f1f);
+  --theme-switcher-border-color: light-dark(#d4d4d4, #525252);
+  --theme-switcher-option-color: light-dark(#404040, #d4d4d4);
+  --theme-switcher-option-active-color: light-dark(#ffffff, #111111);
+  --theme-switcher-option-active-background-color: light-dark(#111111, #ffffff);
+}
 ```
 
 ### Style
@@ -63,6 +118,9 @@ By default, the component comes with basic styling. However, you can customise t
 
 | Name | Description |
 | ---- | ----------- |
+| `theme-option-light-icon` | Custom icon/content for the light theme option. |
+| `theme-option-system-icon` | Custom icon/content for the system theme option. |
+| `theme-option-dark-icon` | Custom icon/content for the dark theme option. |
 
 ### CSS Parts
 

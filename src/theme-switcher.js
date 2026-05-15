@@ -59,6 +59,7 @@ const styles = css`
     color: var(--theme-switcher-option-color);
     background-color: transparent;
     font-size: 1rem;
+    line-height: 0;
   }
 
   .theme-switcher__option:not(:disabled) {
@@ -87,15 +88,18 @@ template.innerHTML = html`
       aria-checked="false"
       aria-label="Switch to light theme"
       data-theme="light"
+      data-theme-switcher-option
     >
-      <svg viewBox="0 0 16 16" width="1em" height="1em">
-        <path
-          fill="currentColor"
-          fill-rule="evenodd"
-          d="M8.75.75V0h-1.5v2h1.5V.75M3.26 4.32l-.53-.53-.35-.35-.53-.53L2.9 1.85l.53.53.35.35.53.53zm8.42-1.06.53-.53.35-.35.53-.53 1.06 1.06-.53.53-.35.35-.53.53zM8 11.25a3.25 3.25 0 1 0 0-6.5 3.25 3.25 0 0 0 0 6.5m0 1.5a4.75 4.75 0 1 0 0-9.5 4.75 4.75 0 0 0 0 9.5m6-5.5h2v1.5h-2zm-13.25 0H0v1.5h2v-1.5H.75m1.62 5.32-.53.53 1.06 1.06.53-.53.35-.35.53-.53-1.06-1.06-.53.53zm10.2 1.06.53.53 1.06-1.06-.53-.53-.35-.35-.53-.53-1.06 1.06.53.53zM8.75 14v2h-1.5v-2z"
-          clip-rule="evenodd"
-        ></path>
-      </svg>
+      <slot name="theme-option-light-icon">
+        <svg viewBox="0 0 16 16" width="1em" height="1em">
+          <path
+            fill="currentColor"
+            fill-rule="evenodd"
+            d="M8.75.75V0h-1.5v2h1.5V.75M3.26 4.32l-.53-.53-.35-.35-.53-.53L2.9 1.85l.53.53.35.35.53.53zm8.42-1.06.53-.53.35-.35.53-.53 1.06 1.06-.53.53-.35.35-.53.53zM8 11.25a3.25 3.25 0 1 0 0-6.5 3.25 3.25 0 0 0 0 6.5m0 1.5a4.75 4.75 0 1 0 0-9.5 4.75 4.75 0 0 0 0 9.5m6-5.5h2v1.5h-2zm-13.25 0H0v1.5h2v-1.5H.75m1.62 5.32-.53.53 1.06 1.06.53-.53.35-.35.53-.53-1.06-1.06-.53.53zm10.2 1.06.53.53 1.06-1.06-.53-.53-.35-.35-.53-.53-1.06 1.06.53.53zM8.75 14v2h-1.5v-2z"
+            clip-rule="evenodd"
+          ></path>
+        </svg>
+      </slot>
     </button>
 
     <button
@@ -106,15 +110,18 @@ template.innerHTML = html`
       aria-checked="false"
       aria-label="Switch to system theme"
       data-theme="system"
+      data-theme-switcher-option
     >
-      <svg viewBox="0 0 16 16" width="1em" height="1em">
-        <path
-          fill="currentColor"
-          fill-rule="evenodd"
-          d="M0 2a1 1 0 0 1 1-1h14a1 1 0 0 1 1 1v8.5a1 1 0 0 1-1 1H8.75v3h1.75V16h-5v-1.5h1.75v-3H1a1 1 0 0 1-1-1zm1.5.5V10h13V2.5z"
-          clip-rule="evenodd"
-        ></path>
-      </svg>
+      <slot name="theme-option-system-icon">
+        <svg viewBox="0 0 16 16" width="1em" height="1em">
+          <path
+            fill="currentColor"
+            fill-rule="evenodd"
+            d="M0 2a1 1 0 0 1 1-1h14a1 1 0 0 1 1 1v8.5a1 1 0 0 1-1 1H8.75v3h1.75V16h-5v-1.5h1.75v-3H1a1 1 0 0 1-1-1zm1.5.5V10h13V2.5z"
+            clip-rule="evenodd"
+          ></path>
+        </svg>
+      </slot>
     </button>
 
     <button
@@ -125,15 +132,18 @@ template.innerHTML = html`
       aria-checked="false"
       aria-label="Switch to dark theme"
       data-theme="dark"
+      data-theme-switcher-option
     >
-      <svg viewBox="0 0 16 16" width="1em" height="1em">
-        <path
-          fill="currentColor"
-          fill-rule="evenodd"
-          d="M1.5 8a6 6 0 0 1 3.62-5.51 7 7 0 0 0 7.08 9.25A5.99 5.99 0 0 1 1.5 8M6.42.58a7.5 7.5 0 1 0 7.96 10.41l-.92-1.01a5.5 5.5 0 0 1-6.3-8.25zm6.83.42v1.75H15v1.5h-1.75V6h-1.5V4.25H10v-1.5h1.75V1z"
-          clip-rule="evenodd"
-        ></path>
-      </svg>
+      <slot name="theme-option-dark-icon">
+        <svg viewBox="0 0 16 16" width="1em" height="1em">
+          <path
+            fill="currentColor"
+            fill-rule="evenodd"
+            d="M1.5 8a6 6 0 0 1 3.62-5.51 7 7 0 0 0 7.08 9.25A5.99 5.99 0 0 1 1.5 8M6.42.58a7.5 7.5 0 1 0 7.96 10.41l-.92-1.01a5.5 5.5 0 0 1-6.3-8.25zm6.83.42v1.75H15v1.5h-1.75V6h-1.5V4.25H10v-1.5h1.75V1z"
+            clip-rule="evenodd"
+          ></path>
+        </svg>
+      </slot>
     </button>
   </div>
 `;
@@ -150,6 +160,10 @@ template.innerHTML = html`
  *
  * @attribute {boolean} no-storage - Whether to disable persistence of the selected theme in local storage. Defaults to false.
  * @attribute {string} storage-key - The local storage key used to persist the selected theme. Defaults to "theme-switcher/theme-preference".
+ *
+ * @slot theme-option-light-icon - Custom icon/content for the light theme option.
+ * @slot theme-option-system-icon - Custom icon/content for the system theme option.
+ * @slot theme-option-dark-icon - Custom icon/content for the dark theme option.
  *
  * @csspart base - The root wrapper element of the theme switcher.
  * @csspart theme-option - A theme option button.
@@ -324,17 +338,31 @@ class ThemeSwitcher extends HTMLElement {
   }
 
   /**
+   * Checks whether a value is a theme option button.
+   *
+   * @param {unknown} value - The value to check.
+   * @returns {value is HTMLButtonElement} True if the value is a theme option button, false otherwise.
+   */
+  #isThemeOptionButton(value) {
+    return value instanceof HTMLButtonElement && value.hasAttribute('data-theme-switcher-option');
+  }
+
+  /**
    * Handles click events on the theme switcher buttons.
    * Updates the theme state based on the clicked button and reflects the change.
    *
    * @param {MouseEvent} evt - The click event object.
    */
   #handleSwitcherClick = evt => {
-    const target = /** @type {HTMLElement | null} */ (evt.target);
-    const closestSwitch = target?.closest('button');
-    const selectedTheme = closestSwitch?.getAttribute('data-theme');
+    const selectedButton = evt.composedPath().find(node => this.#isThemeOptionButton(node));
 
-    if (!selectedTheme || !this.#isTheme(selectedTheme)) {
+    if (!selectedButton) {
+      return;
+    }
+
+    const selectedTheme = selectedButton.getAttribute('data-theme');
+
+    if (!this.#isTheme(selectedTheme) || selectedTheme === this.#theme) {
       return;
     }
 

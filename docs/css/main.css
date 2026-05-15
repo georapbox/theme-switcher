@@ -92,10 +92,6 @@
   font-size: 0.875rem;
 }
 
-.table-of-contents {
-  columns: 300px 2;
-}
-
 browser-window {
   --bw-background: var(--background-alt);
   display: block;
