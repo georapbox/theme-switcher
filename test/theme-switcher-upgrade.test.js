@@ -12,6 +12,9 @@ describe('theme-switcher upgrading', () => {
     // Update properties before upgrading
     el.noStorage = true;
     el.storageKey = 'STORAGE_KEY';
+    el.lightLabel = 'LIGHT_LABEL';
+    el.systemLabel = 'SYSTEM_LABEL';
+    el.darkLabel = 'DARK_LABEL';
 
     // Upgrade custom element
     ThemeSwitcher.define();
@@ -20,5 +23,8 @@ describe('theme-switcher upgrading', () => {
 
     expect(el.hasAttribute('no-storage')).to.be.true;
     expect(el.getAttribute('storage-key')).to.equal('STORAGE_KEY');
+    expect(el.getAttribute('light-label')).to.equal('LIGHT_LABEL');
+    expect(el.getAttribute('system-label')).to.equal('SYSTEM_LABEL');
+    expect(el.getAttribute('dark-label')).to.equal('DARK_LABEL');
   });
 });

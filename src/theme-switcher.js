@@ -157,9 +157,15 @@ template.innerHTML = html`
  *
  * @property {boolean} noStorage - Whether to disable persistence of the selected theme in local storage. Defaults to false.
  * @property {string} storageKey - The local storage key used to persist the selected theme. Defaults to "theme-switcher/theme-preference".
+ * @property {string} lightLabel - The accessible label for the light theme option button.
+ * @property {string} systemLabel - The accessible label for the system theme option button.
+ * @property {string} darkLabel - The accessible label for the dark theme option button.
  *
  * @attribute {boolean} no-storage - Whether to disable persistence of the selected theme in local storage. Defaults to false.
  * @attribute {string} storage-key - The local storage key used to persist the selected theme. Defaults to "theme-switcher/theme-preference".
+ * @attribute {string} light-label - The accessible label for the light theme option button.
+ * @attribute {string} system-label - The accessible label for the system theme option button.
+ * @attribute {string} dark-label - The accessible label for the dark theme option button.
  *
  * @slot theme-option-light-icon - Custom icon/content for the light theme option.
  * @slot theme-option-system-icon - Custom icon/content for the system theme option.
@@ -198,7 +204,7 @@ class ThemeSwitcher extends HTMLElement {
   }
 
   static get observedAttributes() {
-    return ['storage-key'];
+    return ['storage-key', 'light-label', 'system-label', 'dark-label'];
   }
 
   /**
@@ -212,6 +218,27 @@ class ThemeSwitcher extends HTMLElement {
     if (name === 'storage-key' && oldValue !== newValue) {
       this.#theme = this.#getThemePreference();
       this.#reflectThemePreference();
+    }
+
+    if (name === 'light-label' && oldValue !== newValue) {
+      const lightOption = this.shadowRoot?.querySelector(`[data-theme="light"]`);
+      if (lightOption) {
+        lightOption.setAttribute('aria-label', this.lightLabel);
+      }
+    }
+
+    if (name === 'system-label' && oldValue !== newValue) {
+      const systemOption = this.shadowRoot?.querySelector(`[data-theme="system"]`);
+      if (systemOption) {
+        systemOption.setAttribute('aria-label', this.systemLabel);
+      }
+    }
+
+    if (name === 'dark-label' && oldValue !== newValue) {
+      const darkOption = this.shadowRoot?.querySelector(`[data-theme="dark"]`);
+      if (darkOption) {
+        darkOption.setAttribute('aria-label', this.darkLabel);
+      }
     }
   }
 
@@ -243,13 +270,72 @@ class ThemeSwitcher extends HTMLElement {
    * @attribute storage-key
    */
   get storageKey() {
-    return this.getAttribute('storage-key') ?? '';
+    return this.getAttribute('storage-key') ?? DEFAULT_STORAGE_KEY;
   }
 
   set storageKey(value) {
-    if (value != null) {
-      this.setAttribute('storage-key', value);
+    if (value == null) {
+      this.removeAttribute('storage-key');
+      return;
     }
+    this.setAttribute('storage-key', value);
+  }
+
+  /**
+   * The aria-label for the light theme option button.
+   *
+   * @type {string}
+   * @default 'Switch to light theme'
+   * @attribute light-label
+   */
+  get lightLabel() {
+    return this.getAttribute('light-label') ?? 'Switch to light theme';
+  }
+
+  set lightLabel(value) {
+    if (value == null) {
+      this.removeAttribute('light-label');
+      return;
+    }
+    this.setAttribute('light-label', value);
+  }
+
+  /**
+   * The aria-label for the system theme option button.
+   *
+   * @type {string}
+   * @default 'Switch to system theme'
+   * @attribute system-label
+   */
+  get systemLabel() {
+    return this.getAttribute('system-label') ?? 'Switch to system theme';
+  }
+
+  set systemLabel(value) {
+    if (value == null) {
+      this.removeAttribute('system-label');
+      return;
+    }
+    this.setAttribute('system-label', value);
+  }
+
+  /**
+   * The aria-label for the dark theme option button.
+   *
+   * @type {string}
+   * @default 'Switch to dark theme'
+   * @attribute dark-label
+   */
+  get darkLabel() {
+    return this.getAttribute('dark-label') ?? 'Switch to dark theme';
+  }
+
+  set darkLabel(value) {
+    if (value == null) {
+      this.removeAttribute('dark-label');
+      return;
+    }
+    this.setAttribute('dark-label', value);
   }
 
   /**
@@ -258,6 +344,9 @@ class ThemeSwitcher extends HTMLElement {
   connectedCallback() {
     this.#upgradeProperty('noStorage');
     this.#upgradeProperty('storageKey');
+    this.#upgradeProperty('lightLabel');
+    this.#upgradeProperty('systemLabel');
+    this.#upgradeProperty('darkLabel');
 
     this.#themeSwitcher = this.shadowRoot?.querySelector('[part="base"]') || null;
 
@@ -392,7 +481,7 @@ class ThemeSwitcher extends HTMLElement {
    *
    * @see https://web.dev/articles/custom-elements-best-practices#make_properties_lazy
    *
-   * @param {'noStorage' | 'storageKey'} prop - The property name to upgrade.
+   * @param {'noStorage' | 'storageKey' | 'lightLabel' | 'systemLabel' | 'darkLabel'} prop - The property name to upgrade.
    */
   #upgradeProperty(prop) {
     const instance = /** @type {HTMLElement & Record<string, unknown>} */ (this);

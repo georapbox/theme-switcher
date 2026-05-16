@@ -113,6 +113,9 @@ By default, the component comes with basic styling. However, you can customise t
 | ---- | -------- | ---- | -------- | ------- | ----------- |
 | `noStorage`<br>*`no-storage`* | ✓ | `boolean` | - | `false` | Whether to disable persistence of the selected theme in local storage. |
 | `storageKey`<br>*`storage-key`* | ✓ | `string` | - | `'theme-switcher/theme-preference'` | The local storage key used to persist the selected theme. |
+| `lightLabel`<br>*`light-label`* | ✓ | `string` | - | `'Switch to light theme'` | The accessible label for the light theme option button. |
+| `systemLabel`<br>*`system-label`* | ✓ | `string` | - | `'Switch to system theme'` | The accessible label for the system theme option button. |
+| `darkLabel`<br>*`dark-label`* | ✓ | `string` | - | `'Switch to dark theme'` | The accessible label for the dark theme option button. |
 
 ### Slots
 
