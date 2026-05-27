@@ -112,3 +112,143 @@ theme-switcher {
   --theme-switcher-option-active-color: var(--background-body);
   --theme-switcher-option-active-background-color: var(--text-main);
 }
+
+/* Custom styling demo */
+.theme-palette-picker {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.5rem;
+  max-width: 38rem;
+  border: 0;
+  padding: 0;
+  margin: 0 auto 1rem auto;
+}
+
+.theme-palette-picker legend {
+  width: 100%;
+  margin-block-end: 0.5rem;
+  color: var(--text-bright);
+}
+
+.theme-palette-picker label {
+  position: relative;
+  display: inline-flex;
+  cursor: pointer;
+}
+
+.theme-palette-picker input {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.theme-palette-picker span {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  border: 1px solid var(--border);
+  border-radius: 9999px;
+  padding: 0.45rem 0.75rem;
+  color: var(--text-main);
+  background-color: var(--background-card);
+  font: 500 0.8125rem/1.2 system-ui, sans-serif;
+}
+
+.theme-palette-picker span::before {
+  content: '';
+  flex: 0 0 auto;
+  width: 0.75rem;
+  height: 0.75rem;
+  border-radius: 9999px;
+  background-color: var(--palette-color);
+}
+
+.theme-palette-picker input:checked + span {
+  border-color: var(--palette-color);
+  box-shadow: 0 0 0 1px color-mix(in srgb, var(--palette-color) 70%, transparent), 0 0 0.75rem color-mix(in srgb, var(--palette-color) 35%, transparent);
+}
+
+.theme-palette-picker input:focus-visible + span {
+  outline: 2px solid var(--palette-color);
+  outline-offset: 2px;
+}
+
+.theme-palette-picker input:disabled + span {
+  cursor: not-allowed;
+  color: var(--text-muted);
+  background-color: var(--background);
+  opacity: 0.65;
+}
+
+.custom-styling-demo[data-theme-switcher-theme='lime-electric'] theme-switcher {
+  color-scheme: light dark;
+  --theme-switcher-background-color: light-dark(#f7fee7, #142004);
+  --theme-switcher-border-color: light-dark(#bef264, #84cc16);
+  --theme-switcher-option-color: light-dark(#3f6212, #d9f99d);
+  --theme-switcher-option-active-color: light-dark(#ffffff, #172008);
+  --theme-switcher-option-active-background-color: light-dark(#65a30d, #a3e635);
+}
+
+.custom-styling-demo[data-theme-switcher-theme='soft-blue'] theme-switcher {
+  color-scheme: light dark;
+  --theme-switcher-background-color: light-dark(#eff6ff, #0b1220);
+  --theme-switcher-border-color: light-dark(#93c5fd, #2563eb);
+  --theme-switcher-option-color: light-dark(#1e3a8a, #bfdbfe);
+  --theme-switcher-option-active-color: light-dark(#ffffff, #eff6ff);
+  --theme-switcher-option-active-background-color: light-dark(#2563eb, #60a5fa);
+}
+
+.custom-styling-demo[data-theme-switcher-theme='emerald-mint'] theme-switcher {
+  color-scheme: light dark;
+  --theme-switcher-background-color: light-dark(#ecfdf5, #052e24);
+  --theme-switcher-border-color: light-dark(#6ee7b7, #10b981);
+  --theme-switcher-option-color: light-dark(#065f46, #a7f3d0);
+  --theme-switcher-option-active-color: light-dark(#ffffff, #042f2e);
+  --theme-switcher-option-active-background-color: light-dark(#059669, #5eead4);
+}
+
+.custom-styling-demo[data-theme-switcher-theme='warm-amber'] theme-switcher {
+  color-scheme: light dark;
+  --theme-switcher-background-color: light-dark(#fffbeb, #271a05);
+  --theme-switcher-border-color: light-dark(#fbbf24, #d97706);
+  --theme-switcher-option-color: light-dark(#92400e, #fde68a);
+  --theme-switcher-option-active-color: light-dark(#ffffff, #1c1304);
+  --theme-switcher-option-active-background-color: light-dark(#d97706, #facc15);
+}
+
+.custom-styling-demo[data-theme-switcher-theme='rose-coral'] theme-switcher {
+  color-scheme: light dark;
+  --theme-switcher-background-color: light-dark(#fff1f2, #2a0d12);
+  --theme-switcher-border-color: light-dark(#fda4af, #e11d48);
+  --theme-switcher-option-color: light-dark(#9f1239, #fecdd3);
+  --theme-switcher-option-active-color: light-dark(#ffffff, #2a0d12);
+  --theme-switcher-option-active-background-color: light-dark(#e11d48, #fb7185);
+}
+
+.custom-styling-demo[data-theme-switcher-theme='cyan-tech'] theme-switcher {
+  color-scheme: light dark;
+  --theme-switcher-background-color: light-dark(#ecfeff, #061b20);
+  --theme-switcher-border-color: light-dark(#67e8f9, #0891b2);
+  --theme-switcher-option-color: light-dark(#155e75, #a5f3fc);
+  --theme-switcher-option-active-color: light-dark(#ffffff, #06202a);
+  --theme-switcher-option-active-background-color: light-dark(#0891b2, #22d3ee);
+}
+
+.custom-styling-demo[data-theme-switcher-theme='indigo-violet'] theme-switcher {
+  color-scheme: light dark;
+  --theme-switcher-background-color: light-dark(#eef2ff, #11102a);
+  --theme-switcher-border-color: light-dark(#a5b4fc, #818cf8);
+  --theme-switcher-option-color: light-dark(#3730a3, #c7d2fe);
+  --theme-switcher-option-active-color: light-dark(#ffffff, #11102a);
+  --theme-switcher-option-active-background-color: light-dark(#4f46e5, #a78bfa);
+}
+
+.custom-styling-demo[data-theme-switcher-theme='purple-neon'] theme-switcher {
+  color-scheme: light dark;
+  --theme-switcher-background-color: light-dark(#f3e8ff, #0f051d);
+  --theme-switcher-border-color: light-dark(#a855f7, #d8b4fe);
+  --theme-switcher-option-color: light-dark(#581c87, #ddd6fe);
+  --theme-switcher-option-active-color: light-dark(#ffffff, #1a052e);
+  --theme-switcher-option-active-background-color: light-dark(#9333ea, #e879f9);
+}

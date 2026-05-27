@@ -40,6 +40,7 @@
   <ol class="table-of-contents">
     <li><a href="#example-default-config">Default configuration</a></li>
     <li><a href="#example-custom-icons">With custom icons</a></li>
+    <li><a href="#example-custom-styling">With custom styling</a></li>
   </ol>
 
   <h3 id="example-default-config">Default configuration</h3>
@@ -101,6 +102,81 @@
     &lt;path d="M480-120q-150 0-255-105T120-480q0-150 105-255t255-105q14 0 27.5 1t26.5 3q-41 29-65.5 75.5T444-660q0 90 63 153t153 63q55 0 101-24.5t75-65.5q2 13 3 26.5t1 27.5q0 150-105 255T480-120Zm0-80q88 0 158-48.5T740-375q-20 5-40 8t-40 3q-123 0-209.5-86.5T364-660q0-20 3-40t8-40q-78 32-126.5 102T200-480q0 116 82 198t198 82Zm-10-270Z"/&gt;
   &lt;/svg&gt;
 &lt;/theme-switcher&gt;</code></pre>
+    </details>
+  </div>
+
+  <h3 id="example-custom-styling">With custom styling</h3>
+  <p>
+    You can customize the colors of the theme switcher by defining CSS variables for each theme option.
+    In this example, we have defined a few custom color palettes, but you can create your own by using
+    any valid CSS color value (e.g., hex, rgb, hsl, etc.)
+  </p>
+
+  <div class="card">
+    <browser-window url="https://github.com/georapbox/theme-switcher" icon>
+      <div class="custom-styling-demo" data-theme-switcher-theme="lime-electric">
+        <fieldset class="theme-palette-picker">
+          <label style="--palette-color: #65a30d">
+            <input type="radio" name="theme-switcher-theme" value="lime-electric" checked />
+            <span>Lime / electric</span>
+          </label>
+
+          <label style="--palette-color: #2563eb">
+            <input type="radio" name="theme-switcher-theme" value="soft-blue" />
+            <span>Soft blue</span>
+          </label>
+
+          <label style="--palette-color: #059669">
+            <input type="radio" name="theme-switcher-theme" value="emerald-mint" />
+            <span>Emerald / mint</span>
+          </label>
+
+          <label style="--palette-color: #d97706">
+            <input type="radio" name="theme-switcher-theme" value="warm-amber" />
+            <span>Warm amber</span>
+          </label>
+
+          <label style="--palette-color: #e11d48">
+            <input type="radio" name="theme-switcher-theme" value="rose-coral" />
+            <span>Rose / coral</span>
+          </label>
+
+          <label style="--palette-color: #0891b2">
+            <input type="radio" name="theme-switcher-theme" value="cyan-tech" />
+            <span>Cyan / tech</span>
+          </label>
+
+          <label style="--palette-color: #4f46e5">
+            <input type="radio" name="theme-switcher-theme" value="indigo-violet" />
+            <span>Indigo / violet</span>
+          </label>
+
+          <label style="--palette-color: #9333ea">
+            <input type="radio" name="theme-switcher-theme" value="purple-neon" />
+            <span>Purple neon</span>
+          </label>
+        </fieldset>
+
+        <div style="display: flex; justify-content: center; padding: 1rem;">
+          <theme-switcher></theme-switcher>
+        </div>
+      </div>
+    </browser-window>
+
+    <details open>
+      <summary>Code sample</summary>
+
+      <p>For brevity reasons, only the CSS variables for the "Lime / electric" palette are shown below.</p>
+
+<pre><code>theme-switcher {
+  color-scheme: light dark;
+
+  --theme-switcher-background-color: light-dark(#f7fee7, #142004);
+  --theme-switcher-border-color: light-dark(#bef264, #84cc16);
+  --theme-switcher-option-color: light-dark(#3f6212, #d9f99d);
+  --theme-switcher-option-active-color: light-dark(#ffffff, #172008);
+  --theme-switcher-option-active-background-color: light-dark(#65a30d, #a3e635);
+}</code></pre>
     </details>
   </div>
 

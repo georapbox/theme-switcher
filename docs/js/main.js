@@ -18,3 +18,19 @@ document.querySelectorAll('h3[id^="example-"]').forEach((el, index) => {
 document.querySelectorAll('.card').forEach(el => {
   el.insertAdjacentHTML('afterend', `<div class="back-top"><a href="#">↑ Back to top</a></div>`);
 });
+
+// Custom styling demo
+(function () {
+  const demo = document.querySelector('.custom-styling-demo');
+  const picker = document.querySelector('.theme-palette-picker');
+
+  picker.addEventListener('change', event => {
+    const input = event.target;
+
+    if (!(input instanceof HTMLInputElement) || input.type !== 'radio') {
+      return;
+    }
+
+    demo.dataset.themeSwitcherTheme = input.value;
+  });
+})();
