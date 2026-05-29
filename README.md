@@ -49,6 +49,10 @@ To use the component, simply add the `<theme-switcher>` tag to your HTML:
 <theme-switcher></theme-switcher>
 ```
 
+### Styling the component
+
+By default, the component comes with basic styling. However, you can customise the styles of the various elements of the component using either [CSS Parts](#css-parts) or [CSS Custom Properties](#css-custom-properties).
+
 ### How it works
 
 By default, `<theme-switcher>` uses the `system` theme. This allows the page to follow the user's system color preference when your CSS uses `color-scheme`, `light-dark()`, or `prefers-color-scheme`.
@@ -102,10 +106,6 @@ theme-switcher {
 }
 ```
 
-### Style
-
-By default, the component comes with basic styling. However, you can customise the styles of the various elements of the component using either [CSS Parts](#css-parts) or [CSS Custom Properties](#css-custom-properties).
-
 ## API
 
 ### Properties
@@ -134,6 +134,8 @@ By default, the component comes with basic styling. However, you can customise t
 | `theme-option--light` | The button for selecting the light theme. |
 | `theme-option--system` | The button for selecting the system theme. |
 | `theme-option--dark` | The button for selecting the dark theme. |
+
+### CSS Custom Properties
 
 | Name | Description | Default |
 | ---- | ----------- | ------- |
