@@ -13,14 +13,26 @@ const THEME_VALUES = ['light', 'system', 'dark'];
 
 const styles = css`
   :host {
-    --theme-switcher-background-color: transparent;
-    --theme-switcher-border-color: canvastext;
     --theme-switcher-padding: 0.1875rem;
-    --theme-switcher-option-color: canvastext;
-    --theme-switcher-option-active-color: canvas;
-    --theme-switcher-option-active-background-color: canvastext;
+    --theme-switcher-background-color: transparent;
+    --theme-switcher-border-color: #222222;
+    --theme-switcher-option-size: 2rem;
+    --theme-switcher-option-font-size: calc(var(--theme-switcher-option-size) * 0.5);
+    --theme-switcher-option-color: #222222;
+    --theme-switcher-option-active-color: #eeeeee;
+    --theme-switcher-option-active-background-color: #222222;
 
+    display: inline-block;
     box-sizing: border-box;
+  }
+
+  @supports (color: light-dark(#000000, #ffffff)) {
+    :host {
+      --theme-switcher-border-color: light-dark(#222222, #eeeeee);
+      --theme-switcher-option-color: light-dark(#222222, #eeeeee);
+      --theme-switcher-option-active-color: light-dark(#eeeeee, #222222);
+      --theme-switcher-option-active-background-color: light-dark(#222222, #eeeeee);
+    }
   }
 
   :host *,
@@ -41,11 +53,24 @@ const styles = css`
 
   .theme-switcher {
     display: flex;
-    border: 1px solid var(--theme-switcher-border-color);
-    border-radius: 9999px;
     width: fit-content;
     padding: var(--theme-switcher-padding);
+    border: 1px solid var(--theme-switcher-border-color);
+    border-radius: 9999px;
     background-color: var(--theme-switcher-background-color);
+    color-scheme: light dark;
+  }
+
+  .theme-switcher:has([data-theme='light'][aria-checked='true']) {
+    color-scheme: light;
+  }
+
+  .theme-switcher:has([data-theme='system'][aria-checked='true']) {
+    color-scheme: light dark;
+  }
+
+  .theme-switcher:has([data-theme='dark'][aria-checked='true']) {
+    color-scheme: dark;
   }
 
   .theme-switcher__option {
@@ -54,11 +79,11 @@ const styles = css`
     align-items: center;
     border: 0;
     border-radius: 50%;
-    width: 2rem;
-    height: 2rem;
+    width: var(--theme-switcher-option-size);
+    height: var(--theme-switcher-option-size);
     color: var(--theme-switcher-option-color);
     background-color: transparent;
-    font-size: 1rem;
+    font-size: var(--theme-switcher-option-font-size);
     line-height: 0;
   }
 
@@ -177,9 +202,11 @@ template.innerHTML = html`
  * @csspart theme-option--system - The button for selecting the system theme.
  * @csspart theme-option--dark - The button for selecting the dark theme.
  *
+ * @cssproperty --theme-switcher-padding - The padding around the theme switcher content.
  * @cssproperty --theme-switcher-background-color - The background color of the theme switcher.
  * @cssproperty --theme-switcher-border-color - The border color of the theme switcher.
- * @cssproperty --theme-switcher-padding - The padding around the theme switcher content.
+ * @cssproperty --theme-switcher-option-size - The width and height of each theme option button.
+ * @cssproperty --theme-switcher-option-font-size - The font size of each theme option button, which can be used to scale the default SVG icons.
  * @cssproperty --theme-switcher-option-color - The text/icon color of each theme option button.
  * @cssproperty --theme-switcher-option-active-color - The text/icon color of the selected theme option button.
  * @cssproperty --theme-switcher-option-active-background-color - The background color of the selected theme option button.
@@ -415,7 +442,9 @@ class ThemeSwitcher extends HTMLElement {
 
   /**
    * Reflects the current theme state.
-   * This method is called on initialization and when the theme state changes (e.g. via click event).
+   *
+   * This method is called on initialization and when the theme state changes
+   * (e.g. via click event).
    */
   #reflectThemePreference() {
     this.#themeSwitcher?.querySelectorAll(`[data-theme]`)?.forEach(el => {
@@ -437,8 +466,11 @@ class ThemeSwitcher extends HTMLElement {
   }
 
   /**
-   * Handles click events on the theme switcher buttons.
-   * Updates the theme state based on the clicked button and reflects the change.
+   * Handles user selection of a theme option.
+   *
+   * When a valid, different theme is selected, this updates the internal theme
+   * state, persists the preference, reflects the new state to the DOM, and
+   * dispatches a `theme-change` event.
    *
    * @param {MouseEvent} evt - The click event object.
    */

@@ -29,6 +29,8 @@
   --variable: #39a33c;
   --highlight: #fff000;
   --select-arrow: url("data:image/svg+xml;charset=utf-8,%3C?xml version='1.0' encoding='utf-8'?%3E %3Csvg version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' height='62.5' width='116.9' fill='%23161f27'%3E %3Cpath d='M115.3,1.6 C113.7,0 111.1,0 109.5,1.6 L58.5,52.7 L7.4,1.6 C5.8,0 3.2,0 1.6,1.6 C0,3.2 0,5.8 1.6,7.4 L55.5,61.3 C56.3,62.1 57.3,62.5 58.4,62.5 C59.4,62.5 60.5,62.1 61.3,61.3 L115.2,7.4 C116.9,5.8 116.9,3.2 115.3,1.6Z'/%3E %3C/svg%3E");
+
+  color-scheme: light;
 }
 
 :root[data-theme="dark"] {
@@ -52,6 +54,8 @@
   --variable: #d941e2;
   --highlight: #efdb43;
   --select-arrow: url("data:image/svg+xml;charset=utf-8,%3C?xml version='1.0' encoding='utf-8'?%3E %3Csvg version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' height='62.5' width='116.9' fill='%23ffffff'%3E %3Cpath d='M115.3,1.6 C113.7,0 111.1,0 109.5,1.6 L58.5,52.7 L7.4,1.6 C5.8,0 3.2,0 1.6,1.6 C0,3.2 0,5.8 1.6,7.4 L55.5,61.3 C56.3,62.1 57.3,62.5 58.4,62.5 C59.4,62.5 60.5,62.1 61.3,61.3 L115.2,7.4 C116.9,5.8 116.9,3.2 115.3,1.6Z'/%3E %3C/svg%3E");
+
+  color-scheme: dark;
 }
 
 .noscript-banner {
@@ -106,20 +110,12 @@ browser-window::part(title) {
   border-radius: var(--border-radius);
 }
 
-theme-switcher {
-  --theme-switcher-border-color: var(--text-main);
-  --theme-switcher-option-color: var(--text-main);
-  --theme-switcher-option-active-color: var(--background-body);
-  --theme-switcher-option-active-background-color: var(--text-main);
-}
-
-/* Custom styling demo */
 .theme-palette-picker {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   gap: 0.5rem;
-  max-width: 38rem;
+  max-width: 42rem;
   border: 0;
   padding: 0;
   margin: 0 auto 1rem auto;
@@ -181,74 +177,149 @@ theme-switcher {
   opacity: 0.65;
 }
 
-.custom-styling-demo[data-theme-switcher-theme='lime-electric'] theme-switcher {
-  color-scheme: light dark;
-  --theme-switcher-background-color: light-dark(#f7fee7, #142004);
-  --theme-switcher-border-color: light-dark(#bef264, #84cc16);
-  --theme-switcher-option-color: light-dark(#3f6212, #d9f99d);
-  --theme-switcher-option-active-color: light-dark(#ffffff, #172008);
-  --theme-switcher-option-active-background-color: light-dark(#65a30d, #a3e635);
+.demo {
+  padding-block: 1rem;
+  text-align: center;
 }
 
-.custom-styling-demo[data-theme-switcher-theme='soft-blue'] theme-switcher {
-  color-scheme: light dark;
-  --theme-switcher-background-color: light-dark(#eff6ff, #0b1220);
-  --theme-switcher-border-color: light-dark(#93c5fd, #2563eb);
-  --theme-switcher-option-color: light-dark(#1e3a8a, #bfdbfe);
-  --theme-switcher-option-active-color: light-dark(#ffffff, #eff6ff);
-  --theme-switcher-option-active-background-color: light-dark(#2563eb, #60a5fa);
+.demo theme-switcher {
+  margin-top: 1rem;
 }
 
-.custom-styling-demo[data-theme-switcher-theme='emerald-mint'] theme-switcher {
+.demo[data-theme-switcher-theme='lime-electric'] theme-switcher {
   color-scheme: light dark;
-  --theme-switcher-background-color: light-dark(#ecfdf5, #052e24);
-  --theme-switcher-border-color: light-dark(#6ee7b7, #10b981);
-  --theme-switcher-option-color: light-dark(#065f46, #a7f3d0);
-  --theme-switcher-option-active-color: light-dark(#ffffff, #042f2e);
-  --theme-switcher-option-active-background-color: light-dark(#059669, #5eead4);
+  --theme-switcher-background-color: #f7fee7;
+  --theme-switcher-border-color: #bef264;
+  --theme-switcher-option-color: #3f6212;
+  --theme-switcher-option-active-color: #ffffff;
+  --theme-switcher-option-active-background-color: #65a30d;
 }
 
-.custom-styling-demo[data-theme-switcher-theme='warm-amber'] theme-switcher {
+.demo[data-theme-switcher-theme='soft-blue'] theme-switcher {
   color-scheme: light dark;
-  --theme-switcher-background-color: light-dark(#fffbeb, #271a05);
-  --theme-switcher-border-color: light-dark(#fbbf24, #d97706);
-  --theme-switcher-option-color: light-dark(#92400e, #fde68a);
-  --theme-switcher-option-active-color: light-dark(#ffffff, #1c1304);
-  --theme-switcher-option-active-background-color: light-dark(#d97706, #facc15);
+  --theme-switcher-background-color: #eff6ff;
+  --theme-switcher-border-color: #93c5fd;
+  --theme-switcher-option-color: #1e3a8a;
+  --theme-switcher-option-active-color: #ffffff;
+  --theme-switcher-option-active-background-color: #2563eb;
 }
 
-.custom-styling-demo[data-theme-switcher-theme='rose-coral'] theme-switcher {
+.demo[data-theme-switcher-theme='emerald-mint'] theme-switcher {
   color-scheme: light dark;
-  --theme-switcher-background-color: light-dark(#fff1f2, #2a0d12);
-  --theme-switcher-border-color: light-dark(#fda4af, #e11d48);
-  --theme-switcher-option-color: light-dark(#9f1239, #fecdd3);
-  --theme-switcher-option-active-color: light-dark(#ffffff, #2a0d12);
-  --theme-switcher-option-active-background-color: light-dark(#e11d48, #fb7185);
+  --theme-switcher-background-color: #ecfdf5;
+  --theme-switcher-border-color: #6ee7b7;
+  --theme-switcher-option-color: #065f46;
+  --theme-switcher-option-active-color: #ffffff;
+  --theme-switcher-option-active-background-color: #059669;
 }
 
-.custom-styling-demo[data-theme-switcher-theme='cyan-tech'] theme-switcher {
+.demo[data-theme-switcher-theme='warm-amber'] theme-switcher {
   color-scheme: light dark;
-  --theme-switcher-background-color: light-dark(#ecfeff, #061b20);
-  --theme-switcher-border-color: light-dark(#67e8f9, #0891b2);
-  --theme-switcher-option-color: light-dark(#155e75, #a5f3fc);
-  --theme-switcher-option-active-color: light-dark(#ffffff, #06202a);
-  --theme-switcher-option-active-background-color: light-dark(#0891b2, #22d3ee);
+  --theme-switcher-background-color: #fffbeb;
+  --theme-switcher-border-color: #fbbf24;
+  --theme-switcher-option-color: #92400e;
+  --theme-switcher-option-active-color: #ffffff;
+  --theme-switcher-option-active-background-color: #d97706;
 }
 
-.custom-styling-demo[data-theme-switcher-theme='indigo-violet'] theme-switcher {
+.demo[data-theme-switcher-theme='rose-coral'] theme-switcher {
   color-scheme: light dark;
-  --theme-switcher-background-color: light-dark(#eef2ff, #11102a);
-  --theme-switcher-border-color: light-dark(#a5b4fc, #818cf8);
-  --theme-switcher-option-color: light-dark(#3730a3, #c7d2fe);
-  --theme-switcher-option-active-color: light-dark(#ffffff, #11102a);
-  --theme-switcher-option-active-background-color: light-dark(#4f46e5, #a78bfa);
+  --theme-switcher-background-color: #fff1f2;
+  --theme-switcher-border-color: #fda4af;
+  --theme-switcher-option-color: #9f1239;
+  --theme-switcher-option-active-color: #ffffff;
+  --theme-switcher-option-active-background-color: #e11d48;
 }
 
-.custom-styling-demo[data-theme-switcher-theme='purple-neon'] theme-switcher {
+.demo[data-theme-switcher-theme='cyan-tech'] theme-switcher {
   color-scheme: light dark;
-  --theme-switcher-background-color: light-dark(#f3e8ff, #0f051d);
-  --theme-switcher-border-color: light-dark(#a855f7, #d8b4fe);
-  --theme-switcher-option-color: light-dark(#581c87, #ddd6fe);
-  --theme-switcher-option-active-color: light-dark(#ffffff, #1a052e);
-  --theme-switcher-option-active-background-color: light-dark(#9333ea, #e879f9);
+  --theme-switcher-background-color: #ecfeff;
+  --theme-switcher-border-color: #67e8f9;
+  --theme-switcher-option-color: #155e75;
+  --theme-switcher-option-active-color: #ffffff;
+  --theme-switcher-option-active-background-color: #0891b2;
+}
+
+.demo[data-theme-switcher-theme='indigo-violet'] theme-switcher {
+  color-scheme: light dark;
+  --theme-switcher-background-color: #eef2ff;
+  --theme-switcher-border-color: #a5b4fc;
+  --theme-switcher-option-color: #3730a3;
+  --theme-switcher-option-active-color: #ffffff;
+  --theme-switcher-option-active-background-color: #4f46e5;
+}
+
+.demo[data-theme-switcher-theme='purple-neon'] theme-switcher {
+  color-scheme: light dark;
+  --theme-switcher-background-color: #f3e8ff;
+  --theme-switcher-border-color: #a855f7;
+  --theme-switcher-option-color: #581c87;
+  --theme-switcher-option-active-color: #ffffff;
+  --theme-switcher-option-active-background-color: #9333ea;
+}
+
+@supports (color: light-dark(#000000, #ffffff)) {
+  .demo[data-theme-switcher-theme='lime-electric'] theme-switcher {
+    --theme-switcher-background-color: light-dark(#f7fee7, #142004);
+    --theme-switcher-border-color: light-dark(#bef264, #84cc16);
+    --theme-switcher-option-color: light-dark(#3f6212, #d9f99d);
+    --theme-switcher-option-active-color: light-dark(#ffffff, #172008);
+    --theme-switcher-option-active-background-color: light-dark(#65a30d, #a3e635);
+  }
+
+  .demo[data-theme-switcher-theme='soft-blue'] theme-switcher {
+    --theme-switcher-background-color: light-dark(#eff6ff, #0b1220);
+    --theme-switcher-border-color: light-dark(#93c5fd, #2563eb);
+    --theme-switcher-option-color: light-dark(#1e3a8a, #bfdbfe);
+    --theme-switcher-option-active-color: light-dark(#ffffff, #eff6ff);
+    --theme-switcher-option-active-background-color: light-dark(#2563eb, #60a5fa);
+  }
+
+  .demo[data-theme-switcher-theme='emerald-mint'] theme-switcher {
+    --theme-switcher-background-color: light-dark(#ecfdf5, #052e24);
+    --theme-switcher-border-color: light-dark(#6ee7b7, #10b981);
+    --theme-switcher-option-color: light-dark(#065f46, #a7f3d0);
+    --theme-switcher-option-active-color: light-dark(#ffffff, #042f2e);
+    --theme-switcher-option-active-background-color: light-dark(#059669, #5eead4);
+  }
+
+  .demo[data-theme-switcher-theme='warm-amber'] theme-switcher {
+    --theme-switcher-background-color: light-dark(#fffbeb, #271a05);
+    --theme-switcher-border-color: light-dark(#fbbf24, #d97706);
+    --theme-switcher-option-color: light-dark(#92400e, #fde68a);
+    --theme-switcher-option-active-color: light-dark(#ffffff, #1c1304);
+    --theme-switcher-option-active-background-color: light-dark(#d97706, #facc15);
+  }
+
+  .demo[data-theme-switcher-theme='rose-coral'] theme-switcher {
+    --theme-switcher-background-color: light-dark(#fff1f2, #2a0d12);
+    --theme-switcher-border-color: light-dark(#fda4af, #e11d48);
+    --theme-switcher-option-color: light-dark(#9f1239, #fecdd3);
+    --theme-switcher-option-active-color: light-dark(#ffffff, #2a0d12);
+    --theme-switcher-option-active-background-color: light-dark(#e11d48, #fb7185);
+  }
+
+  .demo[data-theme-switcher-theme='cyan-tech'] theme-switcher {
+    --theme-switcher-background-color: light-dark(#ecfeff, #061b20);
+    --theme-switcher-border-color: light-dark(#67e8f9, #0891b2);
+    --theme-switcher-option-color: light-dark(#155e75, #a5f3fc);
+    --theme-switcher-option-active-color: light-dark(#ffffff, #06202a);
+    --theme-switcher-option-active-background-color: light-dark(#0891b2, #22d3ee);
+  }
+
+  .demo[data-theme-switcher-theme='indigo-violet'] theme-switcher {
+    --theme-switcher-background-color: light-dark(#eef2ff, #11102a);
+    --theme-switcher-border-color: light-dark(#a5b4fc, #818cf8);
+    --theme-switcher-option-color: light-dark(#3730a3, #c7d2fe);
+    --theme-switcher-option-active-color: light-dark(#ffffff, #11102a);
+    --theme-switcher-option-active-background-color: light-dark(#4f46e5, #a78bfa);
+  }
+
+  .demo[data-theme-switcher-theme='purple-neon'] theme-switcher {
+    --theme-switcher-background-color: light-dark(#f3e8ff, #0f051d);
+    --theme-switcher-border-color: light-dark(#a855f7, #d8b4fe);
+    --theme-switcher-option-color: light-dark(#581c87, #ddd6fe);
+    --theme-switcher-option-active-color: light-dark(#ffffff, #1a052e);
+    --theme-switcher-option-active-background-color: light-dark(#9333ea, #e879f9);
+  }
 }

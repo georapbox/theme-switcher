@@ -57,8 +57,8 @@ When the user selects a theme, the component sets a `data-theme` attribute on th
 
 ```html
 <html data-theme="light">
-<html data-theme="dark">
 <html data-theme="system">
+<html data-theme="dark">
 ```
 
 The selected theme is saved in `localStorage` by default, using the configured `storageKey`. On future page loads, the saved theme is restored automatically.
@@ -85,12 +85,12 @@ You can use the `data-theme` attribute to control the page color scheme and then
   color-scheme: light;
 }
 
-:root[data-theme='dark'] {
-  color-scheme: dark;
-}
-
 :root[data-theme='system'] {
   color-scheme: light dark;
+}
+
+:root[data-theme='dark'] {
+  color-scheme: dark;
 }
 
 theme-switcher {
@@ -135,16 +135,19 @@ By default, the component comes with basic styling. However, you can customise t
 | `theme-option--system` | The button for selecting the system theme. |
 | `theme-option--dark` | The button for selecting the dark theme. |
 
-### CSS Custom Properties
-
 | Name | Description | Default |
 | ---- | ----------- | ------- |
-| `--theme-switcher-background-color` | The background color of the theme switcher. | `transparent` |
-| `--theme-switcher-border-color` | The border color of the theme switcher. | `canvastext` |
 | `--theme-switcher-padding` | The padding around the theme switcher content. | `0.1875rem` |
-| `--theme-switcher-option-color` | The text/icon color of each theme option button. | `canvastext` |
-| `--theme-switcher-option-active-color` | The text/icon color of the selected theme option button. | `canvas` |
-| `--theme-switcher-option-active-background-color` | The background color of the selected theme option button. | `canvastext` |
+| `--theme-switcher-background-color` | The background color of the theme switcher. | `transparent` |
+| `--theme-switcher-border-color` | The border color of the theme switcher. | `#222222`, or `light-dark(#222222, #eeeeee)` when supported |
+| `--theme-switcher-option-size` | The width and height of each theme option button. | `2rem` |
+| `--theme-switcher-option-font-size` | The font size of each theme option button, which can be used to scale the default SVG icons. | `calc(var(--theme-switcher-option-size) * 0.5)` |
+| `--theme-switcher-option-color` | The text/icon color of each theme option button. | `#222222`, or `light-dark(#222222, #eeeeee)` when supported |
+| `--theme-switcher-option-active-color` | The text/icon color of the selected theme option button. | `#eeeeee`, or `light-dark(#eeeeee, #222222)` when supported |
+| `--theme-switcher-option-active-background-color` | The background color of the selected theme option button. | `#222222`, or `light-dark(#222222, #eeeeee)` when supported |
+
+> [!NOTE]
+> Color defaults use static fallback values first and are enhanced with `light-dark()` in browsers that support it.
 
 ### Methods
 
