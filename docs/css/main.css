@@ -5,6 +5,8 @@
 }
 
 :root {
+  --body-max-width: 60rem;
+
   scroll-behavior: smooth;
 }
 
@@ -116,15 +118,12 @@ browser-window::part(title) {
   justify-content: center;
   gap: 0.5rem;
   max-width: 42rem;
-  border: 0;
-  padding: 0;
   margin: 0 auto 1rem auto;
+  border: 0;
 }
 
 .theme-palette-picker legend {
-  width: 100%;
   margin-block-end: 0.5rem;
-  color: var(--text-bright);
 }
 
 .theme-palette-picker label {
@@ -180,10 +179,6 @@ browser-window::part(title) {
 .demo {
   padding-block: 1rem;
   text-align: center;
-}
-
-.demo theme-switcher {
-  margin-top: 1rem;
 }
 
 .demo[data-theme-switcher-theme='lime-electric'] theme-switcher {
