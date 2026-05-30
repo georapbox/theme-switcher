@@ -104,7 +104,7 @@ template.innerHTML = html`
     ${styles}
   </style>
 
-  <div class="theme-switcher" part="base" role="radiogroup">
+  <div id="theme-switcher" class="theme-switcher" part="base" role="radiogroup">
     <button
       class="theme-switcher__option"
       part="theme-option theme-option--light"
@@ -219,7 +219,7 @@ class ThemeSwitcher extends HTMLElement {
   #theme = 'system';
 
   /** @type {HTMLElement | null} */
-  #themeSwitcher = null;
+  #themeSwitcherEl = null;
 
   constructor() {
     super();
@@ -248,24 +248,18 @@ class ThemeSwitcher extends HTMLElement {
     }
 
     if (name === 'light-label' && oldValue !== newValue) {
-      const lightOption = this.shadowRoot?.querySelector(`[data-theme="light"]`);
-      if (lightOption) {
-        lightOption.setAttribute('aria-label', this.lightLabel);
-      }
+      const lightOptionButton = this.shadowRoot?.querySelector('[data-theme-switcher-option][data-theme="light"]');
+      lightOptionButton?.setAttribute('aria-label', this.lightLabel);
     }
 
     if (name === 'system-label' && oldValue !== newValue) {
-      const systemOption = this.shadowRoot?.querySelector(`[data-theme="system"]`);
-      if (systemOption) {
-        systemOption.setAttribute('aria-label', this.systemLabel);
-      }
+      const systemOptionButton = this.shadowRoot?.querySelector('[data-theme-switcher-option][data-theme="system"]');
+      systemOptionButton?.setAttribute('aria-label', this.systemLabel);
     }
 
     if (name === 'dark-label' && oldValue !== newValue) {
-      const darkOption = this.shadowRoot?.querySelector(`[data-theme="dark"]`);
-      if (darkOption) {
-        darkOption.setAttribute('aria-label', this.darkLabel);
-      }
+      const darkOptionButton = this.shadowRoot?.querySelector('[data-theme-switcher-option][data-theme="dark"]');
+      darkOptionButton?.setAttribute('aria-label', this.darkLabel);
     }
   }
 
@@ -375,19 +369,19 @@ class ThemeSwitcher extends HTMLElement {
     this.#upgradeProperty('systemLabel');
     this.#upgradeProperty('darkLabel');
 
-    this.#themeSwitcher = this.shadowRoot?.querySelector('[part="base"]') || null;
+    this.#themeSwitcherEl = this.shadowRoot?.getElementById('theme-switcher') || null;
 
     this.#theme = this.#getThemePreference();
     this.#reflectThemePreference();
 
-    this.#themeSwitcher?.addEventListener('click', this.#handleSwitcherClick);
+    this.#themeSwitcherEl?.addEventListener('click', this.#handleSwitcherClick);
   }
 
   /**
    * Lifecycle method that is called when the element is removed from the DOM.
    */
   disconnectedCallback() {
-    this.#themeSwitcher?.removeEventListener('click', this.#handleSwitcherClick);
+    this.#themeSwitcherEl?.removeEventListener('click', this.#handleSwitcherClick);
   }
 
   /**
@@ -447,7 +441,13 @@ class ThemeSwitcher extends HTMLElement {
    * (e.g. via click event).
    */
   #reflectThemePreference() {
-    this.#themeSwitcher?.querySelectorAll(`[data-theme]`)?.forEach(el => {
+    const optionButtons = this.#themeSwitcherEl?.querySelectorAll(`[data-theme-switcher-option]`);
+
+    if (!optionButtons || optionButtons.length === 0) {
+      return;
+    }
+
+    optionButtons.forEach(el => {
       const theme = el.getAttribute('data-theme');
       el.setAttribute('aria-checked', theme === this.#theme ? 'true' : 'false');
     });
@@ -491,15 +491,12 @@ class ThemeSwitcher extends HTMLElement {
     this.#setThemePreference();
     this.#reflectThemePreference();
 
-    this.dispatchEvent(
-      new CustomEvent('theme-change', {
-        bubbles: true,
-        composed: true,
-        detail: {
-          theme: this.#theme
-        }
-      })
-    );
+    const changeEvent = new CustomEvent('theme-change', {
+      bubbles: true,
+      composed: true,
+      detail: { theme: this.#theme }
+    });
+    this.dispatchEvent(changeEvent);
   };
 
   /**
