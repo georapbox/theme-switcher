@@ -1,15 +1,36 @@
 // @ts-check
 
 /**
+ * The possible theme values that can be selected and reflected by the theme switcher.
+ *
  * @typedef {'light' | 'system' | 'dark'} Theme
  */
 
-const html = String.raw;
-const css = String.raw;
-
+/**
+ * The default local storage key used to persist the selected theme when
+ * `no-storage` is not enabled.
+ *
+ * This can be overridden by setting the `storage-key` attribute or
+ * `storageKey` property on the element instance.
+ */
 const DEFAULT_STORAGE_KEY = 'theme-switcher/theme-preference';
-const ROOT_ATTR = 'data-theme';
+
+/**
+ * Reflects the current theme on the root document element using this attribute.
+ *
+ * This allows global CSS styles to target the current theme using attribute
+ * selectors, e.g. `html[data-theme="dark"] { ... }`.
+ */
+const ROOT_THEME_ATTR = 'data-theme';
+
+/**
+ * The valid theme values that can be selected by the user and reflected in the DOM.
+ *
+ * @type {readonly string[]}
+ */
 const THEME_VALUES = ['light', 'system', 'dark'];
+
+const css = String.raw;
 
 const styles = css`
   :host {
@@ -97,6 +118,7 @@ const styles = css`
   }
 `;
 
+const html = String.raw;
 const template = document.createElement('template');
 
 template.innerHTML = html`
@@ -180,14 +202,14 @@ template.innerHTML = html`
  * @tagname theme-switcher - The default custom element tag name, unless overridden by the `define` method.
  * @extends HTMLElement
  *
- * @property {boolean} noStorage - Whether to disable persistence of the selected theme in local storage. Defaults to false.
- * @property {string} storageKey - The local storage key used to persist the selected theme. Defaults to "theme-switcher/theme-preference".
+ * @property {boolean} noStorage - Whether to disable persistence of the selected theme in local storage.
+ * @property {string} storageKey - The local storage key used to persist the selected theme.
  * @property {string} lightLabel - The accessible label for the light theme option button.
  * @property {string} systemLabel - The accessible label for the system theme option button.
  * @property {string} darkLabel - The accessible label for the dark theme option button.
  *
- * @attribute {boolean} no-storage - Whether to disable persistence of the selected theme in local storage. Defaults to false.
- * @attribute {string} storage-key - The local storage key used to persist the selected theme. Defaults to "theme-switcher/theme-preference".
+ * @attribute {boolean} no-storage - Whether to disable persistence of the selected theme in local storage.
+ * @attribute {string} storage-key - The local storage key used to persist the selected theme.
  * @attribute {string} light-label - The accessible label for the light theme option button.
  * @attribute {string} system-label - The accessible label for the system theme option button.
  * @attribute {string} dark-label - The accessible label for the dark theme option button.
@@ -212,6 +234,7 @@ template.innerHTML = html`
  * @cssproperty --theme-switcher-option-active-background-color - The background color of the selected theme option button.
  *
  * @event theme-change - Dispatched when the theme is changed by user interaction. The event detail contains the new theme value.
+ *
  * @method define - Static method. Defines the custom element by registering it with the browser's CustomElementRegistry if it hasn't been defined already.
  */
 class ThemeSwitcher extends HTMLElement {
@@ -291,7 +314,7 @@ class ThemeSwitcher extends HTMLElement {
    * @attribute storage-key
    */
   get storageKey() {
-    return this.getAttribute('storage-key') ?? DEFAULT_STORAGE_KEY;
+    return this.getAttribute('storage-key') || DEFAULT_STORAGE_KEY;
   }
 
   set storageKey(value) {
@@ -404,16 +427,14 @@ class ThemeSwitcher extends HTMLElement {
       return 'system';
     }
 
-    let valueFromStorage = '';
-
     try {
-      valueFromStorage = localStorage.getItem(this.storageKey || DEFAULT_STORAGE_KEY) || '';
+      const savedTheme = localStorage.getItem(this.storageKey);
+
+      if (this.#isTheme(savedTheme)) {
+        return savedTheme;
+      }
     } catch {
       // Fail silently...
-    }
-
-    if (this.#isTheme(valueFromStorage)) {
-      return valueFromStorage;
     }
 
     return 'system';
@@ -428,7 +449,7 @@ class ThemeSwitcher extends HTMLElement {
     }
 
     try {
-      localStorage.setItem(this.storageKey || DEFAULT_STORAGE_KEY, this.#theme);
+      localStorage.setItem(this.storageKey, this.#theme);
     } catch {
       // Fail silently...
     }
@@ -452,7 +473,25 @@ class ThemeSwitcher extends HTMLElement {
       el.setAttribute('aria-checked', theme === this.#theme ? 'true' : 'false');
     });
 
-    this.ownerDocument.documentElement.setAttribute(ROOT_ATTR, this.#theme);
+    this.ownerDocument.documentElement.setAttribute(ROOT_THEME_ATTR, this.#theme);
+  }
+
+  /**
+   * Changes the theme to a new value if it's valid and different from the current theme.
+   *
+   * @param {unknown} theme - The new theme to switch to.
+   * @return {boolean} True if the theme was changed, false if the new theme is invalid or the same as the current theme.
+   */
+  #changeTheme(theme) {
+    if (!this.#isTheme(theme) || theme === this.#theme) {
+      return false;
+    }
+
+    this.#theme = theme;
+    this.#setThemePreference();
+    this.#reflectThemePreference();
+
+    return true;
   }
 
   /**
@@ -470,7 +509,7 @@ class ThemeSwitcher extends HTMLElement {
    *
    * When a valid, different theme is selected, this updates the internal theme
    * state, persists the preference, reflects the new state to the DOM, and
-   * dispatches a `theme-change` event.
+   * dispatches a theme change event.
    *
    * @param {MouseEvent} evt - The click event object.
    */
@@ -483,21 +522,24 @@ class ThemeSwitcher extends HTMLElement {
 
     const selectedTheme = selectedButton.getAttribute('data-theme');
 
-    if (!this.#isTheme(selectedTheme) || selectedTheme === this.#theme) {
+    if (!this.#changeTheme(selectedTheme)) {
       return;
     }
 
-    this.#theme = selectedTheme;
-    this.#setThemePreference();
-    this.#reflectThemePreference();
-
-    const changeEvent = new CustomEvent('theme-change', {
-      bubbles: true,
-      composed: true,
-      detail: { theme: this.#theme }
-    });
-    this.dispatchEvent(changeEvent);
+    this.#emitEvent('theme-change', { theme: this.#theme });
   };
+
+  /**
+   * Dispatches a custom event with the given name.
+   *
+   * @param {string} eventName - The name of the event to dispatch.
+   * @param {unknown} detail - The detail object to include with the event.
+   */
+  #emitEvent(eventName, detail = null) {
+    const options = { bubbles: true, composed: true, detail };
+    const evt = new CustomEvent(eventName, options);
+    this.dispatchEvent(evt);
+  }
 
   /**
    * Re-applies a property value that may have been set on the element
