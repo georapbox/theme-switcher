@@ -1,33 +1,18 @@
 // @ts-check
 
 /**
- * The possible theme values that can be selected and reflected by the theme switcher.
- *
  * @typedef {'light' | 'system' | 'dark'} Theme
  */
 
 /**
- * The default local storage key used to persist the selected theme when
- * `no-storage` is not enabled.
- *
- * This can be overridden by setting the `storage-key` attribute or
- * `storageKey` property on the element instance.
+ * @typedef {object} ThemeChangeEventDetail
+ * @property {Theme} theme
  */
-const DEFAULT_STORAGE_KEY = 'theme-switcher/theme-preference';
 
-/**
- * Reflects the current theme on the root document element using this attribute.
- *
- * This allows global CSS styles to target the current theme using attribute
- * selectors, e.g. `html[data-theme="dark"] { ... }`.
- */
+const DEFAULT_STORAGE_KEY = 'theme-switcher/theme-preference';
 const ROOT_THEME_ATTR = 'data-theme';
 
-/**
- * The valid theme values that can be selected by the user and reflected in the DOM.
- *
- * @type {readonly string[]}
- */
+/** @type {readonly string[]} */
 const THEME_VALUES = ['light', 'system', 'dark'];
 
 const css = String.raw;
@@ -398,6 +383,7 @@ class ThemeSwitcher extends HTMLElement {
     this.#reflectThemePreference();
 
     this.#themeSwitcherEl?.addEventListener('click', this.#handleSwitcherClick);
+    this.ownerDocument.addEventListener('theme-change', this.#handleThemeChange);
   }
 
   /**
@@ -405,6 +391,7 @@ class ThemeSwitcher extends HTMLElement {
    */
   disconnectedCallback() {
     this.#themeSwitcherEl?.removeEventListener('click', this.#handleSwitcherClick);
+    this.ownerDocument.removeEventListener('theme-change', this.#handleThemeChange);
   }
 
   /**
@@ -477,19 +464,30 @@ class ThemeSwitcher extends HTMLElement {
   }
 
   /**
-   * Changes the theme to a new value if it's valid and different from the current theme.
+   * Changes the theme if the value is valid and different from the current theme.
    *
    * @param {unknown} theme - The new theme to switch to.
+   * @param {{emit?: boolean, persist?: boolean}} [options] - Additional options for changing the theme.
    * @return {boolean} True if the theme was changed, false if the new theme is invalid or the same as the current theme.
    */
-  #changeTheme(theme) {
+  #changeTheme(theme, options = {}) {
+    const { emit = false, persist = true } = options;
+
     if (!this.#isTheme(theme) || theme === this.#theme) {
       return false;
     }
 
     this.#theme = theme;
-    this.#setThemePreference();
+
+    if (persist) {
+      this.#setThemePreference();
+    }
+
     this.#reflectThemePreference();
+
+    if (emit) {
+      this.#emitEvent('theme-change', { theme: this.#theme });
+    }
 
     return true;
   }
@@ -507,10 +505,6 @@ class ThemeSwitcher extends HTMLElement {
   /**
    * Handles user selection of a theme option.
    *
-   * When a valid, different theme is selected, this updates the internal theme
-   * state, persists the preference, reflects the new state to the DOM, and
-   * dispatches a theme change event.
-   *
    * @param {MouseEvent} evt - The click event object.
    */
   #handleSwitcherClick = evt => {
@@ -522,23 +516,43 @@ class ThemeSwitcher extends HTMLElement {
 
     const selectedTheme = selectedButton.getAttribute('data-theme');
 
-    if (!this.#changeTheme(selectedTheme)) {
-      return;
-    }
-
-    this.#emitEvent('theme-change', { theme: this.#theme });
+    this.#changeTheme(selectedTheme, { emit: true });
   };
 
   /**
-   * Dispatches a custom event with the given name.
+   * Syncs this instance when another theme switcher changes the theme.
    *
-   * @param {string} eventName - The name of the event to dispatch.
-   * @param {unknown} detail - The detail object to include with the event.
+   * @param {Event} evt - The theme change event object.
    */
-  #emitEvent(eventName, detail = null) {
-    const options = { bubbles: true, composed: true, detail };
+  #handleThemeChange = evt => {
+    if (evt.target === this || !(evt instanceof CustomEvent)) {
+      return;
+    }
+
+    const theme = /** @type CustomEvent<ThemeChangeEventDetail> */ (evt).detail?.theme;
+
+    this.#changeTheme(theme, { persist: false });
+  };
+
+  /**
+   * Emit a custom event with the given name and detail.
+   *
+   * @template D
+   * @param {string} eventName - The name of the event.
+   * @param {D} [detail] - The detail payload of the event.
+   * @param {CustomEventInit<D>} [init] - Override the default event initialization options.
+   * @returns {boolean} - Returns false if at least one event listener called `preventDefault()`, otherwise true.
+   */
+  #emitEvent(eventName, detail, init) {
+    const options = {
+      bubbles: true,
+      composed: true,
+      cancelable: false,
+      ...init,
+      detail
+    };
     const evt = new CustomEvent(eventName, options);
-    this.dispatchEvent(evt);
+    return this.dispatchEvent(evt);
   }
 
   /**

@@ -157,8 +157,6 @@ theme-switcher {
 | ---- | ---- | ----------- | --------- |
 | `define` | Static | Defines the custom element by registering it with the browser's CustomElementRegistry if it hasn't been defined already. | `tagName='theme-switcher'` |
 
-<sup>1</sup> Instance methods are only available after the component has been defined. To ensure the component is defined, you can use `whenDefined` method of the `CustomElementRegistry` interface, eg `customElements.whenDefined('theme-switcher').then(() => { /* call methods here */ });`
-
 ### Events
 
 | Name | Description | Event Detail |
