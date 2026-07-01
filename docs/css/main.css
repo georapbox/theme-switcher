@@ -162,11 +162,11 @@ browser-window::part(title) {
 .theme-palette-picker input:checked + span {
   border-color: var(--palette-color);
   box-shadow: 0 0 0 1px color-mix(in srgb, var(--palette-color) 70%, transparent), 0 0 0.75rem color-mix(in srgb, var(--palette-color) 35%, transparent);
+  transition: border-color 0.1s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.1s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .theme-palette-picker input:focus-visible + span {
   outline: 2px solid var(--palette-color);
-  outline-offset: 2px;
 }
 
 .theme-palette-picker input:disabled + span {

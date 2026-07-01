@@ -4,6 +4,23 @@ import { ThemeSwitcher } from '../src/theme-switcher.js';
 
 ThemeSwitcher.define();
 
+const getOptions = el => ({
+  lightOptionButton: el.shadowRoot.querySelector('[data-theme="light"]'),
+  systemOptionButton: el.shadowRoot.querySelector('[data-theme="system"]'),
+  darkOptionButton: el.shadowRoot.querySelector('[data-theme="dark"]')
+});
+
+const pressKey = (target, key) => {
+  const event = new KeyboardEvent('keydown', {
+    key,
+    bubbles: true,
+    composed: true,
+    cancelable: true
+  });
+  target.dispatchEvent(event);
+  return event;
+};
+
 describe('theme-switcher', () => {
   afterEach(() => {
     fixtureCleanup();
@@ -46,10 +63,7 @@ describe('theme-switcher', () => {
 
     it('uses default aria-labels for theme options', async () => {
       const el = await fixture(html`<theme-switcher></theme-switcher>`);
-
-      const lightOptionButton = el.shadowRoot.querySelector('[data-theme="light"]');
-      const systemOptionButton = el.shadowRoot.querySelector('[data-theme="system"]');
-      const darkOptionButton = el.shadowRoot.querySelector('[data-theme="dark"]');
+      const { lightOptionButton, systemOptionButton, darkOptionButton } = getOptions(el);
 
       expect(lightOptionButton).to.have.attribute('aria-label', 'Switch to light theme');
       expect(systemOptionButton).to.have.attribute('aria-label', 'Switch to system theme');
@@ -60,10 +74,7 @@ describe('theme-switcher', () => {
       const el = await fixture(html`
         <theme-switcher light-label="LIGHT_LABEL" system-label="SYSTEM_LABEL" dark-label="DARK_LABEL"></theme-switcher>
       `);
-
-      const lightOptionButton = el.shadowRoot.querySelector('[data-theme="light"]');
-      const systemOptionButton = el.shadowRoot.querySelector('[data-theme="system"]');
-      const darkOptionButton = el.shadowRoot.querySelector('[data-theme="dark"]');
+      const { lightOptionButton, systemOptionButton, darkOptionButton } = getOptions(el);
 
       expect(lightOptionButton).to.have.attribute('aria-label', 'LIGHT_LABEL');
       expect(systemOptionButton).to.have.attribute('aria-label', 'SYSTEM_LABEL');
@@ -74,10 +85,7 @@ describe('theme-switcher', () => {
       const el = await fixture(html`
         <theme-switcher light-label="LIGHT_LABEL" system-label="SYSTEM_LABEL" dark-label="DARK_LABEL"></theme-switcher>
       `);
-
-      const lightOptionButton = el.shadowRoot.querySelector('[data-theme="light"]');
-      const systemOptionButton = el.shadowRoot.querySelector('[data-theme="system"]');
-      const darkOptionButton = el.shadowRoot.querySelector('[data-theme="dark"]');
+      const { lightOptionButton, systemOptionButton, darkOptionButton } = getOptions(el);
 
       el.lightLabel = null;
       el.systemLabel = null;
@@ -92,10 +100,7 @@ describe('theme-switcher', () => {
       const el = await fixture(html`
         <theme-switcher light-label="LIGHT_LABEL" system-label="SYSTEM_LABEL" dark-label="DARK_LABEL"></theme-switcher>
       `);
-
-      const lightOptionButton = el.shadowRoot.querySelector('[data-theme="light"]');
-      const systemOptionButton = el.shadowRoot.querySelector('[data-theme="system"]');
-      const darkOptionButton = el.shadowRoot.querySelector('[data-theme="dark"]');
+      const { lightOptionButton, systemOptionButton, darkOptionButton } = getOptions(el);
 
       el.removeAttribute('light-label');
       el.removeAttribute('system-label');
@@ -258,9 +263,7 @@ describe('theme-switcher', () => {
 
     it('each option button should have the appropriate CSS parts', async () => {
       const el = await fixture(html`<theme-switcher></theme-switcher>`);
-      const lightOptionButton = el.shadowRoot.querySelector('[data-theme="light"]');
-      const systemOptionButton = el.shadowRoot.querySelector('[data-theme="system"]');
-      const darkOptionButton = el.shadowRoot.querySelector('[data-theme="dark"]');
+      const { lightOptionButton, systemOptionButton, darkOptionButton } = getOptions(el);
 
       expect(lightOptionButton).to.have.attribute('part', 'theme-option theme-option--light');
       expect(systemOptionButton).to.have.attribute('part', 'theme-option theme-option--system');
@@ -271,10 +274,7 @@ describe('theme-switcher', () => {
   describe('events', () => {
     it('"theme-change" event is fired when the theme is changed', async () => {
       const el = await fixture(html`<theme-switcher></theme-switcher>`);
-
-      const lightOptionButton = el.shadowRoot.querySelector('[data-theme="light"]');
-      const systemOptionButton = el.shadowRoot.querySelector('[data-theme="system"]');
-      const darkOptionButton = el.shadowRoot.querySelector('[data-theme="dark"]');
+      const { lightOptionButton, systemOptionButton, darkOptionButton } = getOptions(el);
 
       const listener1 = oneEvent(el, 'theme-change');
       lightOptionButton.click();
@@ -299,10 +299,7 @@ describe('theme-switcher', () => {
 
     it('updates the document root theme when an option is selected', async () => {
       const el = await fixture(html`<theme-switcher no-storage></theme-switcher>`);
-
-      const lightOptionButton = el.shadowRoot.querySelector('[data-theme="light"]');
-      const systemOptionButton = el.shadowRoot.querySelector('[data-theme="system"]');
-      const darkOptionButton = el.shadowRoot.querySelector('[data-theme="dark"]');
+      const { lightOptionButton, systemOptionButton, darkOptionButton } = getOptions(el);
 
       expect(document.documentElement).to.have.attribute('data-theme', 'system');
 
@@ -318,10 +315,7 @@ describe('theme-switcher', () => {
 
     it('updates the selected radio state when an option is selected', async () => {
       const el = await fixture(html`<theme-switcher no-storage></theme-switcher>`);
-
-      const lightOptionButton = el.shadowRoot.querySelector('[data-theme="light"]');
-      const systemOptionButton = el.shadowRoot.querySelector('[data-theme="system"]');
-      const darkOptionButton = el.shadowRoot.querySelector('[data-theme="dark"]');
+      const { lightOptionButton, systemOptionButton, darkOptionButton } = getOptions(el);
 
       expect(systemOptionButton).to.have.attribute('aria-checked', 'true');
 
@@ -342,6 +336,163 @@ describe('theme-switcher', () => {
       expect(lightOptionButton).to.have.attribute('aria-checked', 'false');
       expect(systemOptionButton).to.have.attribute('aria-checked', 'false');
       expect(darkOptionButton).to.have.attribute('aria-checked', 'true');
+    });
+  });
+
+  describe('keyboard navigation', () => {
+    it('moves to the next option with ArrowRight', async () => {
+      const el = await fixture(html`<theme-switcher no-storage></theme-switcher>`);
+      const { lightOptionButton, systemOptionButton, darkOptionButton } = getOptions(el);
+
+      expect(systemOptionButton).to.have.attribute('aria-checked', 'true');
+
+      systemOptionButton.focus();
+      const event = pressKey(systemOptionButton, 'ArrowRight');
+
+      expect(event.defaultPrevented).to.be.true;
+
+      expect(lightOptionButton).to.have.attribute('aria-checked', 'false');
+      expect(systemOptionButton).to.have.attribute('aria-checked', 'false');
+      expect(darkOptionButton).to.have.attribute('aria-checked', 'true');
+
+      expect(lightOptionButton).to.have.attribute('tabindex', '-1');
+      expect(systemOptionButton).to.have.attribute('tabindex', '-1');
+      expect(darkOptionButton).to.have.attribute('tabindex', '0');
+
+      expect(document.documentElement).to.have.attribute('data-theme', 'dark');
+      expect(el.shadowRoot.activeElement).to.equal(darkOptionButton);
+    });
+
+    it('moves to the previous option with ArrowLeft', async () => {
+      const el = await fixture(html`<theme-switcher no-storage></theme-switcher>`);
+      const { lightOptionButton, systemOptionButton, darkOptionButton } = getOptions(el);
+
+      expect(systemOptionButton).to.have.attribute('aria-checked', 'true');
+
+      systemOptionButton.focus();
+      pressKey(systemOptionButton, 'ArrowLeft');
+
+      expect(lightOptionButton).to.have.attribute('aria-checked', 'true');
+      expect(systemOptionButton).to.have.attribute('aria-checked', 'false');
+      expect(darkOptionButton).to.have.attribute('aria-checked', 'false');
+
+      expect(document.documentElement).to.have.attribute('data-theme', 'light');
+      expect(el.shadowRoot.activeElement).to.equal(lightOptionButton);
+    });
+
+    it('moves to the next option with ArrowDown', async () => {
+      const el = await fixture(html`<theme-switcher no-storage></theme-switcher>`);
+      const { systemOptionButton, darkOptionButton } = getOptions(el);
+
+      systemOptionButton.focus();
+      pressKey(systemOptionButton, 'ArrowDown');
+
+      expect(darkOptionButton).to.have.attribute('aria-checked', 'true');
+      expect(document.documentElement).to.have.attribute('data-theme', 'dark');
+      expect(el.shadowRoot.activeElement).to.equal(darkOptionButton);
+    });
+
+    it('moves to the previous option with ArrowUp', async () => {
+      const el = await fixture(html`<theme-switcher no-storage></theme-switcher>`);
+      const { lightOptionButton, systemOptionButton } = getOptions(el);
+
+      systemOptionButton.focus();
+      pressKey(systemOptionButton, 'ArrowUp');
+
+      expect(lightOptionButton).to.have.attribute('aria-checked', 'true');
+      expect(document.documentElement).to.have.attribute('data-theme', 'light');
+      expect(el.shadowRoot.activeElement).to.equal(lightOptionButton);
+    });
+
+    it('wraps from the last option to the first option', async () => {
+      const el = await fixture(html`<theme-switcher no-storage></theme-switcher>`);
+      const { lightOptionButton, darkOptionButton } = getOptions(el);
+
+      darkOptionButton.click();
+      expect(darkOptionButton).to.have.attribute('aria-checked', 'true');
+
+      darkOptionButton.focus();
+      pressKey(darkOptionButton, 'ArrowRight');
+
+      expect(lightOptionButton).to.have.attribute('aria-checked', 'true');
+      expect(document.documentElement).to.have.attribute('data-theme', 'light');
+      expect(el.shadowRoot.activeElement).to.equal(lightOptionButton);
+    });
+
+    it('wraps from the first option to the last option', async () => {
+      const el = await fixture(html`<theme-switcher no-storage></theme-switcher>`);
+      const { lightOptionButton, darkOptionButton } = getOptions(el);
+
+      lightOptionButton.click();
+      expect(lightOptionButton).to.have.attribute('aria-checked', 'true');
+
+      lightOptionButton.focus();
+      pressKey(lightOptionButton, 'ArrowLeft');
+
+      expect(darkOptionButton).to.have.attribute('aria-checked', 'true');
+      expect(document.documentElement).to.have.attribute('data-theme', 'dark');
+      expect(el.shadowRoot.activeElement).to.equal(darkOptionButton);
+    });
+
+    it('moves to the first option with Home', async () => {
+      const el = await fixture(html`<theme-switcher no-storage></theme-switcher>`);
+      const { lightOptionButton, darkOptionButton } = getOptions(el);
+
+      darkOptionButton.click();
+      darkOptionButton.focus();
+
+      pressKey(darkOptionButton, 'Home');
+
+      expect(lightOptionButton).to.have.attribute('aria-checked', 'true');
+      expect(document.documentElement).to.have.attribute('data-theme', 'light');
+      expect(el.shadowRoot.activeElement).to.equal(lightOptionButton);
+    });
+
+    it('moves to the last option with End', async () => {
+      const el = await fixture(html`<theme-switcher no-storage></theme-switcher>`);
+      const { systemOptionButton, darkOptionButton } = getOptions(el);
+
+      systemOptionButton.focus();
+
+      pressKey(systemOptionButton, 'End');
+
+      expect(darkOptionButton).to.have.attribute('aria-checked', 'true');
+      expect(document.documentElement).to.have.attribute('data-theme', 'dark');
+      expect(el.shadowRoot.activeElement).to.equal(darkOptionButton);
+    });
+
+    it('fires "theme-change" when the theme is changed by keyboard', async () => {
+      const el = await fixture(html`<theme-switcher no-storage></theme-switcher>`);
+      const { systemOptionButton } = getOptions(el);
+
+      const listener = oneEvent(el, 'theme-change');
+
+      systemOptionButton.focus();
+      pressKey(systemOptionButton, 'ArrowRight');
+
+      expect((await listener).detail).to.deep.equal({ theme: 'dark' });
+    });
+
+    it('does not handle unrelated keys', async () => {
+      const el = await fixture(html`<theme-switcher no-storage></theme-switcher>`);
+      const { lightOptionButton, systemOptionButton, darkOptionButton } = getOptions(el);
+      const themeChangeSpy = sinon.spy();
+
+      el.addEventListener('theme-change', themeChangeSpy);
+
+      systemOptionButton.focus();
+      const event = pressKey(systemOptionButton, 'Tab');
+
+      expect(event.defaultPrevented).to.be.false;
+
+      expect(lightOptionButton).to.have.attribute('aria-checked', 'false');
+      expect(systemOptionButton).to.have.attribute('aria-checked', 'true');
+      expect(darkOptionButton).to.have.attribute('aria-checked', 'false');
+
+      expect(document.documentElement).to.have.attribute('data-theme', 'system');
+      expect(el.shadowRoot.activeElement).to.equal(systemOptionButton);
+
+      sinon.assert.notCalled(themeChangeSpy);
     });
   });
 });

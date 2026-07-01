@@ -383,6 +383,7 @@ class ThemeSwitcher extends HTMLElement {
     this.#reflectThemePreference();
 
     this.#themeSwitcherEl?.addEventListener('click', this.#handleSwitcherClick);
+    this.#themeSwitcherEl?.addEventListener('keydown', this.#handleSwitcherKeyDown);
     this.ownerDocument.addEventListener('theme-change', this.#handleThemeChange);
   }
 
@@ -391,6 +392,7 @@ class ThemeSwitcher extends HTMLElement {
    */
   disconnectedCallback() {
     this.#themeSwitcherEl?.removeEventListener('click', this.#handleSwitcherClick);
+    this.#themeSwitcherEl?.removeEventListener('keydown', this.#handleSwitcherKeyDown);
     this.ownerDocument.removeEventListener('theme-change', this.#handleThemeChange);
   }
 
@@ -449,7 +451,7 @@ class ThemeSwitcher extends HTMLElement {
    * (e.g. via click event).
    */
   #reflectThemePreference() {
-    const optionButtons = this.#themeSwitcherEl?.querySelectorAll(`[data-theme-switcher-option]`);
+    const optionButtons = this.#themeSwitcherEl?.querySelectorAll('[data-theme-switcher-option]');
 
     if (!optionButtons || optionButtons.length === 0) {
       return;
@@ -457,7 +459,10 @@ class ThemeSwitcher extends HTMLElement {
 
     optionButtons.forEach(el => {
       const theme = el.getAttribute('data-theme');
-      el.setAttribute('aria-checked', theme === this.#theme ? 'true' : 'false');
+      const isSelected = theme === this.#theme;
+
+      el.setAttribute('aria-checked', isSelected ? 'true' : 'false');
+      el.setAttribute('tabindex', isSelected ? '0' : '-1');
     });
 
     this.ownerDocument.documentElement.setAttribute(ROOT_THEME_ATTR, this.#theme);
@@ -517,6 +522,53 @@ class ThemeSwitcher extends HTMLElement {
     const selectedTheme = selectedButton.getAttribute('data-theme');
 
     this.#changeTheme(selectedTheme, { emit: true });
+  };
+
+  /**
+   * Handles keyboard navigation and selection of theme options.
+   *
+   * @param {KeyboardEvent} evt - The keyboard event object.
+   */
+  #handleSwitcherKeyDown = evt => {
+    if (!['ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown', 'Home', 'End'].includes(evt.key)) {
+      return;
+    }
+
+    const optionButtons = Array.from(
+      this.#themeSwitcherEl?.querySelectorAll('[data-theme-switcher-option]') || []
+    ).filter(this.#isThemeOptionButton);
+
+    if (optionButtons.length === 0) {
+      return;
+    }
+
+    const currentIndex = optionButtons.findIndex(button => button.getAttribute('aria-checked') === 'true');
+    let nextIndex = currentIndex;
+
+    if (evt.key === 'ArrowLeft' || evt.key === 'ArrowUp') {
+      nextIndex = currentIndex <= 0 ? optionButtons.length - 1 : currentIndex - 1;
+    }
+
+    if (evt.key === 'ArrowRight' || evt.key === 'ArrowDown') {
+      nextIndex = currentIndex === optionButtons.length - 1 ? 0 : currentIndex + 1;
+    }
+
+    if (evt.key === 'Home') {
+      nextIndex = 0;
+    }
+
+    if (evt.key === 'End') {
+      nextIndex = optionButtons.length - 1;
+    }
+
+    const nextButton = optionButtons[nextIndex];
+    const nextTheme = nextButton.getAttribute('data-theme');
+
+    evt.preventDefault();
+
+    if (this.#changeTheme(nextTheme, { emit: true })) {
+      nextButton.focus();
+    }
   };
 
   /**
