@@ -142,11 +142,15 @@ theme-switcher {
 | `--theme-switcher-padding` | The padding around the theme switcher content. | `0.1875rem` |
 | `--theme-switcher-background-color` | The background color of the theme switcher. | `transparent` |
 | `--theme-switcher-border-color` | The border color of the theme switcher. | `#222222`, or `light-dark(#222222, #eeeeee)` when supported |
+| `--theme-switcher-border-radius` | The border radius of the theme switcher. | `9999px` |
 | `--theme-switcher-option-size` | The width and height of each theme option button. | `2rem` |
 | `--theme-switcher-option-font-size` | The font size of each theme option button, which can be used to scale the default SVG icons. | `calc(var(--theme-switcher-option-size) * 0.5)` |
 | `--theme-switcher-option-color` | The text/icon color of each theme option button. | `#222222`, or `light-dark(#222222, #eeeeee)` when supported |
+| `--theme-switcher-option-background-color` | The background color of each theme option button. | `transparent` |
 | `--theme-switcher-option-active-color` | The text/icon color of the selected theme option button. | `#eeeeee`, or `light-dark(#eeeeee, #222222)` when supported |
 | `--theme-switcher-option-active-background-color` | The background color of the selected theme option button. | `#222222`, or `light-dark(#222222, #eeeeee)` when supported |
+| `--theme-switcher-option-border` | The border of each theme option button. | `0` |
+| `--theme-switcher-option-border-radius` | The border radius of each theme option button. | `50%` |
 
 > [!NOTE]
 > Color defaults use static fallback values first and are enhanced with `light-dark()` in browsers that support it.

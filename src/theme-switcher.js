@@ -22,11 +22,15 @@ const styles = css`
     --theme-switcher-padding: 0.1875rem;
     --theme-switcher-background-color: transparent;
     --theme-switcher-border-color: #222222;
+    --theme-switcher-border-radius: 9999px;
     --theme-switcher-option-size: 2rem;
     --theme-switcher-option-font-size: calc(var(--theme-switcher-option-size) * 0.5);
     --theme-switcher-option-color: #222222;
+    --theme-switcher-option-background-color: transparent;
     --theme-switcher-option-active-color: #eeeeee;
     --theme-switcher-option-active-background-color: #222222;
+    --theme-switcher-option-border: 0;
+    --theme-switcher-option-border-radius: 50%;
 
     display: inline-block;
     box-sizing: border-box;
@@ -62,7 +66,7 @@ const styles = css`
     width: fit-content;
     padding: var(--theme-switcher-padding);
     border: 1px solid var(--theme-switcher-border-color);
-    border-radius: 9999px;
+    border-radius: var(--theme-switcher-border-radius);
     background-color: var(--theme-switcher-background-color);
     color-scheme: light dark;
   }
@@ -83,12 +87,12 @@ const styles = css`
     display: flex;
     justify-content: center;
     align-items: center;
-    border: 0;
-    border-radius: 50%;
+    border: var(--theme-switcher-option-border);
+    border-radius: var(--theme-switcher-option-border-radius);
     width: var(--theme-switcher-option-size);
     height: var(--theme-switcher-option-size);
     color: var(--theme-switcher-option-color);
-    background-color: transparent;
+    background-color: var(--theme-switcher-option-background-color);
     font-size: var(--theme-switcher-option-font-size);
     line-height: 0;
   }
@@ -209,11 +213,15 @@ template.innerHTML = html`
  * @cssproperty --theme-switcher-padding - The padding around the theme switcher content.
  * @cssproperty --theme-switcher-background-color - The background color of the theme switcher.
  * @cssproperty --theme-switcher-border-color - The border color of the theme switcher.
+ * @cssproperty --theme-switcher-border-radius - The border radius of the theme switcher.
  * @cssproperty --theme-switcher-option-size - The width and height of each theme option button.
  * @cssproperty --theme-switcher-option-font-size - The font size of each theme option button, which can be used to scale the default SVG icons.
  * @cssproperty --theme-switcher-option-color - The text/icon color of each theme option button.
+ * @cssproperty --theme-switcher-option-background-color - The background color of each theme option button.
  * @cssproperty --theme-switcher-option-active-color - The text/icon color of the selected theme option button.
  * @cssproperty --theme-switcher-option-active-background-color - The background color of the selected theme option button.
+ * @cssproperty --theme-switcher-option-border - The border of each theme option button.
+ * @cssproperty --theme-switcher-option-border-radius - The border radius of each theme option button.
  *
  * @event theme-change - Dispatched when the theme is changed by user interaction. The event detail contains the new theme value.
  *
