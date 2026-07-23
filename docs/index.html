@@ -45,54 +45,70 @@
   <div class="card">
     <browser-window url="https://github.com/georapbox/theme-switcher" icon>
       <div id="demo" class="demo" data-theme-switcher-theme="default-colors">
-        <fieldset id="theme-picker" class="theme-palette-picker">
-          <legend>Theme switcher palette</legend>
+        <form id="demo-controls" autocomplete="off">
+          <fieldset id="theme-picker" class="theme-palette-picker">
+            <legend>Theme switcher palette</legend>
 
-          <label style="--palette-color: light-dark(#222222, #eeeeee)">
-            <input type="radio" name="theme-switcher-theme" value="default-colors" checked />
-            <span>Default colors</span>
-          </label>
+            <label style="--palette-color: light-dark(#222222, #eeeeee)">
+              <input type="radio" name="theme-switcher-theme" value="default-colors" checked />
+              <span>Default colors</span>
+            </label>
 
-          <label style="--palette-color: light-dark(#65a30d, #a3e635)">
-            <input type="radio" name="theme-switcher-theme" value="lime-electric" />
-            <span>Lime / electric</span>
-          </label>
+            <label style="--palette-color: light-dark(#65a30d, #a3e635)">
+              <input type="radio" name="theme-switcher-theme" value="lime-electric" />
+              <span>Lime / electric</span>
+            </label>
 
-          <label style="--palette-color: light-dark(#2563eb, #60a5fa)">
-            <input type="radio" name="theme-switcher-theme" value="soft-blue" />
-            <span>Soft blue</span>
-          </label>
+            <label style="--palette-color: light-dark(#2563eb, #60a5fa)">
+              <input type="radio" name="theme-switcher-theme" value="soft-blue" />
+              <span>Soft blue</span>
+            </label>
 
-          <label style="--palette-color: light-dark(#059669, #5eead4)">
-            <input type="radio" name="theme-switcher-theme" value="emerald-mint" />
-            <span>Emerald / mint</span>
-          </label>
+            <label style="--palette-color: light-dark(#059669, #5eead4)">
+              <input type="radio" name="theme-switcher-theme" value="emerald-mint" />
+              <span>Emerald / mint</span>
+            </label>
 
-          <label style="--palette-color: light-dark(#d97706, #facc15)">
-            <input type="radio" name="theme-switcher-theme" value="warm-amber" />
-            <span>Warm amber</span>
-          </label>
+            <label style="--palette-color: light-dark(#d97706, #facc15)">
+              <input type="radio" name="theme-switcher-theme" value="warm-amber" />
+              <span>Warm amber</span>
+            </label>
 
-          <label style="--palette-color: light-dark(#e11d48, #fb7185)">
-            <input type="radio" name="theme-switcher-theme" value="rose-coral" />
-            <span>Rose / coral</span>
-          </label>
+            <label style="--palette-color: light-dark(#e11d48, #fb7185)">
+              <input type="radio" name="theme-switcher-theme" value="rose-coral" />
+              <span>Rose / coral</span>
+            </label>
 
-          <label style="--palette-color: light-dark(#0891b2, #22d3ee)">
-            <input type="radio" name="theme-switcher-theme" value="cyan-tech" />
-            <span>Cyan / tech</span>
-          </label>
+            <label style="--palette-color: light-dark(#0891b2, #22d3ee)">
+              <input type="radio" name="theme-switcher-theme" value="cyan-tech" />
+              <span>Cyan / tech</span>
+            </label>
 
-          <label style="--palette-color: light-dark(#4f46e5, #a78bfa)">
-            <input type="radio" name="theme-switcher-theme" value="indigo-violet" />
-            <span>Indigo / violet</span>
-          </label>
+            <label style="--palette-color: light-dark(#4f46e5, #a78bfa)">
+              <input type="radio" name="theme-switcher-theme" value="indigo-violet" />
+              <span>Indigo / violet</span>
+            </label>
 
-          <label style="--palette-color: light-dark(#9333ea, #e879f9)">
-            <input type="radio" name="theme-switcher-theme" value="purple-neon" />
-            <span>Purple neon</span>
-          </label>
-        </fieldset>
+            <label style="--palette-color: light-dark(#9333ea, #e879f9)">
+              <input type="radio" name="theme-switcher-theme" value="purple-neon" />
+              <span>Purple neon</span>
+            </label>
+          </fieldset>
+
+          <div class="size-control">
+            <div class="size-control__header">
+              <label for="size-control">Theme switcher size</label>
+              <output id="size-value" for="size-control">100%</output>
+            </div>
+
+            <input id="size-control" type="range" min="0" max="10" value="0" step="0.1">
+
+            <div class="size-control__labels" aria-hidden="true">
+              <span>Default</span>
+              <span>Large</span>
+            </div>
+          </div>
+        </form>
 
         <theme-switcher></theme-switcher>
       </div>

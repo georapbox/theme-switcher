@@ -7,19 +7,39 @@ const componentUrl = isLocalhost ? '../../dist/theme-switcher.js' : '../lib/them
 const { ThemeSwitcher } = await import(componentUrl);
 ThemeSwitcher.define();
 
-document.querySelectorAll('theme-switcher').forEach(el => {
+const demo = document.getElementById('demo');
+const form = document.getElementById('demo-controls');
+const output = document.getElementById('size-value');
+const themeSwitchers = demo.querySelectorAll('theme-switcher');
+
+themeSwitchers.forEach(el => {
   el.setAttribute('storage-key', window.__THEME_TOGGLE_DEMO_STORAGE_KEY__);
 });
 
-const demo = document.getElementById('demo');
-const picker = document.getElementById('theme-picker');
+form.addEventListener('input', evt => {
+  const input = evt.target;
 
-picker.addEventListener('change', event => {
-  const input = event.target;
-
-  if (!(input instanceof HTMLInputElement) || input.type !== 'radio') {
+  if (!(input instanceof HTMLInputElement)) {
     return;
   }
 
-  demo.dataset.themeSwitcherTheme = input.value;
+  if (input.name === 'theme-switcher-theme' && input.type === 'radio') {
+    demo.dataset.themeSwitcherTheme = input.value;
+    return;
+  }
+
+  if (input.id === 'size-control' && input.type === 'range') {
+    const value = input.valueAsNumber;
+    const min = Number(input.min);
+    const max = Number(input.max);
+    const progress = (value - min) / (max - min);
+    const scale = 1 + progress;
+
+    output.value = `${Math.round(scale * 100)}%`;
+
+    themeSwitchers.forEach(el => {
+      el.style.setProperty('--theme-switcher-option-size', `${2 * scale}rem`);
+      el.style.setProperty('--theme-switcher-padding', `${0.1875 * scale}rem`);
+    });
+  }
 });
