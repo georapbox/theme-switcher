@@ -41,7 +41,11 @@
   },
   "keywords": [
     "custom element",
-    "web component"
+    "web component",
+    "theme switcher",
+    "dark mode",
+    "light mode",
+    "system theme"
   ],
   "author": {
     "name": "George Raptis",
