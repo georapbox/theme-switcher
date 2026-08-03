@@ -115,7 +115,6 @@ browser-window::part(title) {
 .theme-palette-picker {
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
   gap: 0.5rem;
   margin-block-end: 1rem;
   border: 0;
@@ -216,13 +215,15 @@ browser-window::part(title) {
 }
 
 .demo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   padding-block: 1rem;
-  text-align: center;
   max-width: 42rem;
   margin: 0 auto;
 }
 
-.demo[data-theme-switcher-theme='lime-electric'] theme-switcher {
+.demo[data-theme-switcher-theme='electric-lime'] theme-switcher {
   color-scheme: light dark;
   --theme-switcher-background-color: #f7fee7;
   --theme-switcher-border-color: #bef264;
@@ -258,7 +259,16 @@ browser-window::part(title) {
   --theme-switcher-option-active-background-color: #d97706;
 }
 
-.demo[data-theme-switcher-theme='rose-coral'] theme-switcher {
+.demo[data-theme-switcher-theme='sunset-orange'] theme-switcher {
+  color-scheme: light dark;
+  --theme-switcher-background-color: #fff7ed;
+  --theme-switcher-border-color: #fdba74;
+  --theme-switcher-option-color: #9a3412;
+  --theme-switcher-option-active-color: #ffffff;
+  --theme-switcher-option-active-background-color: #ea580c;
+}
+
+.demo[data-theme-switcher-theme='coral-rose'] theme-switcher {
   color-scheme: light dark;
   --theme-switcher-background-color: #fff1f2;
   --theme-switcher-border-color: #fda4af;
@@ -267,7 +277,7 @@ browser-window::part(title) {
   --theme-switcher-option-active-background-color: #e11d48;
 }
 
-.demo[data-theme-switcher-theme='cyan-tech'] theme-switcher {
+.demo[data-theme-switcher-theme='tech-cyan'] theme-switcher {
   color-scheme: light dark;
   --theme-switcher-background-color: #ecfeff;
   --theme-switcher-border-color: #67e8f9;
@@ -285,7 +295,7 @@ browser-window::part(title) {
   --theme-switcher-option-active-background-color: #4f46e5;
 }
 
-.demo[data-theme-switcher-theme='purple-neon'] theme-switcher {
+.demo[data-theme-switcher-theme='neon-purple'] theme-switcher {
   color-scheme: light dark;
   --theme-switcher-background-color: #f3e8ff;
   --theme-switcher-border-color: #a855f7;
@@ -295,7 +305,7 @@ browser-window::part(title) {
 }
 
 @supports (color: light-dark(#000000, #ffffff)) {
-  .demo[data-theme-switcher-theme='lime-electric'] theme-switcher {
+  .demo[data-theme-switcher-theme='electric-lime'] theme-switcher {
     --theme-switcher-background-color: light-dark(#f7fee7, #142004);
     --theme-switcher-border-color: light-dark(#bef264, #84cc16);
     --theme-switcher-option-color: light-dark(#3f6212, #d9f99d);
@@ -327,7 +337,15 @@ browser-window::part(title) {
     --theme-switcher-option-active-background-color: light-dark(#d97706, #facc15);
   }
 
-  .demo[data-theme-switcher-theme='rose-coral'] theme-switcher {
+  .demo[data-theme-switcher-theme='sunset-orange'] theme-switcher {
+    --theme-switcher-background-color: light-dark(#fff7ed, #261006);
+    --theme-switcher-border-color: light-dark(#fdba74, #f97316);
+    --theme-switcher-option-color: light-dark(#9a3412, #fed7aa);
+    --theme-switcher-option-active-color: light-dark(#ffffff, #2a0f04);
+    --theme-switcher-option-active-background-color: light-dark(#ea580c, #fb923c);
+  }
+
+  .demo[data-theme-switcher-theme='coral-rose'] theme-switcher {
     --theme-switcher-background-color: light-dark(#fff1f2, #2a0d12);
     --theme-switcher-border-color: light-dark(#fda4af, #e11d48);
     --theme-switcher-option-color: light-dark(#9f1239, #fecdd3);
@@ -335,7 +353,7 @@ browser-window::part(title) {
     --theme-switcher-option-active-background-color: light-dark(#e11d48, #fb7185);
   }
 
-  .demo[data-theme-switcher-theme='cyan-tech'] theme-switcher {
+  .demo[data-theme-switcher-theme='tech-cyan'] theme-switcher {
     --theme-switcher-background-color: light-dark(#ecfeff, #061b20);
     --theme-switcher-border-color: light-dark(#67e8f9, #0891b2);
     --theme-switcher-option-color: light-dark(#155e75, #a5f3fc);
@@ -351,7 +369,7 @@ browser-window::part(title) {
     --theme-switcher-option-active-background-color: light-dark(#4f46e5, #a78bfa);
   }
 
-  .demo[data-theme-switcher-theme='purple-neon'] theme-switcher {
+  .demo[data-theme-switcher-theme='neon-purple'] theme-switcher {
     --theme-switcher-background-color: light-dark(#f3e8ff, #0f051d);
     --theme-switcher-border-color: light-dark(#a855f7, #d8b4fe);
     --theme-switcher-option-color: light-dark(#581c87, #ddd6fe);
