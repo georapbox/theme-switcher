@@ -140,6 +140,7 @@ theme-switcher {
 | Name | Description | Default |
 | ---- | ----------- | ------- |
 | `--theme-switcher-padding` | The padding around the theme switcher content. | `0.1875rem` |
+| `--theme-switcher-gap` | The space between theme option buttons. | `0` |
 | `--theme-switcher-background-color` | The background color of the theme switcher. | `transparent` |
 | `--theme-switcher-border-color` | The border color of the theme switcher. | `#222222`, or `light-dark(#222222, #eeeeee)` when supported |
 | `--theme-switcher-border-radius` | The border radius of the theme switcher. | `9999px` |

@@ -20,6 +20,7 @@ const css = String.raw;
 const styles = css`
   :host {
     --theme-switcher-padding: 0.1875rem;
+    --theme-switcher-gap: 0;
     --theme-switcher-background-color: transparent;
     --theme-switcher-border-color: #222222;
     --theme-switcher-border-radius: 9999px;
@@ -63,6 +64,7 @@ const styles = css`
 
   .theme-switcher {
     display: flex;
+    gap: var(--theme-switcher-gap);
     width: fit-content;
     padding: var(--theme-switcher-padding);
     border: 1px solid var(--theme-switcher-border-color);
@@ -211,6 +213,7 @@ template.innerHTML = html`
  * @csspart theme-option--dark - The button for selecting the dark theme.
  *
  * @cssproperty --theme-switcher-padding - The padding around the theme switcher content.
+ * @cssproperty --theme-switcher-gap - The space between theme option buttons.
  * @cssproperty --theme-switcher-background-color - The background color of the theme switcher.
  * @cssproperty --theme-switcher-border-color - The border color of the theme switcher.
  * @cssproperty --theme-switcher-border-radius - The border radius of the theme switcher.
