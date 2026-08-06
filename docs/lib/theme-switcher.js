@@ -10,6 +10,7 @@
 var l="theme-switcher/theme-preference",d="data-theme",m=["light","system","dark"],u=String.raw,g=u`
   :host {
     --theme-switcher-padding: 0.1875rem;
+    --theme-switcher-gap: 0;
     --theme-switcher-background-color: transparent;
     --theme-switcher-border-color: #222222;
     --theme-switcher-border-radius: 9999px;
@@ -53,6 +54,7 @@ var l="theme-switcher/theme-preference",d="data-theme",m=["light","system","dark
 
   .theme-switcher {
     display: flex;
+    gap: var(--theme-switcher-gap);
     width: fit-content;
     padding: var(--theme-switcher-padding);
     border: 1px solid var(--theme-switcher-border-color);
