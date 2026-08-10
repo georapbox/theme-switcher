@@ -73,6 +73,8 @@ If `no-storage` is enabled, the selected theme is not persisted and the componen
 <theme-switcher no-storage></theme-switcher>
 ```
 
+Multiple `<theme-switcher>` instances in the same document are automatically kept in sync when the theme changes.
+
 You can use the `data-theme` attribute to control the page color scheme and then use the CSS `light-dark()` color function for theme-aware styles:
 
 ```css
@@ -98,8 +100,8 @@ theme-switcher {
   --theme-switcher-background-color: light-dark(#ffffff, #1f1f1f);
   --theme-switcher-border-color: light-dark(#d4d4d4, #525252);
   --theme-switcher-option-color: light-dark(#404040, #d4d4d4);
-  --theme-switcher-option-active-color: light-dark(#ffffff, #111111);
-  --theme-switcher-option-active-background-color: light-dark(#111111, #ffffff);
+  --theme-switcher-option-selected-color: light-dark(#ffffff, #111111);
+  --theme-switcher-option-selected-background-color: light-dark(#111111, #ffffff);
 }
 ```
 
@@ -118,19 +120,24 @@ theme-switcher {
 
 | Name | Description |
 | ---- | ----------- |
-| `theme-option-light-icon` | Custom icon/content for the light theme option. |
-| `theme-option-system-icon` | Custom icon/content for the system theme option. |
-| `theme-option-dark-icon` | Custom icon/content for the dark theme option. |
+| `light-icon` | Custom icon for the light theme option. |
+| `system-icon` | Custom icon for the system theme option. |
+| `dark-icon` | Custom icon for the dark theme option. |
 
 ### CSS Parts
 
 | Name | Description |
 | ---- | ----------- |
-| `base` | The root wrapper element of the theme switcher. |
-| `theme-option` | A theme option button. |
+| `base` | The base element of the component. |
+| `theme-option` | The theme option button. |
 | `theme-option--light` | The button for selecting the light theme. |
 | `theme-option--system` | The button for selecting the system theme. |
 | `theme-option--dark` | The button for selecting the dark theme. |
+| `theme-option--selected` | The button for the currently selected theme. |
+| `theme-option-icon` | The icon inside a theme option button. |
+| `theme-option-icon--light` | The icon inside the light theme option button. |
+| `theme-option-icon--system` | The icon inside the system theme option button. |
+| `theme-option-icon--dark` | The icon inside the dark theme option button. |
 
 ### CSS Custom Properties
 
@@ -139,15 +146,17 @@ theme-switcher {
 | `--theme-switcher-padding` | The padding around the theme switcher content. | `0.1875rem` |
 | `--theme-switcher-gap` | The space between theme option buttons. | `0` |
 | `--theme-switcher-background-color` | The background color of the theme switcher. | `transparent` |
+| `--theme-switcher-border-width` | The border width of the theme switcher. | `1px` |
 | `--theme-switcher-border-color` | The border color of the theme switcher. | `#222222`, or `light-dark(#222222, #eeeeee)` when supported |
 | `--theme-switcher-border-radius` | The border radius of the theme switcher. | `9999px` |
 | `--theme-switcher-option-size` | The width and height of each theme option button. | `2rem` |
 | `--theme-switcher-option-font-size` | The font size of each theme option button, which can be used to scale the default SVG icons. | `calc(var(--theme-switcher-option-size) * 0.5)` |
-| `--theme-switcher-option-color` | The text/icon color of each theme option button. | `#222222`, or `light-dark(#222222, #eeeeee)` when supported |
+| `--theme-switcher-option-color` | The color of each theme option button. | `#222222`, or `light-dark(#222222, #eeeeee)` when supported |
 | `--theme-switcher-option-background-color` | The background color of each theme option button. | `transparent` |
-| `--theme-switcher-option-active-color` | The text/icon color of the selected theme option button. | `#eeeeee`, or `light-dark(#eeeeee, #222222)` when supported |
-| `--theme-switcher-option-active-background-color` | The background color of the selected theme option button. | `#222222`, or `light-dark(#222222, #eeeeee)` when supported |
-| `--theme-switcher-option-border` | The border of each theme option button. | `0` |
+| `--theme-switcher-option-selected-color` | The color of the selected theme option button. | `#eeeeee`, or `light-dark(#eeeeee, #222222)` when supported |
+| `--theme-switcher-option-selected-background-color` | The background color of the selected theme option button. | `#222222`, or `light-dark(#222222, #eeeeee)` when supported |
+| `--theme-switcher-option-border-width` | The border width of each theme option button. | `0` |
+| `--theme-switcher-option-border-color` | The border color of each theme option button. | `transparent` |
 | `--theme-switcher-option-border-radius` | The border radius of each theme option button. | `50%` |
 | `--theme-switcher-option-focus-ring-width` | The width of the focus ring. | `2px` |
 | `--theme-switcher-option-focus-ring-color` | The color of the focus ring. | `#2563eb`, or `light-dark(#2563eb, #60a5fa)` when supported |

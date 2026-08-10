@@ -221,8 +221,8 @@ browser-window::part(title) {
   --theme-switcher-background-color: #f7fee7;
   --theme-switcher-border-color: #bef264;
   --theme-switcher-option-color: #3f6212;
-  --theme-switcher-option-active-color: #ffffff;
-  --theme-switcher-option-active-background-color: #65a30d;
+  --theme-switcher-option-selected-color: #ffffff;
+  --theme-switcher-option-selected-background-color: #65a30d;
   --theme-switcher-option-focus-ring-color: #65a30d;
 }
 
@@ -231,8 +231,8 @@ browser-window::part(title) {
   --theme-switcher-background-color: #eff6ff;
   --theme-switcher-border-color: #93c5fd;
   --theme-switcher-option-color: #1e3a8a;
-  --theme-switcher-option-active-color: #ffffff;
-  --theme-switcher-option-active-background-color: #2563eb;
+  --theme-switcher-option-selected-color: #ffffff;
+  --theme-switcher-option-selected-background-color: #2563eb;
   --theme-switcher-option-focus-ring-color: #2563eb;
 }
 
@@ -241,8 +241,8 @@ browser-window::part(title) {
   --theme-switcher-background-color: #ecfdf5;
   --theme-switcher-border-color: #6ee7b7;
   --theme-switcher-option-color: #065f46;
-  --theme-switcher-option-active-color: #ffffff;
-  --theme-switcher-option-active-background-color: #059669;
+  --theme-switcher-option-selected-color: #ffffff;
+  --theme-switcher-option-selected-background-color: #059669;
   --theme-switcher-option-focus-ring-color: #059669;
 }
 
@@ -251,8 +251,8 @@ browser-window::part(title) {
   --theme-switcher-background-color: #fffbeb;
   --theme-switcher-border-color: #fbbf24;
   --theme-switcher-option-color: #92400e;
-  --theme-switcher-option-active-color: #ffffff;
-  --theme-switcher-option-active-background-color: #d97706;
+  --theme-switcher-option-selected-color: #ffffff;
+  --theme-switcher-option-selected-background-color: #d97706;
   --theme-switcher-option-focus-ring-color: #d97706;
 }
 
@@ -261,8 +261,8 @@ browser-window::part(title) {
   --theme-switcher-background-color: #fff7ed;
   --theme-switcher-border-color: #fdba74;
   --theme-switcher-option-color: #9a3412;
-  --theme-switcher-option-active-color: #ffffff;
-  --theme-switcher-option-active-background-color: #ea580c;
+  --theme-switcher-option-selected-color: #ffffff;
+  --theme-switcher-option-selected-background-color: #ea580c;
   --theme-switcher-option-focus-ring-color: #ea580c;
 }
 
@@ -271,8 +271,8 @@ browser-window::part(title) {
   --theme-switcher-background-color: #fff1f2;
   --theme-switcher-border-color: #fda4af;
   --theme-switcher-option-color: #9f1239;
-  --theme-switcher-option-active-color: #ffffff;
-  --theme-switcher-option-active-background-color: #e11d48;
+  --theme-switcher-option-selected-color: #ffffff;
+  --theme-switcher-option-selected-background-color: #e11d48;
   --theme-switcher-option-focus-ring-color: #e11d48;
 }
 
@@ -281,8 +281,8 @@ browser-window::part(title) {
   --theme-switcher-background-color: #ecfeff;
   --theme-switcher-border-color: #67e8f9;
   --theme-switcher-option-color: #155e75;
-  --theme-switcher-option-active-color: #ffffff;
-  --theme-switcher-option-active-background-color: #0891b2;
+  --theme-switcher-option-selected-color: #ffffff;
+  --theme-switcher-option-selected-background-color: #0891b2;
   --theme-switcher-option-focus-ring-color: #0891b2;
 }
 
@@ -291,8 +291,8 @@ browser-window::part(title) {
   --theme-switcher-background-color: #eef2ff;
   --theme-switcher-border-color: #a5b4fc;
   --theme-switcher-option-color: #3730a3;
-  --theme-switcher-option-active-color: #ffffff;
-  --theme-switcher-option-active-background-color: #4f46e5;
+  --theme-switcher-option-selected-color: #ffffff;
+  --theme-switcher-option-selected-background-color: #4f46e5;
   --theme-switcher-option-focus-ring-color: #4f46e5;
 }
 
@@ -301,8 +301,8 @@ browser-window::part(title) {
   --theme-switcher-background-color: #f3e8ff;
   --theme-switcher-border-color: #a855f7;
   --theme-switcher-option-color: #581c87;
-  --theme-switcher-option-active-color: #ffffff;
-  --theme-switcher-option-active-background-color: #9333ea;
+  --theme-switcher-option-selected-color: #ffffff;
+  --theme-switcher-option-selected-background-color: #9333ea;
   --theme-switcher-option-focus-ring-color: #9333ea;
 }
 
@@ -311,8 +311,8 @@ browser-window::part(title) {
     --theme-switcher-background-color: light-dark(#f7fee7, #142004);
     --theme-switcher-border-color: light-dark(#bef264, #84cc16);
     --theme-switcher-option-color: light-dark(#3f6212, #d9f99d);
-    --theme-switcher-option-active-color: light-dark(#ffffff, #172008);
-    --theme-switcher-option-active-background-color: light-dark(#65a30d, #a3e635);
+    --theme-switcher-option-selected-color: light-dark(#ffffff, #172008);
+    --theme-switcher-option-selected-background-color: light-dark(#65a30d, #a3e635);
     --theme-switcher-option-focus-ring-color: light-dark(#65a30d, #a3e635);
   }
 
@@ -320,8 +320,8 @@ browser-window::part(title) {
     --theme-switcher-background-color: light-dark(#eff6ff, #0b1220);
     --theme-switcher-border-color: light-dark(#93c5fd, #2563eb);
     --theme-switcher-option-color: light-dark(#1e3a8a, #bfdbfe);
-    --theme-switcher-option-active-color: light-dark(#ffffff, #eff6ff);
-    --theme-switcher-option-active-background-color: light-dark(#2563eb, #60a5fa);
+    --theme-switcher-option-selected-color: light-dark(#ffffff, #eff6ff);
+    --theme-switcher-option-selected-background-color: light-dark(#2563eb, #60a5fa);
     --theme-switcher-option-focus-ring-color: light-dark(#2563eb, #60a5fa);
   }
 
@@ -329,8 +329,8 @@ browser-window::part(title) {
     --theme-switcher-background-color: light-dark(#ecfdf5, #052e24);
     --theme-switcher-border-color: light-dark(#6ee7b7, #10b981);
     --theme-switcher-option-color: light-dark(#065f46, #a7f3d0);
-    --theme-switcher-option-active-color: light-dark(#ffffff, #042f2e);
-    --theme-switcher-option-active-background-color: light-dark(#059669, #5eead4);
+    --theme-switcher-option-selected-color: light-dark(#ffffff, #042f2e);
+    --theme-switcher-option-selected-background-color: light-dark(#059669, #5eead4);
     --theme-switcher-option-focus-ring-color: light-dark(#059669, #5eead4);
   }
 
@@ -338,8 +338,8 @@ browser-window::part(title) {
     --theme-switcher-background-color: light-dark(#fffbeb, #271a05);
     --theme-switcher-border-color: light-dark(#fbbf24, #d97706);
     --theme-switcher-option-color: light-dark(#92400e, #fde68a);
-    --theme-switcher-option-active-color: light-dark(#ffffff, #1c1304);
-    --theme-switcher-option-active-background-color: light-dark(#d97706, #facc15);
+    --theme-switcher-option-selected-color: light-dark(#ffffff, #1c1304);
+    --theme-switcher-option-selected-background-color: light-dark(#d97706, #facc15);
     --theme-switcher-option-focus-ring-color: light-dark(#d97706, #facc15);
   }
 
@@ -347,8 +347,8 @@ browser-window::part(title) {
     --theme-switcher-background-color: light-dark(#fff7ed, #261006);
     --theme-switcher-border-color: light-dark(#fdba74, #f97316);
     --theme-switcher-option-color: light-dark(#9a3412, #fed7aa);
-    --theme-switcher-option-active-color: light-dark(#ffffff, #2a0f04);
-    --theme-switcher-option-active-background-color: light-dark(#ea580c, #fb923c);
+    --theme-switcher-option-selected-color: light-dark(#ffffff, #2a0f04);
+    --theme-switcher-option-selected-background-color: light-dark(#ea580c, #fb923c);
     --theme-switcher-option-focus-ring-color: light-dark(#ea580c, #fb923c);
   }
 
@@ -356,8 +356,8 @@ browser-window::part(title) {
     --theme-switcher-background-color: light-dark(#fff1f2, #2a0d12);
     --theme-switcher-border-color: light-dark(#fda4af, #e11d48);
     --theme-switcher-option-color: light-dark(#9f1239, #fecdd3);
-    --theme-switcher-option-active-color: light-dark(#ffffff, #2a0d12);
-    --theme-switcher-option-active-background-color: light-dark(#e11d48, #fb7185);
+    --theme-switcher-option-selected-color: light-dark(#ffffff, #2a0d12);
+    --theme-switcher-option-selected-background-color: light-dark(#e11d48, #fb7185);
     --theme-switcher-option-focus-ring-color: light-dark(#e11d48, #fb7185);
   }
 
@@ -365,8 +365,8 @@ browser-window::part(title) {
     --theme-switcher-background-color: light-dark(#ecfeff, #061b20);
     --theme-switcher-border-color: light-dark(#67e8f9, #0891b2);
     --theme-switcher-option-color: light-dark(#155e75, #a5f3fc);
-    --theme-switcher-option-active-color: light-dark(#ffffff, #06202a);
-    --theme-switcher-option-active-background-color: light-dark(#0891b2, #22d3ee);
+    --theme-switcher-option-selected-color: light-dark(#ffffff, #06202a);
+    --theme-switcher-option-selected-background-color: light-dark(#0891b2, #22d3ee);
     --theme-switcher-option-focus-ring-color: light-dark(#0891b2, #22d3ee);
   }
 
@@ -374,8 +374,8 @@ browser-window::part(title) {
     --theme-switcher-background-color: light-dark(#eef2ff, #11102a);
     --theme-switcher-border-color: light-dark(#a5b4fc, #818cf8);
     --theme-switcher-option-color: light-dark(#3730a3, #c7d2fe);
-    --theme-switcher-option-active-color: light-dark(#ffffff, #11102a);
-    --theme-switcher-option-active-background-color: light-dark(#4f46e5, #a78bfa);
+    --theme-switcher-option-selected-color: light-dark(#ffffff, #11102a);
+    --theme-switcher-option-selected-background-color: light-dark(#4f46e5, #a78bfa);
     --theme-switcher-option-focus-ring-color: light-dark(#4f46e5, #a78bfa);
   }
 
@@ -383,8 +383,8 @@ browser-window::part(title) {
     --theme-switcher-background-color: light-dark(#f3e8ff, #0f051d);
     --theme-switcher-border-color: light-dark(#a855f7, #d8b4fe);
     --theme-switcher-option-color: light-dark(#581c87, #ddd6fe);
-    --theme-switcher-option-active-color: light-dark(#ffffff, #1a052e);
-    --theme-switcher-option-active-background-color: light-dark(#9333ea, #e879f9);
+    --theme-switcher-option-selected-color: light-dark(#ffffff, #1a052e);
+    --theme-switcher-option-selected-background-color: light-dark(#9333ea, #e879f9);
     --theme-switcher-option-focus-ring-color: light-dark(#9333ea, #e879f9);
   }
 }

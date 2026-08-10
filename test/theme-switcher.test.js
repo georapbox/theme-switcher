@@ -25,7 +25,7 @@ describe('theme-switcher', () => {
   afterEach(() => {
     fixtureCleanup();
     sinon.restore();
-    localStorage.clear();
+    window.localStorage.clear();
     document.documentElement.removeAttribute('data-theme');
   });
 
@@ -219,11 +219,11 @@ describe('theme-switcher', () => {
   describe('slots', () => {
     it('should have theme-option-light-icon slot', async () => {
       const el = await fixture(html`<theme-switcher></theme-switcher>`);
-      const lightIconSlot = el.shadowRoot.querySelector('slot[name="theme-option-light-icon"]');
+      const lightIconSlot = el.shadowRoot.querySelector('slot[name="light-icon"]');
       expect(lightIconSlot).to.exist;
 
       const span = document.createElement('span');
-      span.setAttribute('slot', 'theme-option-light-icon');
+      span.setAttribute('slot', 'light-icon');
       span.textContent = 'Light';
       el.appendChild(span);
       expect(lightIconSlot.assignedElements()).to.deep.equal([span]);
@@ -231,11 +231,11 @@ describe('theme-switcher', () => {
 
     it('should have theme-option-system-icon slot', async () => {
       const el = await fixture(html`<theme-switcher></theme-switcher>`);
-      const systemIconSlot = el.shadowRoot.querySelector('slot[name="theme-option-system-icon"]');
+      const systemIconSlot = el.shadowRoot.querySelector('slot[name="system-icon"]');
       expect(systemIconSlot).to.exist;
 
       const span = document.createElement('span');
-      span.setAttribute('slot', 'theme-option-system-icon');
+      span.setAttribute('slot', 'system-icon');
       span.textContent = 'System';
       el.appendChild(span);
       expect(systemIconSlot.assignedElements()).to.deep.equal([span]);
@@ -243,11 +243,11 @@ describe('theme-switcher', () => {
 
     it('should have theme-option-dark-icon slot', async () => {
       const el = await fixture(html`<theme-switcher></theme-switcher>`);
-      const darkIconSlot = el.shadowRoot.querySelector('slot[name="theme-option-dark-icon"]');
+      const darkIconSlot = el.shadowRoot.querySelector('slot[name="dark-icon"]');
       expect(darkIconSlot).to.exist;
 
       const span = document.createElement('span');
-      span.setAttribute('slot', 'theme-option-dark-icon');
+      span.setAttribute('slot', 'dark-icon');
       span.textContent = 'Dark';
       el.appendChild(span);
       expect(darkIconSlot.assignedElements()).to.deep.equal([span]);
@@ -257,17 +257,35 @@ describe('theme-switcher', () => {
   describe('CSS Parts', () => {
     it('should have base part', async () => {
       const el = await fixture(html`<theme-switcher></theme-switcher>`);
-      const basePart = el.shadowRoot.querySelector('.theme-switcher');
-      expect(basePart).to.have.attribute('part', 'base');
+      const baseElement = el.shadowRoot.getElementById('theme-switcher');
+      expect(baseElement.part.contains('base')).to.be.true;
     });
 
     it('each option button should have the appropriate CSS parts', async () => {
       const el = await fixture(html`<theme-switcher></theme-switcher>`);
       const { lightOptionButton, systemOptionButton, darkOptionButton } = getOptions(el);
 
-      expect(lightOptionButton).to.have.attribute('part', 'theme-option theme-option--light');
-      expect(systemOptionButton).to.have.attribute('part', 'theme-option theme-option--system');
-      expect(darkOptionButton).to.have.attribute('part', 'theme-option theme-option--dark');
+      expect(lightOptionButton.part.contains('theme-option')).to.be.true;
+      expect(lightOptionButton.part.contains('theme-option--light')).to.be.true;
+
+      expect(systemOptionButton.part.contains('theme-option')).to.be.true;
+      expect(systemOptionButton.part.contains('theme-option--system')).to.be.true;
+      expect(systemOptionButton.part.contains('theme-option--selected')).to.be.true;
+
+      expect(darkOptionButton.part.contains('theme-option')).to.be.true;
+      expect(darkOptionButton.part.contains('theme-option--dark')).to.be.true;
+
+      const lightOptionIcon = lightOptionButton.querySelector('.theme-switcher__option-icon');
+      expect(lightOptionIcon.part.contains('theme-option-icon')).to.be.true;
+      expect(lightOptionIcon.part.contains('theme-option-icon--light')).to.be.true;
+
+      const systemOptionIcon = systemOptionButton.querySelector('.theme-switcher__option-icon');
+      expect(systemOptionIcon.part.contains('theme-option-icon')).to.be.true;
+      expect(systemOptionIcon.part.contains('theme-option-icon--system')).to.be.true;
+
+      const darkOptionIcon = darkOptionButton.querySelector('.theme-switcher__option-icon');
+      expect(darkOptionIcon.part.contains('theme-option-icon')).to.be.true;
+      expect(darkOptionIcon.part.contains('theme-option-icon--dark')).to.be.true;
     });
   });
 

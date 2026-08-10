@@ -19,15 +19,17 @@ const styles = css`
     --theme-switcher-padding: 0.1875rem;
     --theme-switcher-gap: 0;
     --theme-switcher-background-color: transparent;
+    --theme-switcher-border-width: 1px;
     --theme-switcher-border-color: #222222;
     --theme-switcher-border-radius: 9999px;
     --theme-switcher-option-size: 2rem;
     --theme-switcher-option-font-size: calc(var(--theme-switcher-option-size) * 0.5);
     --theme-switcher-option-color: #222222;
     --theme-switcher-option-background-color: transparent;
-    --theme-switcher-option-active-color: #eeeeee;
-    --theme-switcher-option-active-background-color: #222222;
-    --theme-switcher-option-border: 0;
+    --theme-switcher-option-selected-color: #eeeeee;
+    --theme-switcher-option-selected-background-color: #222222;
+    --theme-switcher-option-border-width: 0;
+    --theme-switcher-option-border-color: transparent;
     --theme-switcher-option-border-radius: 50%;
     --theme-switcher-option-focus-ring-width: 2px;
     --theme-switcher-option-focus-ring-color: #2563eb;
@@ -41,8 +43,8 @@ const styles = css`
     :host {
       --theme-switcher-border-color: light-dark(#222222, #eeeeee);
       --theme-switcher-option-color: light-dark(#222222, #eeeeee);
-      --theme-switcher-option-active-color: light-dark(#eeeeee, #222222);
-      --theme-switcher-option-active-background-color: light-dark(#222222, #eeeeee);
+      --theme-switcher-option-selected-color: light-dark(#eeeeee, #222222);
+      --theme-switcher-option-selected-background-color: light-dark(#222222, #eeeeee);
       --theme-switcher-option-focus-ring-color: light-dark(#2563eb, #60a5fa);
     }
   }
@@ -68,7 +70,7 @@ const styles = css`
     gap: var(--theme-switcher-gap);
     width: fit-content;
     padding: var(--theme-switcher-padding);
-    border: 1px solid var(--theme-switcher-border-color);
+    border: var(--theme-switcher-border-width) solid var(--theme-switcher-border-color);
     border-radius: var(--theme-switcher-border-radius);
     background-color: var(--theme-switcher-background-color);
     color-scheme: light dark;
@@ -90,7 +92,7 @@ const styles = css`
     display: flex;
     justify-content: center;
     align-items: center;
-    border: var(--theme-switcher-option-border);
+    border: var(--theme-switcher-option-border-width) solid var(--theme-switcher-option-border-color);
     border-radius: var(--theme-switcher-option-border-radius);
     width: var(--theme-switcher-option-size);
     height: var(--theme-switcher-option-size);
@@ -114,8 +116,13 @@ const styles = css`
   }
 
   .theme-switcher__option[aria-checked='true'] {
-    background-color: var(--theme-switcher-option-active-background-color);
-    color: var(--theme-switcher-option-active-color);
+    background-color: var(--theme-switcher-option-selected-background-color);
+    color: var(--theme-switcher-option-selected-color);
+  }
+
+  .theme-switcher__option-icon,
+  .theme-switcher__option ::slotted(svg) {
+    flex-shrink: 0;
   }
 `;
 
@@ -127,10 +134,10 @@ template.innerHTML = html`
     ${styles}
   </style>
 
-  <div id="theme-switcher" class="theme-switcher" part="base" role="radiogroup">
+  <div id="theme-switcher" part="base" class="theme-switcher" role="radiogroup">
     <button
-      class="theme-switcher__option"
       part="theme-option theme-option--light"
+      class="theme-switcher__option"
       type="button"
       role="radio"
       aria-checked="false"
@@ -138,8 +145,16 @@ template.innerHTML = html`
       data-theme="light"
       data-theme-switcher-option
     >
-      <slot name="theme-option-light-icon">
-        <svg viewBox="0 0 16 16" width="1em" height="1em" fill="currentColor" aria-hidden="true">
+      <slot name="light-icon">
+        <svg
+          part="theme-option-icon theme-option-icon--light"
+          class="theme-switcher__option-icon"
+          viewBox="0 0 16 16"
+          width="1em"
+          height="1em"
+          fill="currentColor"
+          aria-hidden="true"
+        >
           <path
             fill-rule="evenodd"
             clip-rule="evenodd"
@@ -150,8 +165,8 @@ template.innerHTML = html`
     </button>
 
     <button
-      class="theme-switcher__option"
       part="theme-option theme-option--system"
+      class="theme-switcher__option"
       type="button"
       role="radio"
       aria-checked="false"
@@ -159,8 +174,16 @@ template.innerHTML = html`
       data-theme="system"
       data-theme-switcher-option
     >
-      <slot name="theme-option-system-icon">
-        <svg viewBox="0 0 16 16" width="1em" height="1em" fill="currentColor" aria-hidden="true">
+      <slot name="system-icon">
+        <svg
+          part="theme-option-icon theme-option-icon--system"
+          class="theme-switcher__option-icon"
+          viewBox="0 0 16 16"
+          width="1em"
+          height="1em"
+          fill="currentColor"
+          aria-hidden="true"
+        >
           <path
             fill-rule="evenodd"
             clip-rule="evenodd"
@@ -171,8 +194,8 @@ template.innerHTML = html`
     </button>
 
     <button
-      class="theme-switcher__option"
       part="theme-option theme-option--dark"
+      class="theme-switcher__option"
       type="button"
       role="radio"
       aria-checked="false"
@@ -180,8 +203,16 @@ template.innerHTML = html`
       data-theme="dark"
       data-theme-switcher-option
     >
-      <slot name="theme-option-dark-icon">
-        <svg viewBox="0 0 16 16" width="1em" height="1em" fill="currentColor" aria-hidden="true">
+      <slot name="dark-icon">
+        <svg
+          part="theme-option-icon theme-option-icon--dark"
+          class="theme-switcher__option-icon"
+          viewBox="0 0 16 16"
+          width="1em"
+          height="1em"
+          fill="currentColor"
+          aria-hidden="true"
+        >
           <path
             fill-rule="evenodd"
             clip-rule="evenodd"
@@ -212,28 +243,35 @@ template.innerHTML = html`
  * @attribute {string} system-label - The accessible label for the system theme option button.
  * @attribute {string} dark-label - The accessible label for the dark theme option button.
  *
- * @slot theme-option-light-icon - Custom icon/content for the light theme option.
- * @slot theme-option-system-icon - Custom icon/content for the system theme option.
- * @slot theme-option-dark-icon - Custom icon/content for the dark theme option.
+ * @slot light-icon - Custom icon for the light theme option.
+ * @slot system-icon - Custom icon for the system theme option.
+ * @slot dark-icon - Custom icon for the dark theme option.
  *
- * @csspart base - The root wrapper element of the theme switcher.
- * @csspart theme-option - A theme option button.
+ * @csspart base - The base element of the component.
+ * @csspart theme-option - The theme option button.
  * @csspart theme-option--light - The button for selecting the light theme.
  * @csspart theme-option--system - The button for selecting the system theme.
  * @csspart theme-option--dark - The button for selecting the dark theme.
+ * @csspart theme-option--selected - The button for the currently selected theme.
+ * @csspart theme-option-icon - The icon inside a theme option button.
+ * @csspart theme-option-icon--light - The icon inside the light theme option button.
+ * @csspart theme-option-icon--system - The icon inside the system theme option button.
+ * @csspart theme-option-icon--dark - The icon inside the dark theme option button.
  *
  * @cssproperty --theme-switcher-padding - The padding around the theme switcher content.
  * @cssproperty --theme-switcher-gap - The space between theme option buttons.
  * @cssproperty --theme-switcher-background-color - The background color of the theme switcher.
+ * @cssproperty --theme-switcher-border-width - The border width of the theme switcher.
  * @cssproperty --theme-switcher-border-color - The border color of the theme switcher.
  * @cssproperty --theme-switcher-border-radius - The border radius of the theme switcher.
  * @cssproperty --theme-switcher-option-size - The width and height of each theme option button.
  * @cssproperty --theme-switcher-option-font-size - The font size of each theme option button, which can be used to scale the default SVG icons.
- * @cssproperty --theme-switcher-option-color - The text/icon color of each theme option button.
+ * @cssproperty --theme-switcher-option-color - The color of each theme option button.
  * @cssproperty --theme-switcher-option-background-color - The background color of each theme option button.
- * @cssproperty --theme-switcher-option-active-color - The text/icon color of the selected theme option button.
- * @cssproperty --theme-switcher-option-active-background-color - The background color of the selected theme option button.
- * @cssproperty --theme-switcher-option-border - The border of each theme option button.
+ * @cssproperty --theme-switcher-option-selected-color - The color of the selected theme option button.
+ * @cssproperty --theme-switcher-option-selected-background-color - The background color of the selected theme option button.
+ * @cssproperty --theme-switcher-option-border-width - The border width of each theme option button.
+ * @cssproperty --theme-switcher-option-border-color - The border color of each theme option button.
  * @cssproperty --theme-switcher-option-border-radius - The border radius of each theme option button.
  * @cssproperty --theme-switcher-option-focus-ring-width - The width of the focus ring.
  * @cssproperty --theme-switcher-option-focus-ring-color - The color of the focus ring.
@@ -483,6 +521,7 @@ class ThemeSwitcher extends HTMLElement {
       const isSelected = theme === this.#theme;
 
       el.setAttribute('aria-checked', isSelected ? 'true' : 'false');
+      el.part?.toggle('theme-option--selected', isSelected);
       el.setAttribute('tabindex', isSelected ? '0' : '-1');
     });
 
