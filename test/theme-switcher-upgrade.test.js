@@ -16,6 +16,7 @@ describe('theme-switcher upgrading', () => {
     el.lightLabel = 'LIGHT_LABEL';
     el.systemLabel = 'SYSTEM_LABEL';
     el.darkLabel = 'DARK_LABEL';
+    el.disabled = true;
 
     // Define and explicitly upgrade the custom element
     ThemeSwitcher.define();
@@ -31,5 +32,6 @@ describe('theme-switcher upgrading', () => {
     expect(el.getAttribute('light-label')).to.equal('LIGHT_LABEL');
     expect(el.getAttribute('system-label')).to.equal('SYSTEM_LABEL');
     expect(el.getAttribute('dark-label')).to.equal('DARK_LABEL');
+    expect(el.hasAttribute('disabled')).to.be.true;
   });
 });

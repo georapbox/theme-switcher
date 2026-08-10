@@ -108,6 +108,7 @@ const styles = css`
   }
 
   .theme-switcher__option:disabled {
+    opacity: 0.75;
     cursor: not-allowed;
   }
 
@@ -236,12 +237,14 @@ template.innerHTML = html`
  * @property {string} lightLabel - The accessible label for the light theme option button.
  * @property {string} systemLabel - The accessible label for the system theme option button.
  * @property {string} darkLabel - The accessible label for the dark theme option button.
+ * @property {boolean} disabled - Whether the theme switcher is disabled.
  *
  * @attribute {boolean} no-storage - Whether to disable persistence of the selected theme in local storage.
  * @attribute {string} storage-key - The local storage key used to persist the selected theme.
  * @attribute {string} light-label - The accessible label for the light theme option button.
  * @attribute {string} system-label - The accessible label for the system theme option button.
  * @attribute {string} dark-label - The accessible label for the dark theme option button.
+ * @attribute {boolean} disabled - Whether the theme switcher is disabled.
  *
  * @slot light-icon - Custom icon for the light theme option.
  * @slot system-icon - Custom icon for the system theme option.
@@ -298,7 +301,7 @@ class ThemeSwitcher extends HTMLElement {
   }
 
   static get observedAttributes() {
-    return ['storage-key', 'light-label', 'system-label', 'dark-label'];
+    return ['storage-key', 'light-label', 'system-label', 'dark-label', 'disabled'];
   }
 
   /**
@@ -327,6 +330,10 @@ class ThemeSwitcher extends HTMLElement {
     if (name === 'dark-label' && oldValue !== newValue) {
       const darkOptionButton = this.shadowRoot?.querySelector('[data-theme-switcher-option][data-theme="dark"]');
       darkOptionButton?.setAttribute('aria-label', this.darkLabel);
+    }
+
+    if (name === 'disabled') {
+      this.#reflectDisabledState();
     }
   }
 
@@ -427,6 +434,21 @@ class ThemeSwitcher extends HTMLElement {
   }
 
   /**
+   * Whether the theme switcher is disabled.
+   *
+   * @type {boolean}
+   * @default false
+   * @attribute disabled
+   */
+  get disabled() {
+    return this.hasAttribute('disabled');
+  }
+
+  set disabled(value) {
+    this.toggleAttribute('disabled', !!value);
+  }
+
+  /**
    * Lifecycle method that is called when the element is added to the DOM.
    */
   connectedCallback() {
@@ -435,11 +457,13 @@ class ThemeSwitcher extends HTMLElement {
     this.#upgradeProperty('lightLabel');
     this.#upgradeProperty('systemLabel');
     this.#upgradeProperty('darkLabel');
+    this.#upgradeProperty('disabled');
 
     this.#themeSwitcherEl = this.shadowRoot?.getElementById('theme-switcher') || null;
 
     this.#theme = this.#getThemePreference();
     this.#reflectThemePreference();
+    this.#reflectDisabledState();
 
     this.#themeSwitcherEl?.addEventListener('click', this.#handleSwitcherClick);
     this.#themeSwitcherEl?.addEventListener('keydown', this.#handleSwitcherKeyDown);
@@ -568,6 +592,20 @@ class ThemeSwitcher extends HTMLElement {
   }
 
   /**
+   * Reflects the disabled state of the theme switcher based on the `disabled` property.
+   */
+  #reflectDisabledState() {
+    const optionButtons = this.#themeSwitcherEl?.querySelectorAll('[data-theme-switcher-option]') || [];
+
+    optionButtons.forEach(button => {
+      if (!this.#isThemeOptionButton(button)) {
+        return;
+      }
+      button.disabled = this.disabled;
+    });
+  }
+
+  /**
    * Handles user selection of a theme option.
    *
    * @param {MouseEvent} evt - The click event object.
@@ -678,7 +716,7 @@ class ThemeSwitcher extends HTMLElement {
    *
    * @see https://web.dev/articles/custom-elements-best-practices#make_properties_lazy
    *
-   * @param {'noStorage' | 'storageKey' | 'lightLabel' | 'systemLabel' | 'darkLabel'} prop - The property name to upgrade.
+   * @param {'noStorage' | 'storageKey' | 'lightLabel' | 'systemLabel' | 'darkLabel' | 'disabled'} prop - The property name to upgrade.
    */
   #upgradeProperty(prop) {
     const instance = /** @type {HTMLElement & Record<string, unknown>} */ (this);

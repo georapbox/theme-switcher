@@ -114,104 +114,98 @@ describe('theme-switcher', () => {
 
   describe('property and attribute reflection', () => {
     describe('noStorage', () => {
-      it('reflects the no-storage attribute to the noStorage property', async () => {
+      it('reflects no-storage attribute to noStorage property', async () => {
         const el = await fixture(html`<theme-switcher no-storage></theme-switcher>`);
-
         expect(el.noStorage).to.be.true;
       });
 
-      it('reflects the noStorage property to the no-storage attribute', async () => {
+      it('reflects noStorage property to no-storage attribute', async () => {
         const el = await fixture(html`<theme-switcher></theme-switcher>`);
-
         el.noStorage = true;
         expect(el.hasAttribute('no-storage')).to.be.true;
-
         el.noStorage = false;
         expect(el.hasAttribute('no-storage')).to.be.false;
       });
     });
 
     describe('storageKey', () => {
-      it('reflects the storage-key attribute to the storageKey property', async () => {
+      it('reflects storage-key attribute to storageKey property', async () => {
         const el = await fixture(html`<theme-switcher storage-key="STORAGE_KEY"></theme-switcher>`);
-
         expect(el.storageKey).to.equal('STORAGE_KEY');
       });
 
-      it('reflects the storageKey property to the storage-key attribute', async () => {
+      it('reflects storageKey property to storage-key attribute', async () => {
         const el = await fixture(html`<theme-switcher></theme-switcher>`);
-
         el.storageKey = 'STORAGE_KEY';
-
         expect(el.getAttribute('storage-key')).to.equal('STORAGE_KEY');
       });
 
       it('resets storageKey to the default value when the storage-key attribute is removed', async () => {
         const el = await fixture(html`<theme-switcher storage-key="STORAGE_KEY"></theme-switcher>`);
-
         expect(el.storageKey).to.equal('STORAGE_KEY');
-
         el.removeAttribute('storage-key');
-
         expect(el.storageKey).to.equal('theme-switcher/theme-preference');
       });
 
       it('resets storageKey to the default value when set to null', async () => {
         const el = await fixture(html`<theme-switcher storage-key="STORAGE_KEY"></theme-switcher>`);
-
         expect(el.storageKey).to.equal('STORAGE_KEY');
-
         el.storageKey = null;
-
         expect(el.storageKey).to.equal('theme-switcher/theme-preference');
       });
     });
 
     describe('lightLabel', () => {
-      it('reflects the light-label attribute to the lightLabel property', async () => {
+      it('reflects light-label attribute to lightLabel property', async () => {
         const el = await fixture(html`<theme-switcher light-label="LIGHT_LABEL"></theme-switcher>`);
-
         expect(el.lightLabel).to.equal('LIGHT_LABEL');
       });
 
-      it('reflects the lightLabel property to the light-label attribute', async () => {
+      it('reflects lightLabel property to light-label attribute', async () => {
         const el = await fixture(html`<theme-switcher></theme-switcher>`);
-
         el.lightLabel = 'LIGHT_LABEL';
-
         expect(el.getAttribute('light-label')).to.equal('LIGHT_LABEL');
       });
     });
 
     describe('systemLabel', () => {
-      it('reflects the system-label attribute to the systemLabel property', async () => {
+      it('reflects system-label attribute to systemLabel property', async () => {
         const el = await fixture(html`<theme-switcher system-label="SYSTEM_LABEL"></theme-switcher>`);
-
         expect(el.systemLabel).to.equal('SYSTEM_LABEL');
       });
 
-      it('reflects the systemLabel property to the system-label attribute', async () => {
+      it('reflects systemLabel property to system-label attribute', async () => {
         const el = await fixture(html`<theme-switcher></theme-switcher>`);
-
         el.systemLabel = 'SYSTEM_LABEL';
-
         expect(el.getAttribute('system-label')).to.equal('SYSTEM_LABEL');
       });
     });
 
     describe('darkLabel', () => {
-      it('reflects the dark-label attribute to the darkLabel property', async () => {
+      it('reflects dark-label attribute to darkLabel property', async () => {
         const el = await fixture(html`<theme-switcher dark-label="DARK_LABEL"></theme-switcher>`);
-
         expect(el.darkLabel).to.equal('DARK_LABEL');
       });
 
-      it('reflects the darkLabel property to the dark-label attribute', async () => {
+      it('reflects darkLabel property to dark-label attribute', async () => {
         const el = await fixture(html`<theme-switcher></theme-switcher>`);
-
         el.darkLabel = 'DARK_LABEL';
-
         expect(el.getAttribute('dark-label')).to.equal('DARK_LABEL');
+      });
+    });
+
+    describe('disabled', () => {
+      it('reflects attribute disabled to property disabled', async () => {
+        const el = await fixture(html`<theme-switcher disabled></theme-switcher>`);
+        expect(el.disabled).to.be.true;
+      });
+
+      it('reflects property disabled to attribute disabled', async () => {
+        const el = await fixture(html`<theme-switcher></theme-switcher>`);
+        el.disabled = true;
+        expect(el.hasAttribute('disabled')).to.be.true;
+        el.disabled = false;
+        expect(el.hasAttribute('disabled')).to.be.false;
       });
     });
   });

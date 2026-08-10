@@ -115,6 +115,7 @@ theme-switcher {
 | `lightLabel`<br>*`light-label`* | ✓ | `string` | - | `'Switch to light theme'` | The accessible label for the light theme option button. |
 | `systemLabel`<br>*`system-label`* | ✓ | `string` | - | `'Switch to system theme'` | The accessible label for the system theme option button. |
 | `darkLabel`<br>*`dark-label`* | ✓ | `string` | - | `'Switch to dark theme'` | The accessible label for the dark theme option button. |
+| `disabled` | ✓ | `boolean` | - | `false` | Whether the theme switcher is disabled. |
 
 ### Slots
 
