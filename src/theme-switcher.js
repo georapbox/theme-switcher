@@ -1,12 +1,18 @@
 // @ts-check
 
 /**
+ * The selected theme preference.
+ *
+ * `system` means the page follows the operating system color preference.
+ *
  * @typedef {'light' | 'system' | 'dark'} Theme
  */
 
 /**
+ * The detail payload of the `theme-change` event.
+ *
  * @typedef {object} ThemeChangeEventDetail
- * @property {Theme} theme
+ * @property {Theme} theme - The newly selected theme preference.
  */
 
 /** @type {readonly string[]} */

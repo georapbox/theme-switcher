@@ -50,52 +50,52 @@
             <legend>Theme switcher palette</legend>
 
             <label style="--palette-color: light-dark(#222222, #eeeeee)">
-              <input type="radio" name="theme-switcher-theme" value="default-colors" checked />
+              <input type="radio" name="theme-switcher-theme" value="default-colors" checked>
               <span>Default colors</span>
             </label>
 
             <label style="--palette-color: light-dark(#65a30d, #a3e635)">
-              <input type="radio" name="theme-switcher-theme" value="electric-lime" />
+              <input type="radio" name="theme-switcher-theme" value="electric-lime">
               <span>Electric lime</span>
             </label>
 
             <label style="--palette-color: light-dark(#2563eb, #60a5fa)">
-              <input type="radio" name="theme-switcher-theme" value="soft-blue" />
+              <input type="radio" name="theme-switcher-theme" value="soft-blue">
               <span>Soft blue</span>
             </label>
 
             <label style="--palette-color: light-dark(#059669, #5eead4)">
-              <input type="radio" name="theme-switcher-theme" value="emerald-mint" />
+              <input type="radio" name="theme-switcher-theme" value="emerald-mint">
               <span>Emerald mint</span>
             </label>
 
             <label style="--palette-color: light-dark(#d97706, #facc15)">
-              <input type="radio" name="theme-switcher-theme" value="warm-amber" />
+              <input type="radio" name="theme-switcher-theme" value="warm-amber">
               <span>Warm amber</span>
             </label>
 
             <label style="--palette-color: light-dark(#ea580c, #fb923c)">
-              <input type="radio" name="theme-switcher-theme" value="sunset-orange" />
+              <input type="radio" name="theme-switcher-theme" value="sunset-orange">
               <span>Sunset orange</span>
             </label>
 
             <label style="--palette-color: light-dark(#e11d48, #fb7185)">
-              <input type="radio" name="theme-switcher-theme" value="coral-rose" />
+              <input type="radio" name="theme-switcher-theme" value="coral-rose">
               <span>Coral rose</span>
             </label>
 
             <label style="--palette-color: light-dark(#0891b2, #22d3ee)">
-              <input type="radio" name="theme-switcher-theme" value="tech-cyan" />
+              <input type="radio" name="theme-switcher-theme" value="tech-cyan">
               <span>Tech cyan</span>
             </label>
 
             <label style="--palette-color: light-dark(#4f46e5, #a78bfa)">
-              <input type="radio" name="theme-switcher-theme" value="indigo-violet" />
+              <input type="radio" name="theme-switcher-theme" value="indigo-violet">
               <span>Indigo violet</span>
             </label>
 
             <label style="--palette-color: light-dark(#9333ea, #e879f9)">
-              <input type="radio" name="theme-switcher-theme" value="neon-purple" />
+              <input type="radio" name="theme-switcher-theme" value="neon-purple">
               <span>Neon purple</span>
             </label>
           </fieldset>
@@ -106,12 +106,19 @@
               <output id="size-value" for="size-control">100%</output>
             </div>
 
-            <input id="size-control" type="range" min="0" max="10" value="0" step="0.1">
+            <input id="size-control" name="size-control" type="range" min="0" max="10" value="0" step="0.1">
 
             <div class="size-control__labels" aria-hidden="true">
               <span>Default</span>
               <span>Large</span>
             </div>
+          </div>
+
+          <div class="disable-control">
+            <label>
+              <input name="disable-control" type="checkbox">
+              Disable theme switcher
+            </label>
           </div>
         </form>
 

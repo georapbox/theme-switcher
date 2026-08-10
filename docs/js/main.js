@@ -28,7 +28,7 @@ form.addEventListener('input', evt => {
     return;
   }
 
-  if (input.id === 'size-control' && input.type === 'range') {
+  if (input.name === 'size-control' && input.type === 'range') {
     const value = input.valueAsNumber;
     const min = Number(input.min);
     const max = Number(input.max);
@@ -41,5 +41,9 @@ form.addEventListener('input', evt => {
       el.style.setProperty('--theme-switcher-option-size', `${2 * scale}rem`);
       el.style.setProperty('--theme-switcher-padding', `${0.1875 * scale}rem`);
     });
+  }
+
+  if (input.name === 'disable-control' && input.type === 'checkbox') {
+    themeSwitchers.forEach(el => (el.disabled = input.checked));
   }
 });

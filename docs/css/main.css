@@ -207,6 +207,18 @@ browser-window::part(title) {
   margin: 0;
 }
 
+.disable-control {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0 1rem;
+  margin-block-end: 1rem;
+}
+
+.disable-control input[type="checkbox"] {
+  margin-inline-start: 0;
+}
+
 .demo {
   display: flex;
   flex-direction: column;
