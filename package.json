@@ -1,7 +1,7 @@
 {
   "name": "@georapbox/theme-switcher",
   "version": "1.0.0",
-  "description": "A custom element that allows you to switch between light, dark, and system theme.",
+  "description": "A custom element for switching between light, dark, and system color themes.",
   "type": "module",
   "main": "dist/theme-switcher.js",
   "unpkg": "dist/theme-switcher.js",

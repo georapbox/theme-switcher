@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="color-scheme" content="light dark">
   <title>&lt;theme-switcher&gt;</title>
-  <meta name="description" content="A custom element that allows you to switch between light, dark, and system theme.">
+  <meta name="description" content="A custom element for switching between light, dark, and system color themes.">
   <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
   <link rel="stylesheet" href="lib/highlight/highlight-github.css">
   <link rel="stylesheet" href="css/water.css">
@@ -15,10 +15,10 @@
   <script src="js/main.js" type="module"></script>
   <script>
     document.addEventListener('DOMContentLoaded', () => window.hljs.highlightAll());
-    window.__THEME_TOGGLE_DEMO_STORAGE_KEY__ = 'theme-switcher-demo/theme-preference';
+    window.__THEME_SWITCHER_DEMO_STORAGE_KEY__ = 'theme-switcher-demo/theme-preference';
     try {
       // Set theme early to avoid flash of unstyled content.
-      document.documentElement.setAttribute('data-theme', window.localStorage.getItem(window.__THEME_TOGGLE_DEMO_STORAGE_KEY__) || 'system');
+      document.documentElement.setAttribute('data-theme', window.localStorage.getItem(window.__THEME_SWITCHER_DEMO_STORAGE_KEY__) || 'system');
     } catch {
       // Fail silently...
     }
@@ -31,7 +31,7 @@
 
   <h1>&lt;theme-switcher&gt;</h1>
   <div class="component-description">
-    <p>A custom element that allows you to switch between light, dark, and system theme.</p>
+    <p>A custom element for switching between light, dark, and system color themes.</p>
     <p><a href="https://github.com/georapbox/theme-switcher" target="_blank" rel="noreferrer noopener">Source code & documentation</a></p>
   </div>
 
@@ -122,29 +122,31 @@
     <details open>
       <summary>Code sample</summary>
 
-      <p>For brevity reasons, only the CSS variables for the "Lime / electric" palette are shown below.</p>
+      <p>For brevity reasons, only the CSS variables for the "Electric lime" palette are shown below.</p>
 
-<pre><code>&lt;style&gt;
-  theme-switcher {
-    --theme-switcher-background-color: #f7fee7;
-    --theme-switcher-border-color: #bef264;
-    --theme-switcher-option-color: #3f6212;
-    --theme-switcher-option-active-color: #ffffff;
-    --theme-switcher-option-active-background-color: #65a30d;
+<pre><code>&lt;theme-switcher class="custom-theme"&gt;&lt;/theme-switcher&gt;</code></pre>
 
-    color-scheme: light dark;
-  }
+<pre><code>.custom-theme {
+  color-scheme: light dark;
 
-  @supports (color: light-dark(#000000, #ffffff)) {
+  --theme-switcher-background-color: #f7fee7;
+  --theme-switcher-border-color: #bef264;
+  --theme-switcher-option-color: #3f6212;
+  --theme-switcher-option-active-color: #ffffff;
+  --theme-switcher-option-active-background-color: #65a30d;
+  --theme-switcher-option-focus-ring-color: #65a30d;
+}
+
+@supports (color: light-dark(#000000, #ffffff)) {
+  .custom-theme {
     --theme-switcher-background-color: light-dark(#f7fee7, #142004);
     --theme-switcher-border-color: light-dark(#bef264, #84cc16);
     --theme-switcher-option-color: light-dark(#3f6212, #d9f99d);
     --theme-switcher-option-active-color: light-dark(#ffffff, #172008);
     --theme-switcher-option-active-background-color: light-dark(#65a30d, #a3e635);
+    --theme-switcher-option-focus-ring-color: light-dark(#65a30d, #a3e635);
   }
-&lt;/style&gt;
-
-&lt;theme-switcher&gt;&lt;/theme-switcher&gt;</code></pre>
+}</code></pre>
     </details>
   </div>
 

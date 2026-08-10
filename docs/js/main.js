@@ -13,7 +13,7 @@ const output = document.getElementById('size-value');
 const themeSwitchers = demo.querySelectorAll('theme-switcher');
 
 themeSwitchers.forEach(el => {
-  el.setAttribute('storage-key', window.__THEME_TOGGLE_DEMO_STORAGE_KEY__);
+  el.setAttribute('storage-key', window.__THEME_SWITCHER_DEMO_STORAGE_KEY__);
 });
 
 form.addEventListener('input', evt => {

@@ -6,8 +6,6 @@
 
 :root {
   --body-max-width: 60rem;
-
-  scroll-behavior: smooth;
 }
 
 :root[data-theme="light"] {
@@ -91,11 +89,6 @@
 
 .card details summary {
   font-weight: 500;
-}
-
-.back-top {
-  text-align: end;
-  font-size: 0.875rem;
 }
 
 browser-window {
@@ -230,6 +223,7 @@ browser-window::part(title) {
   --theme-switcher-option-color: #3f6212;
   --theme-switcher-option-active-color: #ffffff;
   --theme-switcher-option-active-background-color: #65a30d;
+  --theme-switcher-option-focus-ring-color: #65a30d;
 }
 
 .demo[data-theme-switcher-theme='soft-blue'] theme-switcher {
@@ -239,6 +233,7 @@ browser-window::part(title) {
   --theme-switcher-option-color: #1e3a8a;
   --theme-switcher-option-active-color: #ffffff;
   --theme-switcher-option-active-background-color: #2563eb;
+  --theme-switcher-option-focus-ring-color: #2563eb;
 }
 
 .demo[data-theme-switcher-theme='emerald-mint'] theme-switcher {
@@ -248,6 +243,7 @@ browser-window::part(title) {
   --theme-switcher-option-color: #065f46;
   --theme-switcher-option-active-color: #ffffff;
   --theme-switcher-option-active-background-color: #059669;
+  --theme-switcher-option-focus-ring-color: #059669;
 }
 
 .demo[data-theme-switcher-theme='warm-amber'] theme-switcher {
@@ -257,6 +253,7 @@ browser-window::part(title) {
   --theme-switcher-option-color: #92400e;
   --theme-switcher-option-active-color: #ffffff;
   --theme-switcher-option-active-background-color: #d97706;
+  --theme-switcher-option-focus-ring-color: #d97706;
 }
 
 .demo[data-theme-switcher-theme='sunset-orange'] theme-switcher {
@@ -266,6 +263,7 @@ browser-window::part(title) {
   --theme-switcher-option-color: #9a3412;
   --theme-switcher-option-active-color: #ffffff;
   --theme-switcher-option-active-background-color: #ea580c;
+  --theme-switcher-option-focus-ring-color: #ea580c;
 }
 
 .demo[data-theme-switcher-theme='coral-rose'] theme-switcher {
@@ -275,6 +273,7 @@ browser-window::part(title) {
   --theme-switcher-option-color: #9f1239;
   --theme-switcher-option-active-color: #ffffff;
   --theme-switcher-option-active-background-color: #e11d48;
+  --theme-switcher-option-focus-ring-color: #e11d48;
 }
 
 .demo[data-theme-switcher-theme='tech-cyan'] theme-switcher {
@@ -284,6 +283,7 @@ browser-window::part(title) {
   --theme-switcher-option-color: #155e75;
   --theme-switcher-option-active-color: #ffffff;
   --theme-switcher-option-active-background-color: #0891b2;
+  --theme-switcher-option-focus-ring-color: #0891b2;
 }
 
 .demo[data-theme-switcher-theme='indigo-violet'] theme-switcher {
@@ -293,6 +293,7 @@ browser-window::part(title) {
   --theme-switcher-option-color: #3730a3;
   --theme-switcher-option-active-color: #ffffff;
   --theme-switcher-option-active-background-color: #4f46e5;
+  --theme-switcher-option-focus-ring-color: #4f46e5;
 }
 
 .demo[data-theme-switcher-theme='neon-purple'] theme-switcher {
@@ -302,6 +303,7 @@ browser-window::part(title) {
   --theme-switcher-option-color: #581c87;
   --theme-switcher-option-active-color: #ffffff;
   --theme-switcher-option-active-background-color: #9333ea;
+  --theme-switcher-option-focus-ring-color: #9333ea;
 }
 
 @supports (color: light-dark(#000000, #ffffff)) {
@@ -311,6 +313,7 @@ browser-window::part(title) {
     --theme-switcher-option-color: light-dark(#3f6212, #d9f99d);
     --theme-switcher-option-active-color: light-dark(#ffffff, #172008);
     --theme-switcher-option-active-background-color: light-dark(#65a30d, #a3e635);
+    --theme-switcher-option-focus-ring-color: light-dark(#65a30d, #a3e635);
   }
 
   .demo[data-theme-switcher-theme='soft-blue'] theme-switcher {
@@ -319,6 +322,7 @@ browser-window::part(title) {
     --theme-switcher-option-color: light-dark(#1e3a8a, #bfdbfe);
     --theme-switcher-option-active-color: light-dark(#ffffff, #eff6ff);
     --theme-switcher-option-active-background-color: light-dark(#2563eb, #60a5fa);
+    --theme-switcher-option-focus-ring-color: light-dark(#2563eb, #60a5fa);
   }
 
   .demo[data-theme-switcher-theme='emerald-mint'] theme-switcher {
@@ -327,6 +331,7 @@ browser-window::part(title) {
     --theme-switcher-option-color: light-dark(#065f46, #a7f3d0);
     --theme-switcher-option-active-color: light-dark(#ffffff, #042f2e);
     --theme-switcher-option-active-background-color: light-dark(#059669, #5eead4);
+    --theme-switcher-option-focus-ring-color: light-dark(#059669, #5eead4);
   }
 
   .demo[data-theme-switcher-theme='warm-amber'] theme-switcher {
@@ -335,6 +340,7 @@ browser-window::part(title) {
     --theme-switcher-option-color: light-dark(#92400e, #fde68a);
     --theme-switcher-option-active-color: light-dark(#ffffff, #1c1304);
     --theme-switcher-option-active-background-color: light-dark(#d97706, #facc15);
+    --theme-switcher-option-focus-ring-color: light-dark(#d97706, #facc15);
   }
 
   .demo[data-theme-switcher-theme='sunset-orange'] theme-switcher {
@@ -343,6 +349,7 @@ browser-window::part(title) {
     --theme-switcher-option-color: light-dark(#9a3412, #fed7aa);
     --theme-switcher-option-active-color: light-dark(#ffffff, #2a0f04);
     --theme-switcher-option-active-background-color: light-dark(#ea580c, #fb923c);
+    --theme-switcher-option-focus-ring-color: light-dark(#ea580c, #fb923c);
   }
 
   .demo[data-theme-switcher-theme='coral-rose'] theme-switcher {
@@ -351,6 +358,7 @@ browser-window::part(title) {
     --theme-switcher-option-color: light-dark(#9f1239, #fecdd3);
     --theme-switcher-option-active-color: light-dark(#ffffff, #2a0d12);
     --theme-switcher-option-active-background-color: light-dark(#e11d48, #fb7185);
+    --theme-switcher-option-focus-ring-color: light-dark(#e11d48, #fb7185);
   }
 
   .demo[data-theme-switcher-theme='tech-cyan'] theme-switcher {
@@ -359,6 +367,7 @@ browser-window::part(title) {
     --theme-switcher-option-color: light-dark(#155e75, #a5f3fc);
     --theme-switcher-option-active-color: light-dark(#ffffff, #06202a);
     --theme-switcher-option-active-background-color: light-dark(#0891b2, #22d3ee);
+    --theme-switcher-option-focus-ring-color: light-dark(#0891b2, #22d3ee);
   }
 
   .demo[data-theme-switcher-theme='indigo-violet'] theme-switcher {
@@ -367,6 +376,7 @@ browser-window::part(title) {
     --theme-switcher-option-color: light-dark(#3730a3, #c7d2fe);
     --theme-switcher-option-active-color: light-dark(#ffffff, #11102a);
     --theme-switcher-option-active-background-color: light-dark(#4f46e5, #a78bfa);
+    --theme-switcher-option-focus-ring-color: light-dark(#4f46e5, #a78bfa);
   }
 
   .demo[data-theme-switcher-theme='neon-purple'] theme-switcher {
@@ -375,5 +385,10 @@ browser-window::part(title) {
     --theme-switcher-option-color: light-dark(#581c87, #ddd6fe);
     --theme-switcher-option-active-color: light-dark(#ffffff, #1a052e);
     --theme-switcher-option-active-background-color: light-dark(#9333ea, #e879f9);
+    --theme-switcher-option-focus-ring-color: light-dark(#9333ea, #e879f9);
   }
+}
+
+theme-switcher:not(:defined) {
+  display: none;
 }

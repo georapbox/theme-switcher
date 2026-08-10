@@ -7,7 +7,8 @@ describe('theme-switcher upgrading', () => {
   });
 
   it('default properties', async () => {
-    const el = await fixture(html`<theme-switcher></theme-switcher>`);
+    const container = await fixture(html`<div></div>`);
+    const el = document.createElement('theme-switcher');
 
     // Update properties before upgrading
     el.noStorage = true;
@@ -16,8 +17,12 @@ describe('theme-switcher upgrading', () => {
     el.systemLabel = 'SYSTEM_LABEL';
     el.darkLabel = 'DARK_LABEL';
 
-    // Upgrade custom element
+    // Define and explicitly upgrade the custom element
     ThemeSwitcher.define();
+    customElements.upgrade(el);
+
+    // Connect the element so connectedCallback runs
+    container.appendChild(el);
 
     await elementUpdated(el);
 

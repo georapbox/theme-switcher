@@ -7,7 +7,7 @@
 
 # &lt;theme-switcher&gt;
 
-A custom element that allows you to switch between light, dark, and system theme.
+A custom element for switching between light, dark, and system color themes.
 
 [API documentation](#api) &bull; [Demo][demo]
 
@@ -77,20 +77,17 @@ You can use the `data-theme` attribute to control the page color scheme and then
 
 ```css
 :root {
+  color-scheme: light dark;
+  
   --page-background-color: light-dark(#ffffff, #111111);
   --page-text-color: light-dark(#111111, #ffffff);
-
-  color-scheme: light dark;
+  
   background-color: var(--page-background-color);
   color: var(--page-text-color);
 }
 
 :root[data-theme='light'] {
   color-scheme: light;
-}
-
-:root[data-theme='system'] {
-  color-scheme: light dark;
 }
 
 :root[data-theme='dark'] {
@@ -152,6 +149,9 @@ theme-switcher {
 | `--theme-switcher-option-active-background-color` | The background color of the selected theme option button. | `#222222`, or `light-dark(#222222, #eeeeee)` when supported |
 | `--theme-switcher-option-border` | The border of each theme option button. | `0` |
 | `--theme-switcher-option-border-radius` | The border radius of each theme option button. | `50%` |
+| `--theme-switcher-option-focus-ring-width` | The width of the focus ring. | `2px` |
+| `--theme-switcher-option-focus-ring-color` | The color of the focus ring. | `#2563eb`, or `light-dark(#2563eb, #60a5fa)` when supported |
+| `--theme-switcher-option-focus-ring-offset` | The offset of the focus ring from the theme option button. | `2px` |
 
 > [!NOTE]
 > Color defaults use static fallback values first and are enhanced with `light-dark()` in browsers that support it.

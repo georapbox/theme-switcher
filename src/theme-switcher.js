@@ -9,9 +9,6 @@
  * @property {Theme} theme
  */
 
-const DEFAULT_STORAGE_KEY = 'theme-switcher/theme-preference';
-const ROOT_THEME_ATTR = 'data-theme';
-
 /** @type {readonly string[]} */
 const THEME_VALUES = ['light', 'system', 'dark'];
 
@@ -32,6 +29,9 @@ const styles = css`
     --theme-switcher-option-active-background-color: #222222;
     --theme-switcher-option-border: 0;
     --theme-switcher-option-border-radius: 50%;
+    --theme-switcher-option-focus-ring-width: 2px;
+    --theme-switcher-option-focus-ring-color: #2563eb;
+    --theme-switcher-option-focus-ring-offset: 2px;
 
     display: inline-block;
     box-sizing: border-box;
@@ -43,6 +43,7 @@ const styles = css`
       --theme-switcher-option-color: light-dark(#222222, #eeeeee);
       --theme-switcher-option-active-color: light-dark(#eeeeee, #222222);
       --theme-switcher-option-active-background-color: light-dark(#222222, #eeeeee);
+      --theme-switcher-option-focus-ring-color: light-dark(#2563eb, #60a5fa);
     }
   }
 
@@ -97,6 +98,15 @@ const styles = css`
     background-color: var(--theme-switcher-option-background-color);
     font-size: var(--theme-switcher-option-font-size);
     line-height: 0;
+  }
+
+  .theme-switcher__option:focus-visible {
+    outline: var(--theme-switcher-option-focus-ring-width) solid var(--theme-switcher-option-focus-ring-color);
+    outline-offset: var(--theme-switcher-option-focus-ring-offset);
+  }
+
+  .theme-switcher__option:disabled {
+    cursor: not-allowed;
   }
 
   .theme-switcher__option:not(:disabled) {
@@ -184,7 +194,7 @@ template.innerHTML = html`
 `;
 
 /**
- * @summary A custom element that allows you to switch between light, dark, and system theme.
+ * @summary A custom element for switching between light, dark, and system color themes.
  * @documentation https://github.com/georapbox/theme-switcher
  *
  * @tagname theme-switcher - The default custom element tag name, unless overridden by the `define` method.
@@ -225,6 +235,9 @@ template.innerHTML = html`
  * @cssproperty --theme-switcher-option-active-background-color - The background color of the selected theme option button.
  * @cssproperty --theme-switcher-option-border - The border of each theme option button.
  * @cssproperty --theme-switcher-option-border-radius - The border radius of each theme option button.
+ * @cssproperty --theme-switcher-option-focus-ring-width - The width of the focus ring.
+ * @cssproperty --theme-switcher-option-focus-ring-color - The color of the focus ring.
+ * @cssproperty --theme-switcher-option-focus-ring-offset - The offset of the focus ring from the theme option button.
  *
  * @event theme-change - Dispatched when the theme is changed by user interaction. The event detail contains the new theme value.
  *
@@ -307,7 +320,7 @@ class ThemeSwitcher extends HTMLElement {
    * @attribute storage-key
    */
   get storageKey() {
-    return this.getAttribute('storage-key') || DEFAULT_STORAGE_KEY;
+    return this.getAttribute('storage-key') || 'theme-switcher/theme-preference';
   }
 
   set storageKey(value) {
@@ -319,7 +332,7 @@ class ThemeSwitcher extends HTMLElement {
   }
 
   /**
-   * The aria-label for the light theme option button.
+   * The accessible label for the light theme option button.
    *
    * @type {string}
    * @default 'Switch to light theme'
@@ -338,7 +351,7 @@ class ThemeSwitcher extends HTMLElement {
   }
 
   /**
-   * The aria-label for the system theme option button.
+   * The accessible label for the system theme option button.
    *
    * @type {string}
    * @default 'Switch to system theme'
@@ -357,7 +370,7 @@ class ThemeSwitcher extends HTMLElement {
   }
 
   /**
-   * The aria-label for the dark theme option button.
+   * The accessible label for the dark theme option button.
    *
    * @type {string}
    * @default 'Switch to dark theme'
@@ -473,7 +486,7 @@ class ThemeSwitcher extends HTMLElement {
       el.setAttribute('tabindex', isSelected ? '0' : '-1');
     });
 
-    this.ownerDocument.documentElement.setAttribute(ROOT_THEME_ATTR, this.#theme);
+    this.ownerDocument.documentElement.setAttribute('data-theme', this.#theme);
   }
 
   /**

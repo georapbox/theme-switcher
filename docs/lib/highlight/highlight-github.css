@@ -8,11 +8,6 @@ code.hljs {
   padding: 3px 5px;
 }
 
-:root {
-  --italic: italic;
-  --bold: 700;
-}
-
 /*!
  * Theme: GitHub
  * Description: Light theme as seen on github.com
@@ -26,127 +21,72 @@ code.hljs {
  :root {
    color-scheme: light dark;
 
-   /* Light and dark color values */
-   --text-color-light: #24292e;
-   --text-color-dark: #c9d1d9;
+   --italic: italic;
+   --bold: 700;
 
-   --background-color-light: #ffffff;
-   --background-color-dark: #0d1117;
-
-   --keyword-color-light: #d73a49;
-   --keyword-color-dark: #ff7b72;
-
-   --title-color-light: #6f42c1;
-   --title-color-dark: #d2a8ff;
-
-   --syntax-color-light: #005cc5;
-   --syntax-color-dark: #79c0ff;
-
-   --string-color-light: #032f62;
-   --string-color-dark: #a5d6ff;
-
-   --built-in-color-light: #e36209;
-   --built-in-color-dark: #ffa657;
-
-   --code-color-light: #6a737d;
-   --code-color-dark: #8b949e;
-
-   --name-color-light: #22863a;
-   --name-color-dark: #7ee787;
-
-   --subst-color-light: #24292e;
-   --subst-color-dark: #c9d1d9;
-
-   --section-color-light: #005cc5;
-   --section-color-dark: #1f6feb;
-
-   --bullet-color-light: #735c0f;
-   --bullet-color-dark: #f2cc60;
-
-   --emphasis-color-light: #24292e;
-   --emphasis-color-dark: #c9d1d9;
-
-   --strong-color-light: #24292e;
-   --strong-color-dark: #c9d1d9;
-
-   --addition-color-light: #22863a;
-   --addition-color-dark: #aff5b4;
-
-   --deletion-color-light: #b31d28;
-   --deletion-color-dark: #ffdcd7;
-
-   --addition-background-light: #f0fff4;
-   --addition-background-dark: #033a16;
-
-   --deletion-background-light: #ffeef0;
-   --deletion-background-dark: #67060c;
-
-   /* Default light-theme values for legacy browsers */
-   --text-color: var(--text-color-light);
-   --background-color: var(--background-color-light);
-   --keyword-color: var(--keyword-color-light);
-   --title-color: var(--title-color-light);
-   --syntax-color: var(--syntax-color-light);
-   --string-color: var(--string-color-light);
-   --built-in-color: var(--built-in-color-light);
-   --code-color: var(--code-color-light);
-   --name-color: var(--name-color-light);
-   --subst-color: var(--subst-color-light);
-   --section-color: var(--section-color-light);
-   --bullet-color: var(--bullet-color-light);
-   --emphasis-color: var(--emphasis-color-light);
-   --strong-color: var(--strong-color-light);
-   --addition-color: var(--addition-color-light);
-   --deletion-color: var(--deletion-color-light);
-   --addition-background: var(--addition-background-light);
-   --deletion-background: var(--deletion-background-light);
+   --text-color: #24292e;
+   --background-color: #ffffff;
+   --keyword-color: #d73a49;
+   --title-color: #6f42c1;
+   --syntax-color: #005cc5;
+   --string-color: #032f62;
+   --built-in-color: #e36209;
+   --code-color: #6a737d;
+   --name-color: #22863a;
+   --subst-color: #24292e;
+   --section-color: #005cc5;
+   --bullet-color: #735c0f;
+   --emphasis-color: #24292e;
+   --strong-color: #24292e;
+   --addition-color: #22863a;
+   --deletion-color: #b31d28;
+   --addition-background: #f0fff4;
+   --deletion-background: #ffeef0;
  }
 
- /* Dark-theme fallback for browsers without light-dark() */
  @media (prefers-color-scheme: dark) {
    :root {
-     --text-color: var(--text-color-dark);
-     --background-color: var(--background-color-dark);
-     --keyword-color: var(--keyword-color-dark);
-     --title-color: var(--title-color-dark);
-     --syntax-color: var(--syntax-color-dark);
-     --string-color: var(--string-color-dark);
-     --built-in-color: var(--built-in-color-dark);
-     --code-color: var(--code-color-dark);
-     --name-color: var(--name-color-dark);
-     --subst-color: var(--subst-color-dark);
-     --section-color: var(--section-color-dark);
-     --bullet-color: var(--bullet-color-dark);
-     --emphasis-color: var(--emphasis-color-dark);
-     --strong-color: var(--strong-color-dark);
-     --addition-color: var(--addition-color-dark);
-     --deletion-color: var(--deletion-color-dark);
-     --addition-background: var(--addition-background-dark);
-     --deletion-background: var(--deletion-background-dark);
+     --text-color: #c9d1d9;
+     --background-color: #0d1117;
+     --keyword-color: #ff7b72;
+     --title-color: #d2a8ff;
+     --syntax-color: #79c0ff;
+     --string-color: #a5d6ff;
+     --built-in-color: #ffa657;
+     --code-color: #8b949e;
+     --name-color: #7ee787;
+     --subst-color: #c9d1d9;
+     --section-color: #1f6feb;
+     --bullet-color: #f2cc60;
+     --emphasis-color: #c9d1d9;
+     --strong-color: #c9d1d9;
+     --addition-color: #aff5b4;
+     --deletion-color: #ffdcd7;
+     --addition-background: #033a16;
+     --deletion-background: #67060c;
    }
  }
 
- /* Use light-dark() where supported */
  @supports (color: light-dark(#000000, #ffffff)) {
    :root {
-     --text-color: light-dark(var(--text-color-light), var(--text-color-dark));
-     --background-color: light-dark(var(--background-color-light), var(--background-color-dark));
-     --keyword-color: light-dark(var(--keyword-color-light), var(--keyword-color-dark));
-     --title-color: light-dark(var(--title-color-light), var(--title-color-dark));
-     --syntax-color: light-dark(var(--syntax-color-light), var(--syntax-color-dark));
-     --string-color: light-dark(var(--string-color-light), var(--string-color-dark));
-     --built-in-color: light-dark(var(--built-in-color-light), var(--built-in-color-dark));
-     --code-color: light-dark(var(--code-color-light), var(--code-color-dark));
-     --name-color: light-dark(var(--name-color-light), var(--name-color-dark));
-     --subst-color: light-dark(var(--subst-color-light), var(--subst-color-dark));
-     --section-color: light-dark(var(--section-color-light),var(--section-color-dark));
-     --bullet-color: light-dark(var(--bullet-color-light),var(--bullet-color-dark));
-     --emphasis-color: light-dark(var(--emphasis-color-light),var(--emphasis-color-dark));
-     --strong-color: light-dark(var(--strong-color-light),var(--strong-color-dark));
-     --addition-color: light-dark(var(--addition-color-light),var(--addition-color-dark));
-     --deletion-color: light-dark(var(--deletion-color-light),var(--deletion-color-dark));
-     --addition-background: light-dark(var(--addition-background-light),var(--addition-background-dark));
-     --deletion-background: light-dark(var(--deletion-background-light),var(--deletion-background-dark));
+     --text-color: light-dark(#24292e, #c9d1d9);
+     --background-color: light-dark(#ffffff, #0d1117);
+     --keyword-color: light-dark(#d73a49, #ff7b72);
+     --title-color: light-dark(#6f42c1, #d2a8ff);
+     --syntax-color: light-dark(#005cc5, #79c0ff);
+     --string-color: light-dark(#032f62, #a5d6ff);
+     --built-in-color: light-dark(#e36209, #ffa657);
+     --code-color: light-dark(#6a737d, #8b949e);
+     --name-color: light-dark(#22863a, #7ee787);
+     --subst-color: light-dark(#24292e, #c9d1d9);
+     --section-color: light-dark(#005cc5, #1f6feb);
+     --bullet-color: light-dark(#735c0f, #f2cc60);
+     --emphasis-color: light-dark(#24292e, #c9d1d9);
+     --strong-color: light-dark(#24292e, #c9d1d9);
+     --addition-color: light-dark(#22863a, #aff5b4);
+     --deletion-color: light-dark(#b31d28, #ffdcd7);
+     --addition-background: light-dark(#f0fff4, #033a16);
+     --deletion-background: light-dark(#ffeef0, #67060c);
    }
  }
 
