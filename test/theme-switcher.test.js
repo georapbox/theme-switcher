@@ -49,7 +49,7 @@ describe('theme-switcher', () => {
       const el = await fixture(html`<theme-switcher></theme-switcher>`);
       const baseEl = el.shadowRoot.querySelector('.theme-switcher');
 
-      expect(baseEl).to.have.attribute('role', 'radiogroup');
+      expect(baseEl.getAttribute('role')).to.equal('radiogroup');
     });
 
     it('renders each theme option as a radio', async () => {
@@ -57,7 +57,7 @@ describe('theme-switcher', () => {
       const options = el.shadowRoot.querySelectorAll('[data-theme-switcher-option]');
 
       options.forEach(option => {
-        expect(option).to.have.attribute('role', 'radio');
+        expect(option.getAttribute('role')).to.equal('radio');
       });
     });
 
@@ -65,9 +65,9 @@ describe('theme-switcher', () => {
       const el = await fixture(html`<theme-switcher></theme-switcher>`);
       const { lightOptionButton, systemOptionButton, darkOptionButton } = getOptions(el);
 
-      expect(lightOptionButton).to.have.attribute('aria-label', 'Switch to light theme');
-      expect(systemOptionButton).to.have.attribute('aria-label', 'Switch to system theme');
-      expect(darkOptionButton).to.have.attribute('aria-label', 'Switch to dark theme');
+      expect(lightOptionButton.getAttribute('aria-label')).to.equal('Switch to light theme');
+      expect(systemOptionButton.getAttribute('aria-label')).to.equal('Switch to system theme');
+      expect(darkOptionButton.getAttribute('aria-label')).to.equal('Switch to dark theme');
     });
 
     it('uses custom aria-labels from label attributes', async () => {
@@ -76,9 +76,9 @@ describe('theme-switcher', () => {
       `);
       const { lightOptionButton, systemOptionButton, darkOptionButton } = getOptions(el);
 
-      expect(lightOptionButton).to.have.attribute('aria-label', 'LIGHT_LABEL');
-      expect(systemOptionButton).to.have.attribute('aria-label', 'SYSTEM_LABEL');
-      expect(darkOptionButton).to.have.attribute('aria-label', 'DARK_LABEL');
+      expect(lightOptionButton.getAttribute('aria-label')).to.equal('LIGHT_LABEL');
+      expect(systemOptionButton.getAttribute('aria-label')).to.equal('SYSTEM_LABEL');
+      expect(darkOptionButton.getAttribute('aria-label')).to.equal('DARK_LABEL');
     });
 
     it('falls back to default aria-labels when custom label properties are set to null or undefined', async () => {
@@ -91,9 +91,9 @@ describe('theme-switcher', () => {
       el.systemLabel = null;
       el.darkLabel = undefined;
 
-      expect(lightOptionButton).to.have.attribute('aria-label', 'Switch to light theme');
-      expect(systemOptionButton).to.have.attribute('aria-label', 'Switch to system theme');
-      expect(darkOptionButton).to.have.attribute('aria-label', 'Switch to dark theme');
+      expect(lightOptionButton.getAttribute('aria-label')).to.equal('Switch to light theme');
+      expect(systemOptionButton.getAttribute('aria-label')).to.equal('Switch to system theme');
+      expect(darkOptionButton.getAttribute('aria-label')).to.equal('Switch to dark theme');
     });
 
     it('falls back to default aria-labels when custom label attributes are removed', async () => {
@@ -106,9 +106,9 @@ describe('theme-switcher', () => {
       el.removeAttribute('system-label');
       el.removeAttribute('dark-label');
 
-      expect(lightOptionButton).to.have.attribute('aria-label', 'Switch to light theme');
-      expect(systemOptionButton).to.have.attribute('aria-label', 'Switch to system theme');
-      expect(darkOptionButton).to.have.attribute('aria-label', 'Switch to dark theme');
+      expect(lightOptionButton.getAttribute('aria-label')).to.equal('Switch to light theme');
+      expect(systemOptionButton.getAttribute('aria-label')).to.equal('Switch to system theme');
+      expect(darkOptionButton.getAttribute('aria-label')).to.equal('Switch to dark theme');
     });
   });
 
@@ -124,10 +124,10 @@ describe('theme-switcher', () => {
         const el = await fixture(html`<theme-switcher></theme-switcher>`);
 
         el.noStorage = true;
-        expect(el).to.have.attribute('no-storage');
+        expect(el.hasAttribute('no-storage')).to.be.true;
 
         el.noStorage = false;
-        expect(el).to.not.have.attribute('no-storage');
+        expect(el.hasAttribute('no-storage')).to.be.false;
       });
     });
 
@@ -143,7 +143,7 @@ describe('theme-switcher', () => {
 
         el.storageKey = 'STORAGE_KEY';
 
-        expect(el).to.have.attribute('storage-key', 'STORAGE_KEY');
+        expect(el.getAttribute('storage-key')).to.equal('STORAGE_KEY');
       });
 
       it('resets storageKey to the default value when the storage-key attribute is removed', async () => {
@@ -179,7 +179,7 @@ describe('theme-switcher', () => {
 
         el.lightLabel = 'LIGHT_LABEL';
 
-        expect(el).to.have.attribute('light-label', 'LIGHT_LABEL');
+        expect(el.getAttribute('light-label')).to.equal('LIGHT_LABEL');
       });
     });
 
@@ -195,7 +195,7 @@ describe('theme-switcher', () => {
 
         el.systemLabel = 'SYSTEM_LABEL';
 
-        expect(el).to.have.attribute('system-label', 'SYSTEM_LABEL');
+        expect(el.getAttribute('system-label')).to.equal('SYSTEM_LABEL');
       });
     });
 
@@ -211,7 +211,7 @@ describe('theme-switcher', () => {
 
         el.darkLabel = 'DARK_LABEL';
 
-        expect(el).to.have.attribute('dark-label', 'DARK_LABEL');
+        expect(el.getAttribute('dark-label')).to.equal('DARK_LABEL');
       });
     });
   });
@@ -312,48 +312,48 @@ describe('theme-switcher', () => {
     it('sets the default theme on the document root', async () => {
       await fixture(html`<theme-switcher no-storage></theme-switcher>`);
 
-      expect(document.documentElement).to.have.attribute('data-theme', 'system');
+      expect(document.documentElement.getAttribute('data-theme')).to.equal('system');
     });
 
     it('updates the document root theme when an option is selected', async () => {
       const el = await fixture(html`<theme-switcher no-storage></theme-switcher>`);
       const { lightOptionButton, systemOptionButton, darkOptionButton } = getOptions(el);
 
-      expect(document.documentElement).to.have.attribute('data-theme', 'system');
+      expect(document.documentElement.getAttribute('data-theme')).to.equal('system');
 
       lightOptionButton.click();
-      expect(document.documentElement).to.have.attribute('data-theme', 'light');
+      expect(document.documentElement.getAttribute('data-theme')).to.equal('light');
 
       systemOptionButton.click();
-      expect(document.documentElement).to.have.attribute('data-theme', 'system');
+      expect(document.documentElement.getAttribute('data-theme')).to.equal('system');
 
       darkOptionButton.click();
-      expect(document.documentElement).to.have.attribute('data-theme', 'dark');
+      expect(document.documentElement.getAttribute('data-theme')).to.equal('dark');
     });
 
     it('updates the selected radio state when an option is selected', async () => {
       const el = await fixture(html`<theme-switcher no-storage></theme-switcher>`);
       const { lightOptionButton, systemOptionButton, darkOptionButton } = getOptions(el);
 
-      expect(systemOptionButton).to.have.attribute('aria-checked', 'true');
+      expect(systemOptionButton.getAttribute('aria-checked')).to.equal('true');
 
       lightOptionButton.click();
 
-      expect(lightOptionButton).to.have.attribute('aria-checked', 'true');
-      expect(systemOptionButton).to.have.attribute('aria-checked', 'false');
-      expect(darkOptionButton).to.have.attribute('aria-checked', 'false');
+      expect(lightOptionButton.getAttribute('aria-checked')).to.equal('true');
+      expect(systemOptionButton.getAttribute('aria-checked')).to.equal('false');
+      expect(darkOptionButton.getAttribute('aria-checked')).to.equal('false');
 
       systemOptionButton.click();
 
-      expect(lightOptionButton).to.have.attribute('aria-checked', 'false');
-      expect(systemOptionButton).to.have.attribute('aria-checked', 'true');
-      expect(darkOptionButton).to.have.attribute('aria-checked', 'false');
+      expect(lightOptionButton.getAttribute('aria-checked')).to.equal('false');
+      expect(systemOptionButton.getAttribute('aria-checked')).to.equal('true');
+      expect(darkOptionButton.getAttribute('aria-checked')).to.equal('false');
 
       darkOptionButton.click();
 
-      expect(lightOptionButton).to.have.attribute('aria-checked', 'false');
-      expect(systemOptionButton).to.have.attribute('aria-checked', 'false');
-      expect(darkOptionButton).to.have.attribute('aria-checked', 'true');
+      expect(lightOptionButton.getAttribute('aria-checked')).to.equal('false');
+      expect(systemOptionButton.getAttribute('aria-checked')).to.equal('false');
+      expect(darkOptionButton.getAttribute('aria-checked')).to.equal('true');
     });
   });
 
@@ -362,22 +362,22 @@ describe('theme-switcher', () => {
       const el = await fixture(html`<theme-switcher no-storage></theme-switcher>`);
       const { lightOptionButton, systemOptionButton, darkOptionButton } = getOptions(el);
 
-      expect(systemOptionButton).to.have.attribute('aria-checked', 'true');
+      expect(systemOptionButton.getAttribute('aria-checked')).to.equal('true');
 
       systemOptionButton.focus();
       const event = pressKey(systemOptionButton, 'ArrowRight');
 
       expect(event.defaultPrevented).to.be.true;
 
-      expect(lightOptionButton).to.have.attribute('aria-checked', 'false');
-      expect(systemOptionButton).to.have.attribute('aria-checked', 'false');
-      expect(darkOptionButton).to.have.attribute('aria-checked', 'true');
+      expect(lightOptionButton.getAttribute('aria-checked')).to.equal('false');
+      expect(systemOptionButton.getAttribute('aria-checked')).to.equal('false');
+      expect(darkOptionButton.getAttribute('aria-checked')).to.equal('true');
 
-      expect(lightOptionButton).to.have.attribute('tabindex', '-1');
-      expect(systemOptionButton).to.have.attribute('tabindex', '-1');
-      expect(darkOptionButton).to.have.attribute('tabindex', '0');
+      expect(lightOptionButton.getAttribute('tabindex')).to.equal('-1');
+      expect(systemOptionButton.getAttribute('tabindex')).to.equal('-1');
+      expect(darkOptionButton.getAttribute('tabindex')).to.equal('0');
 
-      expect(document.documentElement).to.have.attribute('data-theme', 'dark');
+      expect(document.documentElement.getAttribute('data-theme')).to.equal('dark');
       expect(el.shadowRoot.activeElement).to.equal(darkOptionButton);
     });
 
@@ -385,16 +385,16 @@ describe('theme-switcher', () => {
       const el = await fixture(html`<theme-switcher no-storage></theme-switcher>`);
       const { lightOptionButton, systemOptionButton, darkOptionButton } = getOptions(el);
 
-      expect(systemOptionButton).to.have.attribute('aria-checked', 'true');
+      expect(systemOptionButton.getAttribute('aria-checked')).to.equal('true');
 
       systemOptionButton.focus();
       pressKey(systemOptionButton, 'ArrowLeft');
 
-      expect(lightOptionButton).to.have.attribute('aria-checked', 'true');
-      expect(systemOptionButton).to.have.attribute('aria-checked', 'false');
-      expect(darkOptionButton).to.have.attribute('aria-checked', 'false');
+      expect(lightOptionButton.getAttribute('aria-checked')).to.equal('true');
+      expect(systemOptionButton.getAttribute('aria-checked')).to.equal('false');
+      expect(darkOptionButton.getAttribute('aria-checked')).to.equal('false');
 
-      expect(document.documentElement).to.have.attribute('data-theme', 'light');
+      expect(document.documentElement.getAttribute('data-theme')).to.equal('light');
       expect(el.shadowRoot.activeElement).to.equal(lightOptionButton);
     });
 
@@ -405,8 +405,8 @@ describe('theme-switcher', () => {
       systemOptionButton.focus();
       pressKey(systemOptionButton, 'ArrowDown');
 
-      expect(darkOptionButton).to.have.attribute('aria-checked', 'true');
-      expect(document.documentElement).to.have.attribute('data-theme', 'dark');
+      expect(darkOptionButton.getAttribute('aria-checked')).to.equal('true');
+      expect(document.documentElement.getAttribute('data-theme')).to.equal('dark');
       expect(el.shadowRoot.activeElement).to.equal(darkOptionButton);
     });
 
@@ -417,8 +417,8 @@ describe('theme-switcher', () => {
       systemOptionButton.focus();
       pressKey(systemOptionButton, 'ArrowUp');
 
-      expect(lightOptionButton).to.have.attribute('aria-checked', 'true');
-      expect(document.documentElement).to.have.attribute('data-theme', 'light');
+      expect(lightOptionButton.getAttribute('aria-checked')).to.equal('true');
+      expect(document.documentElement.getAttribute('data-theme')).to.equal('light');
       expect(el.shadowRoot.activeElement).to.equal(lightOptionButton);
     });
 
@@ -427,13 +427,13 @@ describe('theme-switcher', () => {
       const { lightOptionButton, darkOptionButton } = getOptions(el);
 
       darkOptionButton.click();
-      expect(darkOptionButton).to.have.attribute('aria-checked', 'true');
+      expect(darkOptionButton.getAttribute('aria-checked')).to.equal('true');
 
       darkOptionButton.focus();
       pressKey(darkOptionButton, 'ArrowRight');
 
-      expect(lightOptionButton).to.have.attribute('aria-checked', 'true');
-      expect(document.documentElement).to.have.attribute('data-theme', 'light');
+      expect(lightOptionButton.getAttribute('aria-checked')).to.equal('true');
+      expect(document.documentElement.getAttribute('data-theme')).to.equal('light');
       expect(el.shadowRoot.activeElement).to.equal(lightOptionButton);
     });
 
@@ -442,13 +442,13 @@ describe('theme-switcher', () => {
       const { lightOptionButton, darkOptionButton } = getOptions(el);
 
       lightOptionButton.click();
-      expect(lightOptionButton).to.have.attribute('aria-checked', 'true');
+      expect(lightOptionButton.getAttribute('aria-checked')).to.equal('true');
 
       lightOptionButton.focus();
       pressKey(lightOptionButton, 'ArrowLeft');
 
-      expect(darkOptionButton).to.have.attribute('aria-checked', 'true');
-      expect(document.documentElement).to.have.attribute('data-theme', 'dark');
+      expect(darkOptionButton.getAttribute('aria-checked')).to.equal('true');
+      expect(document.documentElement.getAttribute('data-theme')).to.equal('dark');
       expect(el.shadowRoot.activeElement).to.equal(darkOptionButton);
     });
 
@@ -461,8 +461,8 @@ describe('theme-switcher', () => {
 
       pressKey(darkOptionButton, 'Home');
 
-      expect(lightOptionButton).to.have.attribute('aria-checked', 'true');
-      expect(document.documentElement).to.have.attribute('data-theme', 'light');
+      expect(lightOptionButton.getAttribute('aria-checked')).to.equal('true');
+      expect(document.documentElement.getAttribute('data-theme')).to.equal('light');
       expect(el.shadowRoot.activeElement).to.equal(lightOptionButton);
     });
 
@@ -474,8 +474,8 @@ describe('theme-switcher', () => {
 
       pressKey(systemOptionButton, 'End');
 
-      expect(darkOptionButton).to.have.attribute('aria-checked', 'true');
-      expect(document.documentElement).to.have.attribute('data-theme', 'dark');
+      expect(darkOptionButton.getAttribute('aria-checked')).to.equal('true');
+      expect(document.documentElement.getAttribute('data-theme')).to.equal('dark');
       expect(el.shadowRoot.activeElement).to.equal(darkOptionButton);
     });
 
@@ -503,11 +503,11 @@ describe('theme-switcher', () => {
 
       expect(event.defaultPrevented).to.be.false;
 
-      expect(lightOptionButton).to.have.attribute('aria-checked', 'false');
-      expect(systemOptionButton).to.have.attribute('aria-checked', 'true');
-      expect(darkOptionButton).to.have.attribute('aria-checked', 'false');
+      expect(lightOptionButton.getAttribute('aria-checked')).to.equal('false');
+      expect(systemOptionButton.getAttribute('aria-checked')).to.equal('true');
+      expect(darkOptionButton.getAttribute('aria-checked')).to.equal('false');
 
-      expect(document.documentElement).to.have.attribute('data-theme', 'system');
+      expect(document.documentElement.getAttribute('data-theme')).to.equal('system');
       expect(el.shadowRoot.activeElement).to.equal(systemOptionButton);
 
       sinon.assert.notCalled(themeChangeSpy);
