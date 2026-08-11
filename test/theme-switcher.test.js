@@ -112,7 +112,7 @@ describe('theme-switcher', () => {
     });
   });
 
-  describe('property and attribute reflection', () => {
+  describe('properties - attributes', () => {
     describe('noStorage', () => {
       it('reflects no-storage attribute to noStorage property', async () => {
         const el = await fixture(html`<theme-switcher no-storage></theme-switcher>`);
