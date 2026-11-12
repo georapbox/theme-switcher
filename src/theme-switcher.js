@@ -232,25 +232,12 @@ template.innerHTML = html`
 `;
 
 /**
- * @summary A custom element for switching between light, dark, and system color themes.
+ * A custom element for switching between light, dark, and system color themes.
+ *
  * @documentation https://github.com/georapbox/theme-switcher
  *
- * @tagname theme-switcher - The default custom element tag name, unless overridden by the `define` method.
+ * @tagname theme-switcher
  * @extends HTMLElement
- *
- * @property {boolean} noStorage - Whether to disable persistence of the selected theme in local storage.
- * @property {string} storageKey - The local storage key used to persist the selected theme.
- * @property {string} lightLabel - The accessible label for the light theme option button.
- * @property {string} systemLabel - The accessible label for the system theme option button.
- * @property {string} darkLabel - The accessible label for the dark theme option button.
- * @property {boolean} disabled - Whether the theme switcher is disabled.
- *
- * @attribute {boolean} no-storage - Whether to disable persistence of the selected theme in local storage.
- * @attribute {string} storage-key - The local storage key used to persist the selected theme.
- * @attribute {string} light-label - The accessible label for the light theme option button.
- * @attribute {string} system-label - The accessible label for the system theme option button.
- * @attribute {string} dark-label - The accessible label for the dark theme option button.
- * @attribute {boolean} disabled - Whether the theme switcher is disabled.
  *
  * @slot light-icon - Custom icon for the light theme option.
  * @slot system-icon - Custom icon for the system theme option.
@@ -287,8 +274,6 @@ template.innerHTML = html`
  * @cssproperty --theme-switcher-option-focus-ring-offset - The offset of the focus ring from the theme option button.
  *
  * @event theme-change - Dispatched when the theme is changed by user interaction. The event detail contains the new theme value.
- *
- * @method define - Static method. Defines the custom element by registering it with the browser's CustomElementRegistry if it hasn't been defined already.
  */
 class ThemeSwitcher extends HTMLElement {
   /** @type {Theme} */
@@ -344,14 +329,15 @@ class ThemeSwitcher extends HTMLElement {
   }
 
   /**
-   * Whether to disable persistence of the selected theme in local storage.
+   * Disables persistence of the selected theme in local storage.
    *
    * When enabled, theme changes are applied only for the current session and
    * are not saved for future page loads.
    *
    * @type {boolean}
-   * @default false
    * @attribute no-storage
+   * @reflect
+   * @default false
    */
   get noStorage() {
     return this.hasAttribute('no-storage');
@@ -367,8 +353,9 @@ class ThemeSwitcher extends HTMLElement {
    * This value is ignored when `no-storage` is enabled.
    *
    * @type {string}
-   * @default 'theme-switcher/theme-preference'
    * @attribute storage-key
+   * @reflect
+   * @default 'theme-switcher/theme-preference'
    */
   get storageKey() {
     return this.getAttribute('storage-key') || 'theme-switcher/theme-preference';
@@ -386,8 +373,9 @@ class ThemeSwitcher extends HTMLElement {
    * The accessible label for the light theme option button.
    *
    * @type {string}
-   * @default 'Switch to light theme'
    * @attribute light-label
+   * @reflect
+   * @default 'Switch to light theme'
    */
   get lightLabel() {
     return this.getAttribute('light-label') ?? 'Switch to light theme';
@@ -405,8 +393,9 @@ class ThemeSwitcher extends HTMLElement {
    * The accessible label for the system theme option button.
    *
    * @type {string}
-   * @default 'Switch to system theme'
    * @attribute system-label
+   * @reflect
+   * @default 'Switch to system theme'
    */
   get systemLabel() {
     return this.getAttribute('system-label') ?? 'Switch to system theme';
@@ -424,8 +413,9 @@ class ThemeSwitcher extends HTMLElement {
    * The accessible label for the dark theme option button.
    *
    * @type {string}
-   * @default 'Switch to dark theme'
    * @attribute dark-label
+   * @reflect
+   * @default 'Switch to dark theme'
    */
   get darkLabel() {
     return this.getAttribute('dark-label') ?? 'Switch to dark theme';
@@ -440,11 +430,12 @@ class ThemeSwitcher extends HTMLElement {
   }
 
   /**
-   * Whether the theme switcher is disabled.
+   * Disables the theme switcher.
    *
    * @type {boolean}
-   * @default false
    * @attribute disabled
+   * @reflect
+   * @default false
    */
   get disabled() {
     return this.hasAttribute('disabled');
@@ -727,7 +718,7 @@ class ThemeSwitcher extends HTMLElement {
   #upgradeProperty(prop) {
     const instance = /** @type {HTMLElement & Record<string, unknown>} */ (this);
 
-    if (Object.prototype.hasOwnProperty.call(instance, prop)) {
+    if (Object.hasOwn(instance, prop)) {
       const value = instance[prop];
       delete instance[prop];
       instance[prop] = value;
@@ -738,13 +729,16 @@ class ThemeSwitcher extends HTMLElement {
    * Defines the custom element by registering it with the browser's
    * CustomElementRegistry if it hasn't been defined already.
    *
-   * @param {string} [tagName='theme-switcher'] - The tag name to use for the custom element. Must include a hyphen.
+   * @param {string} [tagName='theme-switcher'] - The tag name to use for the custom element.
    */
   static define(tagName = 'theme-switcher') {
-    if (typeof window === 'undefined' || window.customElements.get(tagName)) {
+    const registry = globalThis.customElements;
+
+    if (!registry || registry.get(tagName)) {
       return;
     }
-    window.customElements.define(tagName, ThemeSwitcher);
+
+    registry.define(tagName, ThemeSwitcher);
   }
 }
 
