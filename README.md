@@ -11,49 +11,48 @@ A custom element for switching between light, dark, and system color themes.
 
 [API documentation](#api) &bull; [Demo][demo]
 
-## Usage
-
-### Installation
+## Installation
 
 ```sh
 npm install --save @georapbox/theme-switcher
 ```
 
-### Importing the component
+## Registration
 
 By default, the package exports the element class without registering it.
 This lets the application decide when the custom element is defined.
 
-#### Manual definition
+### Manual registration
+
+Import the `ThemeSwitcher` class and call its static `define()` method:
 
 ```js
 import { ThemeSwitcher } from '@georapbox/theme-switcher';
 
-// Define using the default tag name
 ThemeSwitcher.define();
 ```
 
-#### Auto-defined (convenience)
+### Automatic registration
 
-If you don't need control over registration, you can import the pre-defined build which immediately registers `<theme-switcher>`.
+If you don't need control over registration, import the convenience entry point:
 
 ```js
 import '@georapbox/theme-switcher/define';
 ```
 
-### Using the component in your HTML
+## Usage
 
-To use the component, simply add the `<theme-switcher>` tag to your HTML:
+Once registered, use the custom element in your HTML:
 
 ```html
 <theme-switcher></theme-switcher>
 ```
 
-### Styling the component
+## Styling
 
-By default, the component comes with basic styling. However, you can customise the styles of the various elements of the component using either [CSS Parts](#css-parts) or [CSS Custom Properties](#css-custom-properties).
+By default, the component comes with basic styling. However, you can customise the styles of the various elements of the component using either [CSS parts](#css-parts) or [CSS custom properties](#css-custom-properties).
 
-### How it works
+## How it works
 
 By default, `<theme-switcher>` uses the `system` theme. This allows the page to follow the user's system color preference when your CSS uses `color-scheme`, `light-dark()`, or `prefers-color-scheme`.
 
@@ -107,15 +106,18 @@ theme-switcher {
 
 ## API
 
-### Properties
-| Name | Reflects | Type | Required | Default | Description |
-| ---- | -------- | ---- | -------- | ------- | ----------- |
-| `noStorage`<br>*`no-storage`* | ✓ | `boolean` | - | `false` | Whether to disable persistence of the selected theme in local storage. |
-| `storageKey`<br>*`storage-key`* | ✓ | `string` | - | `'theme-switcher/theme-preference'` | The local storage key used to persist the selected theme. |
-| `lightLabel`<br>*`light-label`* | ✓ | `string` | - | `'Switch to light theme'` | The accessible label for the light theme option button. |
-| `systemLabel`<br>*`system-label`* | ✓ | `string` | - | `'Switch to system theme'` | The accessible label for the system theme option button. |
-| `darkLabel`<br>*`dark-label`* | ✓ | `string` | - | `'Switch to dark theme'` | The accessible label for the dark theme option button. |
-| `disabled` | ✓ | `boolean` | - | `false` | Whether the theme switcher is disabled. |
+### Properties and attributes
+
+| Property / Attribute | Type | Default | Description |
+| -------------------- | ---- | ------- | ----------- |
+| `noStorage` / `no-storage` | `boolean` | `false` | Disables persistence of the selected theme in local storage. |
+| `storageKey` / `storage-key` | `string` | `'theme-switcher/theme-preference'` | The local storage key used to persist the selected theme. |
+| `lightLabel` / `light-label` | `string` | `'Switch to light theme'` | The accessible label for the light theme option button. |
+| `systemLabel` / `system-label` | `string` | `'Switch to system theme'` | The accessible label for the system theme option button. |
+| `darkLabel` / `dark-label` | `string` | `'Switch to dark theme'` | The accessible label for the dark theme option button. |
+| `disabled` | `boolean` | `false` | Disables the theme switcher. |
+
+All properties are reflected through their corresponding HTML attributes. When only one name is listed, the property and attribute share the same name.
 
 ### Slots
 
@@ -125,7 +127,7 @@ theme-switcher {
 | `system-icon` | Custom icon for the system theme option. |
 | `dark-icon` | Custom icon for the dark theme option. |
 
-### CSS Parts
+### CSS parts
 
 | Name | Description |
 | ---- | ----------- |
@@ -140,7 +142,7 @@ theme-switcher {
 | `theme-option-icon--system` | The icon inside the system theme option button. |
 | `theme-option-icon--dark` | The icon inside the dark theme option button. |
 
-### CSS Custom Properties
+### CSS custom properties
 
 | Name | Description | Default |
 | ---- | ----------- | ------- |
@@ -227,6 +229,24 @@ Create a production build by running the following command.
 
 ```sh
 npm run build
+```
+
+### Git hooks
+
+This repository includes a pre-commit hook that runs linting and formatting checks before each commit.
+
+To enable the hook, run the following command from the repository root:
+
+```sh
+git config --local core.hooksPath .githooks
+```
+
+This configuration only needs to be applied once per clone and does not affect other repositories.
+
+To disable the hook, run:
+
+```sh
+git config --local --unset core.hooksPath
 ```
 
 ## License
