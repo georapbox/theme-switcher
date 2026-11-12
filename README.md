@@ -176,9 +176,9 @@ All properties are reflected through their corresponding HTML attributes. When o
 
 ### Events
 
-| Name | Description | Event Detail |
-| ---- | ----------- | ------------ |
-| `theme-change` | Dispatched when the theme is changed by user interaction. The event detail contains the new theme value. | `{theme: 'light' \| 'dark' \| 'system'}` |
+| Name | Type | Description | Event Detail |
+| ---- | ---- | ----------- | ------------ |
+| `theme-change` | CustomEvent | Dispatched when the theme is changed by user interaction. The event detail contains the new theme value. | `{theme: 'light' \| 'dark' \| 'system'}` |
 
 ## Changelog
 
