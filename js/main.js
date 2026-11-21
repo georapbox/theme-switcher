@@ -1,0 +1,49 @@
+import '../lib/browser-window.js';
+
+const isLocal = ['localhost', '127.0.0.1'].includes(location.hostname);
+const basePath = isLocal ? '../..' : '..';
+const componentUrl = `${basePath}/dist/theme-switcher.js`;
+
+const { ThemeSwitcher } = await import(componentUrl);
+ThemeSwitcher.define();
+
+const demo = document.getElementById('demo');
+const form = document.getElementById('demo-controls');
+const output = document.getElementById('size-value');
+const themeSwitchers = demo.querySelectorAll('theme-switcher');
+
+themeSwitchers.forEach(el => {
+  el.setAttribute('storage-key', window.__THEME_SWITCHER_DEMO_STORAGE_KEY__);
+});
+
+form.addEventListener('input', evt => {
+  const input = evt.target;
+
+  if (!(input instanceof HTMLInputElement)) {
+    return;
+  }
+
+  if (input.name === 'theme-switcher-theme' && input.type === 'radio') {
+    demo.dataset.themeSwitcherTheme = input.value;
+    return;
+  }
+
+  if (input.name === 'size-control' && input.type === 'range') {
+    const value = input.valueAsNumber;
+    const min = Number(input.min);
+    const max = Number(input.max);
+    const progress = (value - min) / (max - min);
+    const scale = 1 + progress;
+
+    output.value = `${Math.round(scale * 100)}%`;
+
+    themeSwitchers.forEach(el => {
+      el.style.setProperty('--theme-switcher-option-size', `${2 * scale}rem`);
+      el.style.setProperty('--theme-switcher-padding', `${0.1875 * scale}rem`);
+    });
+  }
+
+  if (input.name === 'disable-control' && input.type === 'checkbox') {
+    themeSwitchers.forEach(el => (el.disabled = input.checked));
+  }
+});

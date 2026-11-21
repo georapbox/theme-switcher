@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="color-scheme" content="light dark">
+  <title>&lt;theme-switcher&gt;</title>
+  <meta name="description" content="A custom element for switching between light, dark, and system color themes.">
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+  <link rel="stylesheet" href="lib/highlight/highlight-github.css">
+  <link rel="stylesheet" href="css/water.css">
+  <link rel="stylesheet" href="css/main.css">
+  <script src="lib/highlight/highlight.min.js" defer></script>
+  <script src="js/main.js" type="module"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => window.hljs.highlightAll());
+    window.__THEME_SWITCHER_DEMO_STORAGE_KEY__ = 'theme-switcher-demo/theme-preference';
+    try {
+      // Set theme early to avoid flash of unstyled content.
+      document.documentElement.setAttribute('data-theme', window.localStorage.getItem(window.__THEME_SWITCHER_DEMO_STORAGE_KEY__) || 'system');
+    } catch {
+      // Fail silently...
+    }
+  </script>
+</head>
+<body>
+  <noscript>
+    <div class="noscript-banner">This demo requires JavaScript to work.</div>
+  </noscript>
+
+  <h1>&lt;theme-switcher&gt;</h1>
+  <div class="component-description">
+    <p>A custom element for switching between light, dark, and system color themes.</p>
+    <p><a href="https://github.com/georapbox/theme-switcher" target="_blank" rel="noreferrer noopener">Source code & documentation</a></p>
+  </div>
+
+  <h2>Demo</h2>
+
+  <p>
+    Use the theme switcher below to change the page theme. The palette picker demonstrates
+    how CSS variables can be used to customize the component's colors.
+  </p>
+
+  <div class="card">
+    <browser-window url="https://github.com/georapbox/theme-switcher" icon>
+      <div id="demo" class="demo" data-theme-switcher-theme="default-colors">
+        <form id="demo-controls" autocomplete="off">
+          <fieldset id="theme-picker" class="theme-palette-picker">
+            <legend>Theme switcher palette</legend>
+
+            <label style="--palette-color: light-dark(#222222, #eeeeee)">
+              <input type="radio" name="theme-switcher-theme" value="default-colors" checked>
+              <span>Default colors</span>
+            </label>
+
+            <label style="--palette-color: light-dark(#65a30d, #a3e635)">
+              <input type="radio" name="theme-switcher-theme" value="electric-lime">
+              <span>Electric lime</span>
+            </label>
+
+            <label style="--palette-color: light-dark(#2563eb, #60a5fa)">
+              <input type="radio" name="theme-switcher-theme" value="soft-blue">
+              <span>Soft blue</span>
+            </label>
+
+            <label style="--palette-color: light-dark(#059669, #5eead4)">
+              <input type="radio" name="theme-switcher-theme" value="emerald-mint">
+              <span>Emerald mint</span>
+            </label>
+
+            <label style="--palette-color: light-dark(#d97706, #facc15)">
+              <input type="radio" name="theme-switcher-theme" value="warm-amber">
+              <span>Warm amber</span>
+            </label>
+
+            <label style="--palette-color: light-dark(#ea580c, #fb923c)">
+              <input type="radio" name="theme-switcher-theme" value="sunset-orange">
+              <span>Sunset orange</span>
+            </label>
+
+            <label style="--palette-color: light-dark(#e11d48, #fb7185)">
+              <input type="radio" name="theme-switcher-theme" value="coral-rose">
+              <span>Coral rose</span>
+            </label>
+
+            <label style="--palette-color: light-dark(#0891b2, #22d3ee)">
+              <input type="radio" name="theme-switcher-theme" value="tech-cyan">
+              <span>Tech cyan</span>
+            </label>
+
+            <label style="--palette-color: light-dark(#4f46e5, #a78bfa)">
+              <input type="radio" name="theme-switcher-theme" value="indigo-violet">
+              <span>Indigo violet</span>
+            </label>
+
+            <label style="--palette-color: light-dark(#9333ea, #e879f9)">
+              <input type="radio" name="theme-switcher-theme" value="neon-purple">
+              <span>Neon purple</span>
+            </label>
+          </fieldset>
+
+          <div class="size-control">
+            <div class="size-control__header">
+              <label for="size-control">Theme switcher size</label>
+              <output id="size-value" for="size-control">100%</output>
+            </div>
+
+            <input id="size-control" name="size-control" type="range" min="0" max="10" value="0" step="0.1">
+
+            <div class="size-control__labels" aria-hidden="true">
+              <span>Default</span>
+              <span>Large</span>
+            </div>
+          </div>
+
+          <div class="disable-control">
+            <label>
+              <input name="disable-control" type="checkbox">
+              Disable theme switcher
+            </label>
+          </div>
+        </form>
+
+        <theme-switcher></theme-switcher>
+      </div>
+    </browser-window>
+
+    <details open>
+      <summary>Code sample</summary>
+
+      <p>For brevity reasons, only the CSS variables for the "Electric lime" palette are shown below.</p>
+
+<pre><code>&lt;theme-switcher class="custom-theme"&gt;&lt;/theme-switcher&gt;</code></pre>
+
+<pre><code>.custom-theme {
+  color-scheme: light dark;
+
+  --theme-switcher-background-color: #f7fee7;
+  --theme-switcher-border-color: #bef264;
+  --theme-switcher-option-color: #3f6212;
+  --theme-switcher-option-selected-color: #ffffff;
+  --theme-switcher-option-selected-background-color: #65a30d;
+  --theme-switcher-option-focus-ring-color: #65a30d;
+}
+
+@supports (color: light-dark(#000000, #ffffff)) {
+  .custom-theme {
+    --theme-switcher-background-color: light-dark(#f7fee7, #142004);
+    --theme-switcher-border-color: light-dark(#bef264, #84cc16);
+    --theme-switcher-option-color: light-dark(#3f6212, #d9f99d);
+    --theme-switcher-option-selected-color: light-dark(#ffffff, #172008);
+    --theme-switcher-option-selected-background-color: light-dark(#65a30d, #a3e635);
+    --theme-switcher-option-focus-ring-color: light-dark(#65a30d, #a3e635);
+  }
+}</code></pre>
+    </details>
+  </div>
+
+  <h2>License</h2>
+  <p>Licensed under the <a href="https://github.com/georapbox/theme-switcher/blob/main/LICENSE" target="_blank" rel="noreferrer noopener">The MIT License (MIT)</a></p>
+</body>
+</html>
