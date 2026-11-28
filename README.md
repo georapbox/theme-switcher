@@ -14,7 +14,7 @@ A custom element for switching between light, dark, and system color themes.
 ## Installation
 
 ```sh
-npm install --save @georapbox/theme-switcher
+npm install @georapbox/theme-switcher
 ```
 
 ## Registration
@@ -216,7 +216,13 @@ npm run lint
 
 ### Testing
 
-Run the tests by running any of the following commands.
+The tests use Playwright to run in real browsers. Install the required browser binaries if they are not already installed:
+
+```sh
+npx playwright install
+```
+
+Run the tests using any of the following commands:
 
 ```sh
 npm test
