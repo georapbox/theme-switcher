@@ -2,8 +2,8 @@
 [![npm license](https://img.shields.io/npm/l/@georapbox/theme-switcher.svg)](https://www.npmjs.com/package/@georapbox/theme-switcher)
 
 [demo]: https://georapbox.github.io/theme-switcher/
-[license]: https://github.com/georapbox/theme-switcher/blob/main/LICENSE
-[changelog]: https://github.com/georapbox/theme-switcher/blob/main/CHANGELOG.md
+[license]: ./LICENSE
+[changelog]: ./CHANGELOG.md
 
 # &lt;theme-switcher&gt;
 
